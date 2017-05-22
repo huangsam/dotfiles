@@ -15,6 +15,10 @@ alias drmi='docker rmi'
 alias drmia='docker rmi $(docker images -q -a)'
 alias drmid='docker rmi $(docker images -q -f "dangling=true")'
 
+function dpull() {
+    docker images | grep -v REPOSITORY | awk '{print $1 ":" $2}' | xargs -L1 docker pull
+}
+
 # Volumes
 alias dvls='docker volume ls'
 alias drmva='docker volume rm $(docker volume ls -q)'
