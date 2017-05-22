@@ -1,5 +1,6 @@
 # Containers
 alias dps='docker ps'
+alias dps='docker ps -a'
 alias dlog='docker log'
 alias dexec='docker exec'
 alias drm='docker rm'
