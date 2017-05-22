@@ -20,5 +20,9 @@ alias dvls='docker volume ls'
 alias drmva='docker volume rm $(docker volume ls -q)'
 alias drmvd='docker volume rm $(docker volume ls -q -f "dangling=true")'
 
+# Networks
+alias dnls='docker network ls'
+alias drmn='docker network rm'
+
 # Docker Compose
 alias fig='docker-compose'
