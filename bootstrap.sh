@@ -9,7 +9,7 @@ function doIt() {
         --exclude "bootstrap.sh" \
         --exclude "README.md" \
         --exclude "LICENSE.txt" \
-        -avh --no-perms . ~/.oh-my-zsh/custom;
+        -avh --no-perms . "$ZSH_CUSTOM";
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then

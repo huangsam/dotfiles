@@ -1,8 +1,10 @@
 # oh-my-custom
 
-Collection of aliases for the `$ZSH_CUSTOM` folder defined by `oh-my-zsh`.
+Collection of alias plugins for the `$ZSH_CUSTOM` folder.
 
 Run `bash bootstrap.sh` to install these files to `$ZSH_CUSTOM`.
+
+*Note: bootstrap.sh assumes that you have `oh-my-zsh` installed*
 
 Inspiration:
 
