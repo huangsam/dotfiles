@@ -1,6 +1,9 @@
-# oh-my-custom
+# dotfiles
 
-Collection of plugins for the `$ZSH_CUSTOM` folder. Most of them are aliases at the moment.
+Collection of dotfiles. What is present at the moment:
+
+- [x] Plugins for the `$ZSH_CUSTOM` folder: enhances Docker, Linux, Maven workflows
+- [ ] Git configuration
 
 ## Usage
 
