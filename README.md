@@ -3,7 +3,7 @@
 Collection of dotfiles. What is present at the moment:
 
 - [x] Plugins for the `$ZSH_CUSTOM` folder: enhances Docker, Linux, Maven workflows
-- [ ] Git configuration
+- [x] Git configuration
 
 ## Usage
 
