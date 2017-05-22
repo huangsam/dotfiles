@@ -10,7 +10,6 @@ function doIt() {
         --exclude "README.md" \
         --exclude "LICENSE.txt" \
         -avh --no-perms . ~/.oh-my-zsh/custom;
-    source ~/.zshrc;
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
