@@ -11,7 +11,8 @@ alias drmsv='docker rm -v $(docker ps -q -f "status=exited")'
 # Images
 alias di='docker images'
 alias drmi='docker rmi'
-alias drmia='docker rmi $(docker images -q --filter "dangling=true")'
+alias drmia='docker rmi $(docker images -q -a)'
+alias drmid='docker rmi $(docker images -q -f "dangling=true")'
 
 # Volumes
 alias dvls='docker volume ls'
