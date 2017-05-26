@@ -3,10 +3,7 @@
 git pull origin master
 
 function doIt() {
-    rsync --exclude ".DS_Store" \
-        --exclude ".osx" \
-        --exclude "README.md" \
-        -avh --no-perms zsh-plugins ~/.oh-my-zsh/custom;
+    cp ./zsh-plugins/* ~/.oh-my-zsh/custom;
 }
 
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
