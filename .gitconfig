@@ -1,62 +1,62 @@
 [color]
-  ui = auto
+	ui = auto
 
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+	current = yellow reverse
+	local = yellow
+	remote = green
 
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
 
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+	added = yellow
+	changed = green
+	untracked = cyan
 
 [alias]
-  # shortcut to list all aliases for git
-  la = !git config -l | grep alias | cut -c 7-
+	# shortcut to list all aliases for git
+	la = !git config -l | grep alias | cut -c 7-
 
-  # aliases for the most common commands
-  br = branch
-  co = checkout
-  ci = commit
-  s = status -s -uno
-  st = status
+	# aliases for the most common commands
+	br = branch
+	co = checkout
+	ci = commit
+	s = status -s -uno
+	st = status
 
-  # aliases to perform a minor fix to the last commit w/o
-  # actually changing the commit message.
-  caan = commit --all --amend --no-edit
+	# aliases to perform a minor fix to the last commit w/o
+	# actually changing the commit message.
+	caan = commit --all --amend --no-edit
 
-  # aliases to "undo" adding of files for a commit or
-  # actually undoing the last commit and leaving the files staged.
-  unstage = reset HEAD --
-  undo = reset --soft HEAD^
+	# aliases to "undo" adding of files for a commit or
+	# actually undoing the last commit and leaving the files staged.
+	unstage = reset HEAD --
+	undo = reset --soft HEAD^
 
-  # aliases to provide different views of the commit log
-  last = log -1 HEAD
-  lg = log --pretty=format:'%C(yellow)%h %C(reset)-%C(red)%d %C(reset)%s %C(magenta)(%cr) %C(blue)[%cn]' --graph
-  ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]' --decorate --numstat
-  ls = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]' --decorate
-  le = log --oneline --decorate
-  fl = log -u
-  dl = !git ll -1
-  dlc = diff --cached HEAD^
+	# aliases to provide different views of the commit log
+	last = log -1 HEAD
+	lg = log --pretty=format:'%C(yellow)%h %C(reset)-%C(red)%d %C(reset)%s %C(magenta)(%cr) %C(blue)[%cn]' --graph
+	ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]' --decorate --numstat
+	ls = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]' --decorate
+	le = log --oneline --decorate
+	fl = log -u
+	dl = !git ll -1
+	dlc = diff --cached HEAD^
 
 [grep]
-  lineNumber = true
-  patternType = extended
+	lineNumber = true
+	patternType = extended
 
 [pull]
-  default = current
+	default = current
 
 [push]
-  default = current
+	default = current
 
 [core]
-  autocrlf = input
-  editor = vim
+	autocrlf = input
+	editor = vim
