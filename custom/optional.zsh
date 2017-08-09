@@ -17,3 +17,6 @@ alias ytdl='youtube-dl --format mp4'
 
 # Monitoring
 alias osquery='/usr/local/bin/osqueryi'
+
+# SSH connection
+alias sshv='ssh -vvv -o LogLevel=DEBUG3'
