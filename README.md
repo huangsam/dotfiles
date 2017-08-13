@@ -2,10 +2,8 @@
 
 Collection of dotfiles. What is present at the moment:
 
-- [x] Plugins for the `$ZSH_CUSTOM` folder: enhances Docker, Linux, Maven workflows
+- [x] Plugins for the `$ZSH_CUSTOM` folder
 - [x] Git configuration
-- [x] Implement `python.zsh`
-- [ ] Support gitconfig import via `bootstrap.sh`
 
 ## Usage
 
