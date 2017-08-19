@@ -1,6 +1,12 @@
 # Run `git pull` in every repository within current path
 alias gpull='find . -type d -name ".glide" -prune -o -name ".git" -exec sh -c "cd \"{}\"/../ && pwd && git pull" \;'
 
+# Enable assumption for file in repository
+alias gignore='git update-index --assume-unchanged'
+
+# Disable assumption for file in repository
+alias gremind='git update-index --no-assume-unchanged'
+
 # List top ten commands from history
 function hstats {
     history \
