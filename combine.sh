@@ -1,7 +1,7 @@
 #!/bin/bash
 
-for i in custom/*.zsh
+for fl in custom/*.zsh
 do
-    cat $i >> bash_aliases
+    cat "${fl}" >> bash_aliases
     echo >> bash_aliases
 done
