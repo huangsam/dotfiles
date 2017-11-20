@@ -1,3 +1,4 @@
+# Gerrit shortcuts
 function git_publish() {
     git push origin "HEAD:refs/for/${1}"
 }

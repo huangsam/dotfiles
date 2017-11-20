@@ -1,3 +1,4 @@
+# Python helpers
 alias venv='source /usr/local/bin/virtualenvwrapper.sh'
 
 function pipup() {
