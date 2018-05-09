@@ -7,10 +7,15 @@ Collection of dotfiles. What is present at the moment:
 
 ## Usage
 
-These are the steps to get started:
+If you are using `oh-my-zsh`:
 
 1. Run `bash bootstrap.sh` to install these files to `$ZSH_CUSTOM`
 2. Create a clean terminal instance to load the new aliases in
+
+If you are using plain `bash`:
+
+1. Run `bash combine.sh` to generate a `bashrc` file
+2. Upload the `bashrc` file to anywhere you like
 
 ## Assumptions
 
