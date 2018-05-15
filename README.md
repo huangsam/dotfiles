@@ -14,15 +14,21 @@ If you are using `oh-my-zsh`:
 
 If you are using plain `bash`:
 
-1. Run `bash combine.sh` to generate a `bashrc` file
-2. Upload the `bashrc` file to anywhere you like
+1. Run `bash combine.sh` to generate a `bash_aliases` file
+2. Upload the `bash_aliases` file to anywhere you like
 
 ## Assumptions
 
-Currently, `bootstrap.sh` assumes the following about your setup:
+`bootstrap.sh` assumes the following about your setup:
 
 - `oh-my-zsh` is installed on your local machine
 - `ZSH_CUSTOM` is set to `~/.oh-my-zsh/custom`
+
+`combine.sh` assumes the following about your setup:
+
+- `bash` is installed on your local machine
+- `.bashrc` exists in your home directory
+- `.bash_aliases` is imported inside your `.bashrc`
 
 ## Inspiration
 
