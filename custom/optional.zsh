@@ -6,6 +6,14 @@ function gcomm() {
     find . -type d -name ".glide" -prune -o -name ".git" -exec sh -c "cd \"{}\"/../ && pwd && git $1" \;
 }
 
+# Sync origin/master with upstream/master
+function gsync() {
+    git checkout master
+    git fetch upstream
+    git reset --hard upstream/master
+    git push origin master
+}
+
 # Enable assumption for file in repository
 alias gignore='git update-index --assume-unchanged'
 
@@ -13,7 +21,7 @@ alias gignore='git update-index --assume-unchanged'
 alias gremind='git update-index --no-assume-unchanged'
 
 # List top ten commands from history
-function hstats {
+function hstats() {
     history \
         | awk '{ CMD[$2]++; count++; } END { for (a in CMD) print CMD[a] " " CMD[a]/count*100 "% " a; }' \
         | grep -v './' \
