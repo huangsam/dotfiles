@@ -1,5 +1,5 @@
 # Run `git pull` in every repository within current path
-alias gpull='find . -type d -name ".glide" -prune -o -name ".git" -exec sh -c "cd \"{}\"/../ && pwd && git pull" \;'
+alias gpull='find . -type d -name ".git" -exec sh -c "cd \"{}\"/../ && pwd && git pull" \;'
 
 # Run generic `git` command in every repository within current path
 function gcomm() {
