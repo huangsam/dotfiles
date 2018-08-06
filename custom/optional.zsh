@@ -1,25 +1,3 @@
-# Run `git pull` in every repository within current path
-alias gpull='find . -type d -name ".git" -exec sh -c "cd \"{}\"/../ && pwd && git pull" \;'
-
-# Run generic `git` command in every repository within current path
-function gcomm() {
-    find . -type d -name ".glide" -prune -o -name ".git" -exec sh -c "cd \"{}\"/../ && pwd && git $1" \;
-}
-
-# Sync origin/master with upstream/master
-function gsync() {
-    git checkout master
-    git fetch upstream
-    git reset --hard upstream/master
-    git push origin master
-}
-
-# Enable assumption for file in repository
-alias gignore='git update-index --assume-unchanged'
-
-# Disable assumption for file in repository
-alias gremind='git update-index --no-assume-unchanged'
-
 # List top ten commands from history
 function hstats() {
     history \
@@ -33,6 +11,3 @@ function hstats() {
 
 # Download MP4 format
 alias ytdl='youtube-dl --format mp4'
-
-# SSH connection
-alias sshv='ssh -vvv -o LogLevel=DEBUG3'
