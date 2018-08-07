@@ -2,8 +2,10 @@
 
 Collection of dotfiles. What is present at the moment:
 
-- [x] Plugins for the `$ZSH_CUSTOM` folder
-- [x] Git configuration
+- Plugins for the `$ZSH_CUSTOM` folder
+- Script to import plugins to `$ZSH_CUSTOM`
+- Script to combine plugins as `.bash_aliases` file
+- Git configuration with efficient aliases
 
 ## Usage
 
