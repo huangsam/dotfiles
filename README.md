@@ -1,11 +1,23 @@
 # dotfiles
 
-Collection of dotfiles. What is present at the moment:
+Collection of dotfiles.
 
-- Plugins for the `$ZSH_CUSTOM` folder
-- Script to import plugins to `$ZSH_CUSTOM`
-- Script to combine plugins as `.bash_aliases` file
-- Git configuration with efficient aliases
+What is present at the moment:
+
+- Artifacts for the `$ZSH_CUSTOM` folder
+- Script to import artifacts to `$ZSH_CUSTOM`
+- Script to combine artifacts as `bash_aliases`
+- Git configuration with embedded aliases
+
+`custom` currently supports various types of commands:
+
+- Git
+- Python
+- Docker
+- Linux
+- and so much more
+
+**Note:** Using these commands reduces your risk of carpal-tunnel.
 
 ## Usage
 
