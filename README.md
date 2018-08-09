@@ -9,14 +9,16 @@ What is present at the moment:
 - Script to combine artifacts as `bash_aliases`
 - Git configuration with embedded aliases
 
-The `custom` folder supports the commands below and more:
+The `custom` folder supports aliases and functions for the following CLIs:
 
 - Git
 - Python
 - Docker
-- Linux
+- Maven
 
-**Note:** Using these commands reduces your risk of carpal-tunnel.
+These extensions and others can be found by inspecting the `zsh` files.
+
+**Note:** Using these commands reduces your risk for carpal-tunnel.
 
 ## Usage
 
