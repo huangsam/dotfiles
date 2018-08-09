@@ -47,13 +47,13 @@
 	dl = !git ll -1
 	dlc = diff --cached HEAD^
 
-    # aliases to find the first buggy commit in a branch-based
-    # workflow.
-    bis = bisect
-    bisb = bisect bad
-    bisg = bisect good
-    bisr = bisect reset
-    biss = bisect start
+	# aliases to find the first buggy commit in a branch-based
+	# workflow.
+	bis = bisect
+	bisb = bisect bad
+	bisg = bisect good
+	bisr = bisect reset
+	biss = bisect start
 
 [grep]
 	lineNumber = true
