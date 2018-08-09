@@ -8,6 +8,9 @@ alias drma='docker rm $(docker ps -q -a)'
 alias drmav='docker rm -v $(docker ps -q -a)'
 alias drms='docker rm $(docker ps -q -f "status=exited")'
 alias drmsv='docker rm -v $(docker ps -q -f "status=exited")'
+alias dinip='docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
+alias dinim='docker inspect --format="{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}"'
+alias dicfg='docker inspect --format="{{json .Config}}"'
 
 # Images
 alias di='docker images'
