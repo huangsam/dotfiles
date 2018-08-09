@@ -37,7 +37,7 @@
 	unstage = reset HEAD --
 	undo = reset --soft HEAD^
 
-	# aliases to provide different views of the commit log
+	# aliases to provide different views of the commit log.
 	last = log -1 HEAD
 	lg = log --pretty=format:'%C(yellow)%h %C(reset)-%C(red)%d %C(reset)%s %C(magenta)(%cr) %C(blue)[%cn]' --graph
 	ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]' --decorate --numstat
@@ -46,6 +46,14 @@
 	fl = log -u
 	dl = !git ll -1
 	dlc = diff --cached HEAD^
+
+    # aliases to find the first buggy commit in a branch-based
+    # workflow.
+    bis = bisect
+    bisb = bisect bad
+    bisg = bisect good
+    bisr = bisect reset
+    biss = bisect start
 
 [grep]
 	lineNumber = true
