@@ -9,13 +9,12 @@ What is present at the moment:
 - Script to combine artifacts as `bash_aliases`
 - Git configuration with embedded aliases
 
-`custom` currently supports various types of commands:
+The `custom` folder supports the commands below and more:
 
 - Git
 - Python
 - Docker
 - Linux
-- and so much more
 
 **Note:** Using these commands reduces your risk of carpal-tunnel.
 
