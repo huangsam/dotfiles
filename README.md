@@ -31,7 +31,7 @@ If you are using plain `bash`:
 1. Run `bash combine.sh` to generate a `bash_aliases` file
 2. Upload the `bash_aliases` file to anywhere you like
 
-## Assumptions
+### Assumptions
 
 `bootstrap.sh` assumes the following about your setup:
 
