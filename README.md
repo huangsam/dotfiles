@@ -8,6 +8,7 @@ What is present at the moment:
 - Script to import artifacts to `$ZSH_CUSTOM`
 - Script to combine artifacts as `bash_aliases`
 - Git configuration with embedded aliases
+- Python configuration for `pip` binary
 
 The `custom` folder supports aliases and functions for the following CLIs:
 
