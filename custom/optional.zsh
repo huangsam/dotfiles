@@ -13,4 +13,5 @@ function hstats() {
 alias ytdl='youtube-dl --format mp4'
 
 # My IP address
-alias myip='curl bot.whatismyipaddress.com'
+alias curlip='curl bot.whatismyipaddress.com'
+alias digip='dig +short myip.opendns.com @resolver1.opendns.com'
