@@ -28,14 +28,17 @@
 	s = status -s -uno
 	st = status
 
-	# aliases to perform a minor fix to the last commit w/o
+	# alias to perform a minor fix to the last commit w/o
 	# actually changing the commit message.
 	caan = commit --all --amend --no-edit
 
-	# aliases to "undo" adding of files for a commit or
+	# alias to "undo" adding of files for a commit or
 	# actually undoing the last commit and leaving the files staged.
 	unstage = reset HEAD --
 	undo = reset --soft HEAD^
+
+	# alias to set upstream branch
+	pushup = "!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
 
 	# aliases to provide different views of the commit log.
 	last = log -1 HEAD
