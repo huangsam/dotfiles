@@ -67,6 +67,7 @@
 
 [push]
 	default = current
+    followTags = true
 
 [core]
 	autocrlf = input
