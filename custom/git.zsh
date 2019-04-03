@@ -20,3 +20,9 @@ alias gignore='git update-index --assume-unchanged'
 
 # Disable assumption for file in repository
 alias gremind='git update-index --no-assume-unchanged'
+
+# Run submodule update
+alias gupdate='git submodule update --recursive --remote'
+
+# Run `git fetch` with tracing enabled
+alias gtrace='GIT_TRACE=1 git fetch'
