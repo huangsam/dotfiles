@@ -10,7 +10,7 @@ What is present at the moment:
 - Custom Git configuration for personal/project use
 - Custom Python configuration for `pip` binary
 
-**Note:** Using the shortcuts above reduces your risk for [carpal-tunnel](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/) :-)
+**Note:** Using the shortcuts above should reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/). :-)
 
 ## Usage
 
