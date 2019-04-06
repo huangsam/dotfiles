@@ -14,9 +14,10 @@ alias drmi='docker rmi'
 alias drmia='docker rmi $(docker images -qa)'
 alias drmid='docker rmi $(docker images -qf "dangling=true")'
 
-# Pull all available Docker images
+# Pull available Docker images
 function dpull() {
-    docker images --format '{{.Repository}}:{{.Tag }}' | xargs -L1 docker pull
+    docker images --format '{{.Repository}}:{{.Tag }}' \
+        | xargs -L1 docker pull
 }
 
 # Docker volumes
@@ -26,6 +27,3 @@ alias drmvd='docker volume rm $(docker volume ls -q -f "dangling=true")'
 
 # Docker networks
 alias dnls='docker network ls'
-
-# Simple alias to Docker Compose
-alias fig='docker-compose'

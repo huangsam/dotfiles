@@ -4,6 +4,9 @@ alias py='python'
 alias py3='python3'
 alias penv='pipenv'
 
+# Update available pip dependencies
 function pipup() {
-    pip list --outdated | awk '{if (NR > 2) print $1"=="$3}' | xargs pip install
+    pip list --format=freeze --outdated \
+        | awk -F'==' '{print $1}' \
+        | xargs pip install -U
 }
