@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Transfer diffs from repo over to oh-my-zsh
 function doIt() {
     rsync --exclude '.DS_Store' \
         --exclude '.osx' \
@@ -7,6 +8,7 @@ function doIt() {
         -avh --no-perms ./custom/* ~/.oh-my-zsh/custom
 }
 
+# Prompt user for bootstrap process
 if [ "$1" == '--force' ] || [ "$1" == '-f' ]; then
     doIt
 else
