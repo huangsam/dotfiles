@@ -1,4 +1,4 @@
-# Containers
+# Docker containers
 alias dps='docker ps'
 alias dpsa='docker ps -a'
 alias dlog='docker logs'
@@ -8,23 +8,24 @@ alias dinip='docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAd
 alias dinim='docker inspect --format="{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}"'
 alias dicfg='docker inspect --format="{{json .Config}}"'
 
-# Images
+# Docker images
 alias di='docker images'
 alias drmi='docker rmi'
 alias drmia='docker rmi $(docker images -qa)'
 alias drmid='docker rmi $(docker images -qf "dangling=true")'
 
+# Pull all available Docker images
 function dpull() {
     docker images --format '{{.Repository}}:{{.Tag }}' | xargs -L1 docker pull
 }
 
-# Volumes
+# Docker volumes
 alias dvls='docker volume ls'
 alias drmva='docker volume rm $(docker volume ls -q)'
 alias drmvd='docker volume rm $(docker volume ls -q -f "dangling=true")'
 
-# Networks
+# Docker networks
 alias dnls='docker network ls'
 
-# Docker Compose
+# Simple alias to Docker Compose
 alias fig='docker-compose'
