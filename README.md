@@ -4,22 +4,13 @@ Collection of dotfiles.
 
 What is present at the moment:
 
-- Artifacts for the `$ZSH_CUSTOM` folder
-- Script to import artifacts to `$ZSH_CUSTOM`
-- Script to combine artifacts as `bash_aliases`
-- Git configuration with embedded aliases
-- Python configuration for `pip` binary
+- Shortcuts for command-line tools
+- Script to move `custom` artifacts to `$ZSH_CUSTOM`
+- Script to move `custom` artifacts to `$ALIAS_PATH`
+- Custom Git configuration for personal/project use
+- Custom Python configuration for `pip` binary
 
-The `custom` folder supports aliases and functions for the following CLIs:
-
-- Git
-- Python
-- Docker
-- Maven
-
-These extensions and others can be found by inspecting the `zsh` files.
-
-**Note:** Using these commands reduces your risk for carpal-tunnel.
+**Note:** Using the shortcuts above reduces your risk for [carpal-tunnel](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/) :-)
 
 ## Usage
 
