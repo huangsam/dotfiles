@@ -1,11 +1,6 @@
 # Run `git pull` in every repository within current path
 alias gpull='find . -type d -name ".git" -exec sh -c "cd \"{}\"/../ && pwd && git pull" \;'
 
-# Run generic `git` command in every repository within current path
-function gcomm() {
-    find . -type d -name ".glide" -prune -o -name ".git" -exec sh -c "cd \"{}\"/../ && pwd && git $1" \;
-}
-
 # Sync origin/master with upstream/master
 function gsync() {
     BRANCH="${1:-master}"
