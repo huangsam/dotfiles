@@ -1,9 +1,11 @@
 #!/bin/bash
-VIRTUALENV="/usr/local/bin/virtualenv"
-VDIR="$HOME/.virtualenvs"
+VDIR="$HOME/.local/share/virtualenvs"
 find "$VDIR" -type l -exec rm {} +
 pushd "$VDIR"
-venvs=$(find . -type d -depth 1 | xargs basename)
+venvs="$(ls)"
 for venv in $venvs ; do
-    $VIRTUALENV "$venv"
+    echo $venv
+    python -m venv "$venv"
+    echo "done."
 done
+popd
