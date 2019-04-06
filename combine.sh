@@ -1,15 +1,15 @@
 #!/bin/bash
 
 # Establish bash aliases
-ALIAS_LOC="${1:-./bash_aliases}"
+ALIAS_PATH="${1:-./bash_aliases}"
 
-# Wipe bash aliases clean
-test -f "$ALIAS_LOC" && rm -f "$ALIAS_LOC"
+# Wipe existing bash aliases
+test -f "$ALIAS_PATH" && rm -f "$ALIAS_PATH"
 
 # Combine alias files into one file
 for fl in custom/*.zsh
 do
-    cat "$fl" >> "$ALIAS_LOC"
-    echo >> "$ALIAS_LOC"
+    cat "$fl" >> "$ALIAS_PATH"
+    echo >> "$ALIAS_PATH"
 done
-echo "Combine done! Copy $ALIAS_LOC anywhere you like :-)"
+echo "Combine done! Copy $ALIAS_PATH anywhere you like :-)"
