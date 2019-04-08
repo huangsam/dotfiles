@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Establish target path for diffs
-export TARGET_PATH="${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"
+export ZSH_CUSTOM="${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"
 
 # Transfer diffs from repo over to oh-my-zsh
 function doIt() {
     rsync --exclude '.DS_Store' \
         --exclude '.osx' \
         --exclude 'README.md' \
-        -avh --no-perms ./custom/* "$TARGET_PATH"
+        -avh --no-perms ./custom/* "$ZSH_CUSTOM"
 }
 
 # Prompt user for diff transfers
