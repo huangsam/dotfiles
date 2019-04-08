@@ -1,14 +1,17 @@
 #!/bin/bash
 
+# Establish target path for diffs
+export TARGET_PATH="${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"
+
 # Transfer diffs from repo over to oh-my-zsh
 function doIt() {
     rsync --exclude '.DS_Store' \
         --exclude '.osx' \
         --exclude 'README.md' \
-        -avh --no-perms ./custom/* ~/.oh-my-zsh/custom
+        -avh --no-perms ./custom/* $TARGET_PATH
 }
 
-# Prompt user for bootstrap process
+# Prompt user for diff transfers
 if [ "$1" == '--force' ] || [ "$1" == '-f' ]; then
     doIt
 else
