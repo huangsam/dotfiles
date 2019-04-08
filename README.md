@@ -16,14 +16,14 @@ What is present at the moment:
 
 If you are using `oh-my-zsh`:
 
-1. Run `bash bootstrap.sh` to install these files to `$ZSH_CUSTOM`
-2a. Create a new `zsh` shell to load the new aliases
-2b. Otherwise, source your `~/.zshrc` to load the new aliases
+- Run `bash bootstrap.sh` to install these files to `$ZSH_CUSTOM`
+- Create a new `zsh` shell to load the new aliases
+- Otherwise, source your `~/.zshrc` to load the new aliases
 
 If you are using plain `bash`:
 
-1. Run `bash combine.sh` to generate a `bash_aliases` file
-2. Move `bash_aliases` to wherever you like
+- Run `bash combine.sh` to generate a `bash_aliases` file
+- Move `bash_aliases` to wherever you like
 
 ## Project inspiration
 
