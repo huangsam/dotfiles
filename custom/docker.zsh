@@ -7,7 +7,7 @@ function dpull() {
 # Docker containers
 alias dps='docker ps'
 alias dpsa='docker ps -a'
-alias dlog='docker logs'
+alias dlogs='docker logs'
 alias dexec='docker exec'
 alias drma='docker rm $(docker ps -qa)'
 alias dinip='docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
