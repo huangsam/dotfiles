@@ -12,7 +12,7 @@ What is present at the moment:
 
 **Note:** Using the shortcuts above should reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/). :-)
 
-## Usage
+## Getting started
 
 If you are using `oh-my-zsh`:
 
@@ -25,7 +25,9 @@ If you are using plain `bash`:
 1. Run `bash combine.sh` to generate a `bash_aliases` file
 2. Move `bash_aliases` to wherever you like
 
-## Inspiration
+## Project inspiration
+
+This effort was inspired by the following repos:
 
 - https://github.com/robbyrussell/oh-my-zsh
 - https://github.com/mathiasbynens/dotfiles
