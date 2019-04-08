@@ -8,7 +8,7 @@ function doIt() {
     rsync --exclude '.DS_Store' \
         --exclude '.osx' \
         --exclude 'README.md' \
-        -avh --no-perms ./custom/* $TARGET_PATH
+        -avh --no-perms ./custom/* "$TARGET_PATH"
 }
 
 # Prompt user for diff transfers
