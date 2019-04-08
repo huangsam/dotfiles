@@ -2,7 +2,7 @@
 set -eo pipefail
 
 # Establish bash aliases
-ALIAS_PATH="${1:-./bash_aliases}"
+export ALIAS_PATH="${ALIAS_PATH:-./bash_aliases}"
 
 # Wipe existing bash aliases
 test -f "$ALIAS_PATH" && rm -f "$ALIAS_PATH"
