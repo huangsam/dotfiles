@@ -10,17 +10,17 @@ What is present at the moment:
 - Custom Git configuration for personal/project use
 - Custom Python configuration for `pip` binary
 
-**Note:** Using the shortcuts above should reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/). :-)
+**Note:** Using the shortcuts above should reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/). :smile:
 
 ## Getting started
 
-If you are using `oh-my-zsh`:
+For `oh-my-zsh` users:
 
 - Run `bash bootstrap.sh` to install these files to `$ZSH_CUSTOM`
 - Create a new `zsh` shell to load the new aliases
 - Otherwise, source your `~/.zshrc` to load the new aliases
 
-If you are using plain `bash`:
+For `bash` users:
 
 - Run `bash combine.sh` to generate a `bash_aliases` file
 - Move `bash_aliases` to wherever you like
