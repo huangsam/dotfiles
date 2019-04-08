@@ -44,7 +44,8 @@
   contrib = shortlog --summary --numbered
 
   # aliases to provide different views of the commit log.
-  last = log -1 HEAD --graph
+  last = log -1 HEAD
+  lg = log --pretty=format:'%C(yellow)%h %C(reset)-%C(red)%d %C(reset)%s %C(magenta)(%cr) %C(blue)[%cn]' --graph
   ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]' --decorate --numstat
   ls = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]' --decorate
   le = log --oneline --decorate
