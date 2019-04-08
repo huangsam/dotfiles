@@ -17,25 +17,13 @@ What is present at the moment:
 If you are using `oh-my-zsh`:
 
 1. Run `bash bootstrap.sh` to install these files to `$ZSH_CUSTOM`
-2. Create a clean terminal instance to load the new aliases in
+2a. Create a new `zsh` shell to load the new aliases
+2b. Otherwise, source your `~/.zshrc` to load the new aliases
 
 If you are using plain `bash`:
 
 1. Run `bash combine.sh` to generate a `bash_aliases` file
-2. Upload the `bash_aliases` file to anywhere you like
-
-### Assumptions
-
-`bootstrap.sh` assumes the following about your setup:
-
-- `oh-my-zsh` is installed on your local machine
-- `ZSH_CUSTOM` is set to `~/.oh-my-zsh/custom`
-
-`combine.sh` assumes the following about your setup:
-
-- `bash` is installed on your local machine
-- `.bashrc` exists in your home directory
-- `.bash_aliases` is imported inside your `.bashrc`
+2. Move `bash_aliases` to wherever you like
 
 ## Inspiration
 
