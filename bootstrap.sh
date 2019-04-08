@@ -12,7 +12,8 @@ function doIt() {
 }
 
 # Prompt user for diff transfers
-if [ "$1" == '--force' ] || [ "$1" == '-f' ]; then
+if [ "$1" == '--force' ] || [ "$1" == '-f' ]
+then
     doIt
 else
     read -r -p 'This may overwrite files. Are you sure? (y/n) ' -n 1
