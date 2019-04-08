@@ -4,7 +4,7 @@ Collection of dotfiles.
 
 What is present at the moment:
 
-- Shortcuts for command-line tools in `custom`
+- Shortcuts for CLI tools in `custom`
 - Script for moving `custom` shortcuts to `$ZSH_CUSTOM`
 - Script for moving `custom` shortcuts to `$ALIAS_PATH`
 - Custom configuration for `git` CLI
