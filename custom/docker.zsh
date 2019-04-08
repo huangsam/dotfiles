@@ -1,3 +1,9 @@
+# Pull available Docker images
+function dpull() {
+    docker images --format '{{.Repository}}:{{.Tag }}' \
+        | xargs -L1 docker pull
+}
+
 # Docker containers
 alias dps='docker ps'
 alias dpsa='docker ps -a'
@@ -13,12 +19,6 @@ alias di='docker images'
 alias drmi='docker rmi'
 alias drmia='docker rmi $(docker images -qa)'
 alias drmid='docker rmi $(docker images -qf "dangling=true")'
-
-# Pull available Docker images
-function dpull() {
-    docker images --format '{{.Repository}}:{{.Tag }}' \
-        | xargs -L1 docker pull
-}
 
 # Docker volumes
 alias dvls='docker volume ls'
