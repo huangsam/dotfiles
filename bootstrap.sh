@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Establish target path for diffs
-export ZSH_CUSTOM="${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"
+export ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
 # Transfer diffs from repo over to oh-my-zsh
 function doIt() {
