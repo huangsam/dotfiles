@@ -40,6 +40,9 @@
 	# alias to set upstream branch
 	pushup = "!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
 
+	# alias to list contributors with number of commits
+	contrib = shortlog --summary --numbered
+
 	# aliases to provide different views of the commit log.
 	last = log -1 HEAD
 	lg = log --pretty=format:'%C(yellow)%h %C(reset)-%C(red)%d %C(reset)%s %C(magenta)(%cr) %C(blue)[%cn]' --graph
