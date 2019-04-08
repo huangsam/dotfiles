@@ -4,11 +4,11 @@ Collection of dotfiles.
 
 What is present at the moment:
 
-- Shortcuts for command-line tools
-- Script to move `custom` artifacts to `$ZSH_CUSTOM`
-- Script to move `custom` artifacts to `$ALIAS_PATH`
-- Custom Git configuration for personal/project use
-- Custom Python configuration for `pip` binary
+- Shortcuts for command-line tools in `custom`
+- Script for moving `custom` shortcuts to `$ZSH_CUSTOM`
+- Script for moving `custom` shortcuts to `$ALIAS_PATH`
+- Custom configuration for `git` CLI
+- Custom configuration for `pip` CLI
 
 **Note:** Using the shortcuts above should reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/). :smile:
 
