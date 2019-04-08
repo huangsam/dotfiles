@@ -3,7 +3,7 @@
 # Establish target path for diffs
 export ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
-# Transfer diffs from repo over to oh-my-zsh
+# Transfer diffs over to target path
 function doIt() {
     rsync --exclude '.DS_Store' \
         --exclude '.osx' \
@@ -21,4 +21,3 @@ else
         doIt
     fi
 fi
-unset doIt
