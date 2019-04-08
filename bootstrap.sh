@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eo pipefail
 
 # Establish target path for diffs
 export ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
