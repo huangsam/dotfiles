@@ -5,7 +5,7 @@ set -eo pipefail
 export ALIAS_PATH="${ALIAS_PATH:-./bash_aliases}"
 
 # Wipe existing bash aliases
-test -f "$ALIAS_PATH" && rm -f "$ALIAS_PATH"
+[[ -f "$ALIAS_PATH" ]] && rm -f "$ALIAS_PATH"
 
 # Combine alias files into one file
 for fl in custom/*.zsh
