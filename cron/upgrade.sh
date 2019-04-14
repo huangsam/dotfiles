@@ -14,10 +14,8 @@ REPOS=(
     "$HOME/.dotfiles"
 )
 
-for repo in "${REPOS[@]}"
-do
-    if [[ -d "$repo" ]]
-    then
+for repo in "${REPOS[@]}"; do
+    if [[ -d "$repo" ]]; then
         echo -n "$repo..."
         cd "$repo" && $GIT pull > /dev/null
         echo 'done.'

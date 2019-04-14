@@ -8,8 +8,7 @@ export ALIAS_PATH="${ALIAS_PATH:-./bash_aliases}"
 [[ -f "$ALIAS_PATH" ]] && rm -f "$ALIAS_PATH"
 
 # Combine alias files into one file
-for fl in custom/*.zsh
-do
+for fl in custom/*.zsh; do
     cat "$fl" >> "$ALIAS_PATH"
     echo >> "$ALIAS_PATH"
 done
