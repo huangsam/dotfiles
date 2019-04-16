@@ -12,4 +12,11 @@ for fl in custom/*.zsh; do
     cat "$fl" >> "$ALIAS_PATH"
     echo >> "$ALIAS_PATH"
 done
-echo "Combine done! Copy $ALIAS_PATH anywhere you like. ✨"
+
+# Establish emojis
+EMOJI_STARS="\xE2\x9c\xa8"
+EMOJI_CAKE="\xF0\x9F\x8D\xB0"
+
+# Print status and output location
+echo -e "Combine done! $EMOJI_STARS $EMOJI_CAKE $EMOJI_STARS"
+echo "Final output location: $ALIAS_PATH"
