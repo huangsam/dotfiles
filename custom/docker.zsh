@@ -4,6 +4,17 @@ function dpull() {
         | xargs -L1 docker pull
 }
 
+# Retrieve ids of cacheable Docker layers
+function dcache() {
+    docker history -q "$1" \
+        | awk '{if ($1 !~ /missing/) print $1}'
+}
+
+# Save tar of cacheable Docker layers
+function dsave() {
+    docker save -o "${2:-output.tar}" $(dcache "$1")
+}
+
 # Docker containers
 alias dps='docker ps'
 alias dpsa='docker ps -a'
