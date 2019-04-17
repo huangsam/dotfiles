@@ -6,10 +6,8 @@ export ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
 # Transfer diffs over to target path
 function doIt() {
-    rsync --exclude '.DS_Store' \
-        --exclude '.osx' \
-        --exclude 'README.md' \
-        -avh --no-perms ./custom/* "$ZSH_CUSTOM"
+    rsync -avh --exclude '.DS_Store' --no-perms \
+        ./custom/* "$ZSH_CUSTOM"
 }
 
 # Prompt user for diff transfers
