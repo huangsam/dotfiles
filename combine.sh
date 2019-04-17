@@ -14,8 +14,8 @@ for fl in custom/*.zsh; do
 done
 
 # Establish emojis
-EMOJI_STARS="\xE2\x9c\xa8"
-EMOJI_CAKE="\xF0\x9F\x8D\xB0"
+EMOJI_STARS='\xE2\x9c\xa8'
+EMOJI_CAKE='\xF0\x9F\x8D\xB0'
 
 # Print status and output location
 echo -e "Combine done! $EMOJI_STARS $EMOJI_CAKE $EMOJI_STARS"
