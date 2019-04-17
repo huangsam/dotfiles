@@ -15,7 +15,7 @@ REPOS=(
 )
 
 for repo in "${REPOS[@]}"; do
-    if [[ -d "$repo" ]]; then
+    if [[ -d $repo ]]; then
         echo -n "$repo..."
         cd "$repo" && $GIT pull > /dev/null
         echo 'done.'
