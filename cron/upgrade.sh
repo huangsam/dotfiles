@@ -5,7 +5,9 @@ BREW=/usr/local/bin/brew
 GIT=/usr/bin/git
 
 # Upgrade brew plugins
+echo -n 'brew upgrade/cleanup...'
 $BREW upgrade && $BREW cleanup
+echo 'done.'
 
 # Upgrade git repositories
 REPOS=(
@@ -16,7 +18,7 @@ REPOS=(
 
 for repo in "${REPOS[@]}"; do
     if [[ -d $repo ]]; then
-        echo -n "$repo..."
+        echo -n "sync $repo..."
         cd "$repo" && $GIT pull > /dev/null
         echo 'done.'
     fi
