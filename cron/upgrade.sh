@@ -4,9 +4,17 @@
 BREW=/usr/local/bin/brew
 GIT=/usr/bin/git
 
-# Upgrade brew plugins
-echo -n 'brew updates...'
-$BREW upgrade && $BREW cleanup
+# Upgrade brew software
+echo -n 'brew update...'
+$BREW update > /dev/null
+echo 'done.'
+
+echo -n 'brew upgrade...'
+$BREW upgrade > /dev/null
+echo 'done.'
+
+echo -n 'brew cleanup...'
+$BREW cleanup > /dev/null
 echo 'done.'
 
 # Upgrade git repositories
