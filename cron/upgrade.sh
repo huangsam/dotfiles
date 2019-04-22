@@ -9,9 +9,7 @@ echo -n 'brew update...'
 $BREW update > /dev/null
 echo 'done.'
 
-echo -n 'brew upgrade...'
-$BREW upgrade > /dev/null
-echo 'done.'
+$BREW upgrade
 
 echo -n 'brew cleanup...'
 $BREW cleanup > /dev/null
