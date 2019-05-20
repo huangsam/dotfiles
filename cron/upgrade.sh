@@ -26,7 +26,7 @@ REPOS=(
 for repo in "${REPOS[@]}"; do
     if [[ -d $repo ]]; then
         echo -n "git $repo..."
-        cd "$repo" && $GIT pull > /dev/null
+        cd "$repo" && $GIT pull -q
         echo 'done.'
     fi
 done
