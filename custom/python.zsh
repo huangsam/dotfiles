@@ -1,8 +1,8 @@
 # Update available pip dependencies
 function pipup() {
-    pip list --format=freeze --outdated \
+    pip3 list --format=freeze --outdated \
         | awk -F'==' '{print $1}' \
-        | xargs pip install -U
+        | xargs pip3 install -U
 }
 
 # Python helpers
