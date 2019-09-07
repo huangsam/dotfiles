@@ -9,4 +9,4 @@ function pipup() {
 alias venable='source /usr/local/bin/virtualenvwrapper.sh'
 alias py='python'
 alias py3='python3'
-alias pipout='pip list --outdated'
+alias pipout='pip3 list --outdated'
