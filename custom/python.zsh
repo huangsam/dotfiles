@@ -7,7 +7,9 @@ function pipup() {
 
 # Python helpers
 alias vwrap='source /usr/local/bin/virtualenvwrapper.sh'
-alias vactivate='source venv/bin/activate'
+alias vmake='virtualenv venv'
+alias vstart='source venv/bin/activate'
+alias vstop='deactivate'
 alias py='python'
 alias py3='python3'
 alias pipout='pip3 list --outdated'
