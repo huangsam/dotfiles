@@ -6,7 +6,8 @@ function pipup() {
 }
 
 # Python helpers
-alias venable='source /usr/local/bin/virtualenvwrapper.sh'
+alias vwrap='source /usr/local/bin/virtualenvwrapper.sh'
+alias vactivate='source venv/bin/activate'
 alias py='python'
 alias py3='python3'
 alias pipout='pip3 list --outdated'
