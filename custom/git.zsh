@@ -1,3 +1,18 @@
+# Run `git pull` for every repo under a path
+function gpull() {
+    # shellcheck disable=SC2156
+    find "${1:-.}" -type d -name ".git" -exec bash -c '
+        cd {}/../
+        dir="$(pwd)"
+        if grep -qs "remote" .git/config; then
+            echo "= pull $dir"
+            git pull -q
+        else
+            echo "x skip $dir"
+        fi
+    ' \;
+}
+
 # Sync origin/master with upstream/master
 function gsync() {
     BRANCH="${1:-master}"
@@ -16,9 +31,6 @@ function gerrit_publish() {
 function gerrit_draft() {
     git push origin "HEAD:refs/drafts/$1"
 }
-
-# Run `git pull` in every repository within current path
-alias gpull='find . -type d -name ".git" -exec sh -c "cd \"{}\"/../ && pwd && git pull" \;'
 
 # Enable assumption for file in repository
 alias gignore='git update-index --assume-unchanged'
