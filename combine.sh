@@ -10,7 +10,6 @@ export ALIAS_PATH="${ALIAS_PATH:-./bash_aliases}"
 # Combine alias files into one file
 for fl in custom/*.zsh; do
     cat "$fl" >> "$ALIAS_PATH"
-    echo >> "$ALIAS_PATH"
 done
 
 # Establish emojis
