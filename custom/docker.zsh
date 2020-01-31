@@ -1,13 +1,6 @@
-# Pull available Docker images
-function dpull() {
-    docker images --format '{{.Repository}}:{{.Tag }}' \
-        | xargs -L1 docker pull
-}
-
 # Retrieve ids of cacheable Docker layers
 function dcache() {
-    docker history -q "$1" \
-        | awk '{if ($1 !~ /missing/) print $1}'
+    docker history -q "$1" | awk '{if ($1 !~ /missing/) print $1}'
 }
 
 # Save tar of cacheable Docker layers
@@ -30,6 +23,7 @@ alias di='docker images'
 alias drmi='docker rmi'
 alias drmia='docker rmi $(docker images -qa)'
 alias drmid='docker rmi $(docker images -qf "dangling=true")'
+alias dpull='docker images --format "{{.Repository}}:{{.Tag }}" | xargs -L1 docker pull'
 
 # Docker volumes
 alias dvls='docker volume ls'
