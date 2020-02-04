@@ -1,7 +1,8 @@
 # Run `git pull` for online repos in a specific path
 function gpull() {
-    find "${1:-.}" -type d -name '.git' | while read -r dir; do
-        cd "$dir/../" || return
+    # shellcheck disable=SC2156
+    find "${1:-.}" -type d -name ".git" -exec bash -c '
+        cd {}/../
         dir="$(pwd)"
         if grep -qs "remote" .git/config; then
             echo "= pull $dir"
@@ -9,7 +10,7 @@ function gpull() {
         else
             echo "x skip $dir"
         fi
-    done
+    ' \;
 }
 
 # Sync origin/master with upstream/master
