@@ -8,5 +8,8 @@ GIT=/usr/bin/git
 TARGET="$HOME/Playground"
 
 find "$TARGET" -type d -name ".git" | while read -r dir; do
-    cd "$dir/../" && pwd && $GIT pull
+    cd "$dir/../"
+    if grep -qs "remote" .git/config; then
+        pwd && $GIT pull
+    fi
 done
