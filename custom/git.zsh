@@ -3,12 +3,8 @@ function gpull() {
     # shellcheck disable=SC2156
     find "${1:-.}" -type d -name ".git" -exec bash -c '
         cd {}/../
-        dir="$(pwd)"
         if grep -qs "remote" .git/config; then
-            echo "= pull $dir"
-            git pull -q
-        else
-            echo "x skip $dir"
+            pwd && git pull
         fi
     ' \;
 }
