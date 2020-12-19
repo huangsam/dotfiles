@@ -1,7 +1,7 @@
 # Run `git pull` and `git remote prune` for remote repos
 function gpull() {
     # shellcheck disable=SC2156
-    find . -type d -name ".git" -exec bash -c '
+    find . -type d -name ".git" -exec sh -c '
         cd {}/../
         if grep -qs "remote \"origin\"" .git/config; then
             pwd
