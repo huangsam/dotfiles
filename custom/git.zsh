@@ -1,12 +1,24 @@
-# Run `git pull` for online repos in a specific path
+# Run `git pull` and `git remote prune` for remote repos
 function gpull() {
     # shellcheck disable=SC2156
     find "${1:-.}" -type d -name ".git" -exec bash -c '
         cd {}/../
-        if grep -qs "remote" .git/config; then
-            pwd && git pull
+        if grep -qs "remote \"origin\"" .git/config; then
+            pwd
+            git pull
+            git remote prune origin
         fi
     ' \;
+}
+
+# Run any `git` command for all repos
+function gmap() {
+    COMMAND="$1"
+    CONTEXT="${2:-.}"
+    find "$CONTEXT" -type d -name '.git' \
+        | sed 's/\/.git//g' \
+        | xargs -I{} echo "echo {}; git -C {} $COMMAND" \
+        | sh
 }
 
 # Sync origin/master with upstream/master
