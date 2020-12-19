@@ -1,7 +1,7 @@
 # Run `git pull` and `git remote prune` for remote repos
 function gpull() {
     # shellcheck disable=SC2156
-    find "${1:-.}" -type d -name ".git" -exec bash -c '
+    find . -type d -name ".git" -exec bash -c '
         cd {}/../
         if grep -qs "remote \"origin\"" .git/config; then
             pwd
@@ -14,8 +14,7 @@ function gpull() {
 # Run any `git` command for all repos
 function gmap() {
     COMMAND="$1"
-    CONTEXT="${2:-.}"
-    find "$CONTEXT" -type d -name '.git' \
+    find . -type d -name '.git' \
         | sed 's/\/.git//g' \
         | xargs -I{} echo "echo {}; git -C {} $COMMAND" \
         | sh
