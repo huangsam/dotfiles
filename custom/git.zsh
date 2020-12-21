@@ -2,22 +2,19 @@
 function gpull() {
     # shellcheck disable=SC2156
     find . -type d -name ".git" -exec sh -c '
-        cd {}/../
-        if grep -qs "remote \"origin\"" .git/config; then
-            pwd
-            git pull
-            git remote prune origin
+        if grep -qs "remote \"origin\"" {}/config; then
+            echo {}
+            git -C {}/../ pull
+            git -C {}/../ remote prune origin
         fi
     ' \;
 }
 
 # Run any `git` command for all repos
 function gmap() {
-    COMMAND="$1"
+    COMMAND="$@"
     find . -type d -name '.git' \
-        | sed 's/\/.git//g' \
-        | xargs -I{} echo "echo {}; git -C {} $COMMAND" \
-        | sh
+        | xargs -I{} sh -c "echo {}; git -C {}/../ $COMMAND"
 }
 
 # Sync origin/master with upstream/master
