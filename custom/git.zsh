@@ -12,9 +12,8 @@ function gpull() {
 
 # Run any `git` command for all repos
 function gmap() {
-    COMMAND="$@"
-    find . -type d -name '.git' \
-        | xargs -I{} sh -c "echo {}; git -C {}/../ $COMMAND"
+    # shellcheck disable=SC2156
+    find . -type d -name '.git' -exec sh -c "echo {}; git -C {}/../ $*" \;
 }
 
 # Sync origin/master with upstream/master
