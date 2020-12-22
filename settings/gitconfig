@@ -28,7 +28,7 @@
   s = status -s -uno
   st = status
 
-  # alias to fix the last commit w/o changing the commit message
+  # alias to fix the last commit without changing the commit message
   caan = commit --all --amend --no-edit
 
   # alias to undo the last commit and leave the files staged
