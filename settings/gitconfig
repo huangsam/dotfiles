@@ -34,9 +34,8 @@
     # alias to undo the last commit and leave the files staged
     undo = reset --soft HEAD^
 
-    # aliases to configure local branch to origin repository
-    pushup = !git push -u origin $(git symbolic-ref --short HEAD)
-    branchup = !git branch -u origin $(git symbolic-ref --short HEAD)
+    # alias to remove untracked and ignored files
+    cleanup = clean -fdx
 
     # alias to list contributors with number of commits
     contributors = shortlog --summary --numbered
@@ -50,6 +49,10 @@
     dc = diff --cached HEAD
     dlc = diff --cached HEAD^
 
+    # aliases to configure local branch to origin repository
+    push-up = !git push -u origin $(git symbolic-ref --short HEAD)
+    branch-up = !git branch -u origin $(git symbolic-ref --short HEAD)
+
     # aliases to improve bisect UX
     bisect-fixed = bisect bad
     bisect-unfixed = bisect good
@@ -59,8 +62,8 @@
     submodule-update = submodule update --init --recursive
 
     # aliases to flag files that are not in .gitignore
-    flag = update-index --assume-unchanged
-    unflag = update-index --no-assume-unchanged
+    index-flag = update-index --assume-unchanged
+    index-unflag = update-index --no-assume-unchanged
 
 [grep]
     lineNumber = true
