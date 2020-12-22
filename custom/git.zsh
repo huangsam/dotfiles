@@ -29,7 +29,7 @@ function gsync() {
     git checkout "$branch"
     git fetch "$parent"
     git reset --hard "$parent/$branch"
-    git push "$current" "$target"
+    git push "$current" "$branch"
 }
 
 # Run `git fetch` with tracing enabled
