@@ -2,8 +2,8 @@
 set -eo pipefail
 
 # Establish commands
-BREW=/usr/local/bin/brew
-GIT=/usr/bin/git
+BREW="$(which brew)"
+GIT="$(which git)"
 
 # Upgrade brew software
 echo -n 'brew update...'
