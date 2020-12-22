@@ -1,19 +1,24 @@
 # Run `git pull` and `git remote prune` for remote repos
 function gpull() {
-    # shellcheck disable=SC2156
     find . -type d -name ".git" -exec sh -c '
-        if grep -qs "remote \"origin\"" {}/config; then
-            echo {}
-            git -C {}/../ pull
-            git -C {}/../ remote prune origin
+        dir="$1"
+        repo="$2"
+        if grep -qs "remote .$repo." $dir/config; then
+            echo "$dir"
+            git -C "$dir/../" pull "$repo"
+            git -C "$dir/../" remote prune origin
         fi
-    ' \;
+    ' _ {} "${1:-origin}" \;
 }
 
 # Run any `git` command for all repos
 function gmap() {
-    # shellcheck disable=SC2156
-    find . -type d -name '.git' -exec sh -c "echo {}; git -C {}/../ $*" \;
+    find . -type d -name '.git' -exec sh -c '
+        dir="$1"
+        command="$2"
+        echo "$dir"
+        git -C "$dir/../" $command
+    ' _ {} "$*" \;
 }
 
 # Sync origin/target with upstream/target
