@@ -1,2 +1,0 @@
-MAILTO=""
-30 8-17 * * 1-5 .cron/upgrade.sh
