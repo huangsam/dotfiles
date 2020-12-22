@@ -16,7 +16,7 @@ function gmap() {
     find . -type d -name '.git' -exec sh -c "echo {}; git -C {}/../ $*" \;
 }
 
-# Sync origin/master with upstream/master
+# Sync origin/target with upstream/target
 function gsync() {
     target="${1:-master}"
     git checkout "$target"
