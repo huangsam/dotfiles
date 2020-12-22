@@ -28,38 +28,38 @@
   s = status -s -uno
   st = status
 
-  # alias to perform a minor fix to the last commit w/o
-  # actually changing the commit message.
+  # alias to perform a minor fix to the last commit without
+  # actually changing the commit message
   caan = commit --all --amend --no-edit
 
   # alias to "undo" adding of files for a commit or
-  # actually undoing the last commit and leaving the files staged.
+  # actually undoing the last commit and leaving the files staged
   unstage = reset HEAD --
   undo = reset --soft HEAD^
 
-  # alias to set upstream branch
-  pushup = "!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
+  # aliases to configure local branch to origin repository
+  pushup = !git push -u origin $(git symbolic-ref --short HEAD)
+  branchup = !git branch -u origin $(git symbolic-ref --short HEAD)
 
   # alias to list contributors with number of commits
-  contrib = shortlog --summary --numbered
+  contributors = shortlog --summary --numbered
 
-  # aliases to provide different views of the commit log.
+  # aliases to provide different views of the commit log
   last = log -1 HEAD
   lg = log --pretty=format:'%C(yellow)%h %C(reset)-%C(red)%d %C(reset)%s %C(magenta)(%cr) %C(blue)[%cn]' --graph
   ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]' --decorate --numstat
   ls = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]' --decorate
   le = log --oneline --decorate
-  fl = log -u
-  dl = !git ll -1
+  dc = diff --cached HEAD
   dlc = diff --cached HEAD^
 
-  # aliases to find the first buggy commit in a branch-based
-  # workflow.
-  bis = bisect
-  bisb = bisect bad
-  bisg = bisect good
-  bisr = bisect reset
-  biss = bisect start
+  # aliases for rare commands
+  mark = bisect
+  smod = submodule
+
+  # aliases to flag files that are not in .gitignore
+  flag = update-index --assume-unchanged
+  unflag = update-index --no-assume-unchanged
 
 [grep]
   lineNumber = true
