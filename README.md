@@ -1,24 +1,28 @@
-# dotfiles
+# Sam's dotfiles
 
-Collection of dotfiles to boost productivity and happiness.
+Collection of dotfiles to boost productivity.
 
-**Note:** Using the `custom` shortcuts will reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/).
+## Installation
 
-## Getting started
+### Custom aliases and functions
 
-For `oh-my-zsh` users:
-
-- Run `bootstrap.sh` to install these files to `$ZSH_CUSTOM`
-- Reload your `.zshrc` to load the new aliases
-
-For `bash` users:
+Using the `custom` shortcuts will reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/).
 
 - Run `combine.sh` to generate a `bash_aliases` file
 - Move `bash_aliases` to wherever you like
 
-## Project inspiration
+### Git settings
 
-This effort was inspired by the following repos:
+The `.gitconfig` has tons of aliases and defaults.
+
+- Run `cp .gitconfig ~/.gitconfig`
+- Add `user.name` and `user.email` to `~/.gitconfig`
+
+### MacOS software
+
+Run `macos.sh` to install developer software on a new MacOS machine.
+
+## Thanks to...
 
 - https://github.com/robbyrussell/oh-my-zsh
 - https://github.com/mathiasbynens/dotfiles
