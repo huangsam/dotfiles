@@ -21,13 +21,15 @@ function gmap() {
     ' _ {} "$*" \;
 }
 
-# Sync origin/target with upstream/target
+# Sync current/branch with parent/branch
 function gsync() {
-    target="${1:-master}"
-    git checkout "$target"
-    git fetch upstream
-    git reset --hard "upstream/$target"
-    git push origin "$target"
+    branch="${1:-master}"
+    current="${2:-origin}"
+    parent="${3:-upstream}"
+    git checkout "$branch"
+    git fetch "$parent"
+    git reset --hard "$parent/$branch"
+    git push "$current" "$target"
 }
 
 # Run `git fetch` with tracing enabled
