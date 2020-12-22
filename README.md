@@ -13,7 +13,7 @@ Using the `custom` shortcuts will reduce your risk for [Carpal Tunnel Syndrome](
 
 ### Git settings
 
-The `.gitconfig` has tons of aliases and defaults.
+The `.gitconfig` has tons of useful aliases and defaults.
 
 - Run `cp .gitconfig ~/.gitconfig`
 - Add `user.name` and `user.email` to `~/.gitconfig`
