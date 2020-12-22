@@ -6,7 +6,7 @@ function gpull() {
         if grep -qs "remote .$repo." $dir/config; then
             echo "$dir"
             git -C "$dir/../" pull "$repo"
-            git -C "$dir/../" remote prune origin
+            git -C "$dir/../" remote prune "$repo"
         fi
     ' _ {} "${1:-origin}" \;
 }
