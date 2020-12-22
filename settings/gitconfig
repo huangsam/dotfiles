@@ -28,13 +28,10 @@
   s = status -s -uno
   st = status
 
-  # alias to perform a minor fix to the last commit without
-  # actually changing the commit message
+  # alias to fix the last commit w/o changing the commit message
   caan = commit --all --amend --no-edit
 
-  # alias to "undo" adding of files for a commit or
-  # actually undoing the last commit and leaving the files staged
-  unstage = reset HEAD --
+  # alias to undo the last commit and leave the files staged
   undo = reset --soft HEAD^
 
   # aliases to configure local branch to origin repository
@@ -53,9 +50,13 @@
   dc = diff --cached HEAD
   dlc = diff --cached HEAD^
 
-  # aliases for rare commands
-  mark = bisect
-  smod = submodule
+  # aliases to improve bisect UX
+  bisect-fixed = bisect bad
+  bisect-unfixed = bisect good
+
+  # aliases to improve submodule UX
+  submodule-sync = submodule sync --recursive
+  submodule-update = submodule update --init --recursive
 
   # aliases to flag files that are not in .gitignore
   flag = update-index --assume-unchanged
