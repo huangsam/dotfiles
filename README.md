@@ -8,15 +8,13 @@ Collection of dotfiles to boost productivity and happiness.
 
 For `oh-my-zsh` users:
 
-- Run `bash bootstrap.sh` to install these files to `$ZSH_CUSTOM`
+- Run `bootstrap.sh` to install these files to `$ZSH_CUSTOM`
 - Reload your `.zshrc` to load the new aliases
-- You can export `$ZSH_CUSTOM` before running `bootstrap.sh`
 
 For `bash` users:
 
-- Run `bash combine.sh` to generate a `bash_aliases` file
+- Run `combine.sh` to generate a `bash_aliases` file
 - Move `bash_aliases` to wherever you like
-- You can export `$ALIAS_PATH` before running `combine.sh`
 
 ## Project inspiration
 
