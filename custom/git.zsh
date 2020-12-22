@@ -18,11 +18,11 @@ function gmap() {
 
 # Sync origin/master with upstream/master
 function gsync() {
-    BRANCH="${1:-master}"
-    git checkout "$BRANCH"
+    target="${1:-master}"
+    git checkout "$target"
     git fetch upstream
-    git reset --hard "upstream/$BRANCH"
-    git push origin "$BRANCH"
+    git reset --hard "upstream/$target"
+    git push origin "$target"
 }
 
 # Enable assumption for file in repository
