@@ -50,8 +50,8 @@
     dlc = diff --cached HEAD^
 
     # aliases to configure local branch to origin repository
-    push-up = !git push -u origin $(git symbolic-ref --short HEAD)
-    branch-up = !git branch -u origin $(git symbolic-ref --short HEAD)
+    push-origin = push -u origin
+    branch-origin = branch -u origin
 
     # aliases to improve bisect UX
     bisect-fixed = bisect bad
