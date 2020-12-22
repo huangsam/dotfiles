@@ -1,16 +1,8 @@
 # dotfiles
 
-Collection of dotfiles.
+Collection of dotfiles to boost productivity and happiness.
 
-What is present at the moment:
-
-- Shortcuts for CLI tools in `custom`
-- Script for moving `custom` shortcuts to `$ZSH_CUSTOM`
-- Script for moving `custom` shortcuts to `$ALIAS_PATH`
-- Custom configuration for `git` CLI
-- Custom configuration for `pip` CLI
-
-**Note:** Using the shortcuts above should reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/). :smile:
+**Note:** Using the `custom` shortcuts will reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/).
 
 ## Getting started
 
