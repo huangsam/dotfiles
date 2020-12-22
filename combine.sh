@@ -1,22 +1,24 @@
 #!/bin/bash
 set -eo pipefail
+shopt -s nullglob
 
 # Establish bash aliases
-export ALIAS_PATH="${ALIAS_PATH:-./bash_aliases}"
+alias_path="./.bash_aliases"
 
 # Wipe existing bash aliases
-[[ -f "$ALIAS_PATH" ]] && rm -f "$ALIAS_PATH"
+[[ -f "$alias_path" ]] && rm -f "$alias_path"
 
 # Combine alias files into one file
-for fl in custom/*.zsh; do
+for fl in custom/*.{sh,zsh}; do
     cat "$fl"
     echo
-done | perl -pe 'chomp if eof' > "$ALIAS_PATH"
+done | perl -pe 'chomp if eof' > "$alias_path"
 
 # Establish emojis
-EMOJI_STARS='\xE2\x9c\xa8'
-EMOJI_CAKE='\xF0\x9F\x8D\xB0'
+emoji_stars='\xE2\x9c\xa8'
+emoji_cake='\xF0\x9F\x8D\xB0'
 
 # Print status and output location
-echo -e "Combine done! $EMOJI_STARS $EMOJI_CAKE $EMOJI_STARS"
-echo "Final output location: $ALIAS_PATH"
+echo -e "Combine done! $emoji_stars $emoji_cake $emoji_stars"
+
+echo "Final output location: $alias_path"
