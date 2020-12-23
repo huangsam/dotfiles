@@ -3,7 +3,7 @@ set -eo pipefail
 shopt -s nullglob
 
 # Establish bash aliases
-alias_path="./.bash_aliases"
+alias_path="${1:-$HOME/.bash_aliases}"
 
 # Wipe existing bash aliases
 [[ -f "$alias_path" ]] && rm -f "$alias_path"
