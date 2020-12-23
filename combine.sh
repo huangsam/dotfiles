@@ -1,6 +1,5 @@
 #!/bin/bash
 set -eo pipefail
-shopt -s nullglob
 
 # Establish bash aliases
 alias_path="${1:-$HOME/.bash_aliases}"
@@ -9,7 +8,7 @@ alias_path="${1:-$HOME/.bash_aliases}"
 [[ -f "$alias_path" ]] && rm -f "$alias_path"
 
 # Combine alias files into one file
-for fl in custom/*.{sh,zsh}; do
+for fl in custom/*.sh; do
     cat "$fl"
     echo
 done | perl -pe 'chomp if eof' > "$alias_path"
