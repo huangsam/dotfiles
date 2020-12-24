@@ -1,0 +1,19 @@
+{
+	"color_scheme": "Packages/Color Scheme - Default/Mariana.sublime-color-scheme",
+	"default_line_ending": "unix",
+	"draw_white_space": "all",
+	"font_size": 12,
+	"highlight_modified_tabs": true,
+	"line_padding_bottom": 5,
+	"rulers":
+	[
+		80,
+		120
+	],
+	"show_encoding": true,
+	"show_line_endings": true,
+	"theme": "Adaptive.sublime-theme",
+	"translate_tabs_to_spaces": false,
+	"trim_trailing_white_space_on_save": true,
+	"word_wrap": false
+}
