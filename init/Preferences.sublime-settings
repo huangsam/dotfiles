@@ -1,10 +1,9 @@
 {
 	"color_scheme": "Mariana.sublime-color-scheme",
-	"default_encoding": "UTF-8",
 	"default_line_ending": "unix",
 	"draw_white_space": "all",
+	"ensure_newline_at_eof_on_save": true,
 	"font_size": 12,
-	"highlight_modified_tabs": true,
 	"line_padding_bottom": 5,
 	"rulers":
 	[
@@ -14,7 +13,7 @@
 	"show_encoding": true,
 	"show_line_endings": true,
 	"theme": "Adaptive.sublime-theme",
-	"translate_tabs_to_spaces": false,
+	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": false
 }
