@@ -1,13 +1,6 @@
 #!/bin/bash
 set -eo pipefail
 
-# Install hidden files to home directory
-for fl in .*; do
-    if [[ -f "$fl" ]]; then
-        cp "$fl" "$HOME"
-    fi
-done
-
 # Establish bash aliases
 alias_path="$HOME/.bash_aliases"
 
