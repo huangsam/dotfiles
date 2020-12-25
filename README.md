@@ -1,24 +1,14 @@
 # Sam's dotfiles
 
-Collection of dotfiles to boost productivity.
+Collection of dotfiles to boost productivity. :rocket:
+
+Using them will reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/).
 
 ## Installation
 
-### Custom aliases and functions
+Run `combine.sh` to generate a `.bash_aliases` file at the home directory.
 
-Using the `custom` shortcuts will reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/).
-
-- Run `combine.sh` to generate a `.bash_aliases` file
-- Move `.bash_aliases` to wherever you like
-
-### Git settings
-
-The `.gitconfig` has tons of useful aliases and defaults.
-
-- Run `cp .gitconfig ~/.gitconfig`
-- Add `user.name` and `user.email` to `~/.gitconfig`
-
-### MacOS software
+Run `copy.sh` to copy all dotfiles over to the home directory.
 
 Run `macos.sh` to install developer software on a new MacOS machine.
 
