@@ -1,5 +1,5 @@
 #!/bin/bash
-set -o pipefail
+set -u -o pipefail
 
 # Install hidden files to home directory
 for fl in .*; do

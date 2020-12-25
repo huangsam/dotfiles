@@ -1,8 +1,8 @@
 #!/bin/bash
-set -eo pipefail
+set -e -u -o pipefail
 
 # Install core developer software
-xcode-select install
+xcode-select --install
 
 # Install Homebrew
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"

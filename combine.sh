@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eo pipefail
+set -e -u -o pipefail
 
 # Combine alias files into one file
 for fl in custom/*.sh; do
