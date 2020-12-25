@@ -1,4 +1,5 @@
 #!/bin/bash
+set -o pipefail
 
 # Install hidden files to home directory
 for fl in .*; do
@@ -6,3 +7,8 @@ for fl in .*; do
         cp -i "$fl" "$HOME"
     fi
 done
+
+# Print status
+emoji_stars='\xE2\x9c\xa8'
+emoji_cake='\xF0\x9F\x8D\xB0'
+echo -e "$0 done! $emoji_stars $emoji_cake $emoji_stars"
