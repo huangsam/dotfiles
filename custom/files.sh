@@ -1,3 +1,9 @@
+# Normalize permissions of files and directories
+function normalperms {
+    find . -type f -exec chmod 644 {} +
+    find . -type d -exec chmod 755 {} +
+}
+
 # File navigation and listing
 alias ll='ls -l'
 alias la='ls -la'
