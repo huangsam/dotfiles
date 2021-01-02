@@ -5,3 +5,13 @@ charset = utf-8
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
+
+[*.{sublime-settings, terminal}]
+indent_style = tab
+
+[.gitconfig]
+indent_style = tab
+
+[*.{sh, md}]
+indent_style = space
+indent_space = 4
