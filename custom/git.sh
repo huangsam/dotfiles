@@ -23,10 +23,9 @@ function gmap() {
 
 # Sync current/branch with parent/branch
 function gsync() {
-    branch="${1:-master}"
-    current="${2:-origin}"
-    parent="${3:-upstream}"
-    git checkout "$branch"
+    branch="$(git symbolic-ref --short HEAD)"
+    current="${1:-origin}"
+    parent="${2:-upstream}"
     git fetch "$parent"
     git reset --hard "$parent/$branch"
     git push "$current" "$branch"
