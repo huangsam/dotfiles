@@ -31,5 +31,16 @@ function gsync() {
     git push "$current" "$branch"
 }
 
+# Wipe out non-master branches
+function gwipe() {
+    exclude_pattern="${1:-(HEAD|master)}"
+    repo="{$2:-origin}"
+    git branch -r \
+        | grep "$repo" \
+        | grep -Ev "$exclude_pattern" \
+        | cut -d'/' -f 2,3 \
+        | xargs git push origin --delete
+}
+
 # Run `git fetch` with tracing enabled
 alias gtrace='GIT_TRACE=1 git fetch'
