@@ -31,7 +31,7 @@ function gsync() {
     git push "$current" "$branch"
 }
 
-# Wipe out non-master branches
+# Wipe out secondary branches for remote repos
 function gwipe() {
     exclude_pattern="${1:-(HEAD|master)}"
     repo="{$2:-origin}"
