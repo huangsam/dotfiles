@@ -37,7 +37,7 @@ function glist() {
     repo="${2:-origin}"
     git branch -r \
         | grep "$repo/" \
-        | grep -v "HEAD" \
+        | grep -v 'HEAD' \
         | grep -Ev "$exclude_pattern" \
         | cut -d'/' -f 2,3
 }
