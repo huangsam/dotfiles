@@ -31,15 +31,15 @@ function gsync() {
     git push "$current" "$branch"
 }
 
-# Wipe out secondary branches for remote repos
-function gwipe() {
-    exclude_pattern="${1:-(HEAD|master)}"
-    repo="{$2:-origin}"
+# List secondary branches for remote repos
+function glist() {
+    exclude_pattern="${1:-(main|master)}"
+    repo="${2:-origin}"
     git branch -r \
-        | grep "$repo" \
+        | grep "$repo/" \
+        | grep -v "HEAD" \
         | grep -Ev "$exclude_pattern" \
-        | cut -d'/' -f 2,3 \
-        | xargs git push origin --delete
+        | cut -d'/' -f 2,3
 }
 
 # Run `git fetch` with tracing enabled
