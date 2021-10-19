@@ -1,4 +1,5 @@
 # Sam's dotfiles
+# It is a effort to make python simpler
 
 Collection of dotfiles to boost productivity. :rocket:
 
