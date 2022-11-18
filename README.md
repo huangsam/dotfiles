@@ -12,6 +12,8 @@ Run `copy.sh` to copy all dotfiles over to the home directory.
 
 Run `macos.sh` to install developer software on a new MacOS machine.
 
+Run `brew bundle` to install Homebrew dependencies from `Brewfile`.
+
 ## Thanks to...
 
 - https://github.com/robbyrussell/oh-my-zsh
