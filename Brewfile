@@ -22,7 +22,7 @@ brew "mysql", restart_service: true
 brew "node"
 brew "numpy"
 brew "poetry"
-brew "postgresql", restart_service: true
+brew "postgresql@14", restart_service: true
 brew "r"
 brew "sbt"
 brew "scala"
