@@ -11,3 +11,6 @@ function hstats() {
 
 # Download MP4 format
 alias ytdl='youtube-dl --format mp4'
+
+# Show Homebrew dependency tree
+alias brewtree='brew deps --tree --installed'
