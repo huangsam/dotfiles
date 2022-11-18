@@ -26,6 +26,7 @@ brew "postgresql", restart_service: true
 brew "r"
 brew "sbt"
 brew "scala"
+brew "shellcheck"
 brew "youtube-dl"
 cask "adoptopenjdk11"
 cask "dbeaver-community"
