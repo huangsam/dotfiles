@@ -5,7 +5,7 @@ set -e -u -o pipefail
 for fl in custom/*.sh; do
     cat "$fl"
     echo
-done | perl -pe 'chomp if eof' > "$HOME/.bash_aliases"
+done | perl -pe 'chomp if eof' > "$HOME/.zsh_aliases"
 
 # Indicate completion
 emoji_stars='\xE2\x9c\xa8'
