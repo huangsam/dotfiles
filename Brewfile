@@ -39,7 +39,6 @@ brew "youtube-dl"
 # Casks applications
 cask "dbeaver-community"
 cask "discord"
-cask "google-chrome"
 cask "intellij-idea-ce"
 cask "pycharm-ce"
 cask "rstudio"
