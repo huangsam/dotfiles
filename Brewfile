@@ -31,6 +31,7 @@ brew "postgresql@14", restart_service: true
 brew "protobuf"
 brew "python@3.10"
 brew "r"
+brew "rust"
 brew "sbt"
 brew "scala"
 brew "shellcheck"
