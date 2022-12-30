@@ -2,7 +2,6 @@
 function hstats() {
     history \
         | awk '{ CMD[$2]++; count++; } END { for (a in CMD) printf("%d %.2f%% %s\n", CMD[a], CMD[a]/count*100, a); }' \
-        | grep -v './' \
         | column -c3 -s ' ' -t \
         | sort -nr \
         | nl \
