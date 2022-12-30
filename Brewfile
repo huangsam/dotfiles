@@ -24,6 +24,7 @@ brew "hugo"
 brew "jq"
 brew "kotlin"
 brew "mysql", restart_service: true
+brew "neovim"
 brew "node@18"
 brew "numpy"
 brew "openjdk@17"
