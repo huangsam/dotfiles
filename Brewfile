@@ -37,7 +37,7 @@ brew "rustfmt"
 brew "sbt"
 brew "scala"
 brew "shellcheck"
-brew "youtube-dl"
+brew "yt-dlp"
 
 # Casks applications
 cask "dbeaver-community"
