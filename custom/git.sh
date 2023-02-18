@@ -24,11 +24,11 @@ function gmap() {
 # Sync current/branch with parent/branch
 function gsync() {
     branch="$(git symbolic-ref --short HEAD)"
-    current="${1:-origin}"
-    parent="${2:-upstream}"
-    git fetch "$parent"
-    git reset --hard "$parent/$branch"
-    git push "$current" "$branch"
+    current_remote="${1:-origin}"
+    parent_remote="${2:-upstream}"
+    git fetch "$parent_remote"
+    git reset --hard "$parent_remote/$branch"
+    git push "$current_remote" "$branch"
 }
 
 # List secondary branches for remote repos
@@ -40,6 +40,13 @@ function glist() {
         | grep -v 'HEAD' \
         | grep -Ev "$exclude_pattern" \
         | cut -d'/' -f 2,3
+}
+
+# Set current branch to pull from current remote
+function gupstream() {
+    branch="$(git symbolic-ref --short HEAD)"
+    current_remote="${1:-origin}"
+    git branch -u "$current_remote/$branch" "$branch"
 }
 
 # Run `git fetch` with tracing enabled
