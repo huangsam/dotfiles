@@ -42,12 +42,5 @@ function glist() {
         | cut -d'/' -f 2,3
 }
 
-# Set local branch to pull from current_remote/branch
-function gupstream() {
-    branch="$(git symbolic-ref --short HEAD)"
-    current_remote="${1:-origin}"
-    git branch -u "$current_remote/$branch" "$branch"
-}
-
 # Run `git fetch` with tracing enabled
 alias gtrace='GIT_TRACE=1 git fetch'
