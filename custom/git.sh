@@ -21,7 +21,7 @@ function gmap() {
     ' _ {} "$*" \;
 }
 
-# Sync current/branch with parent/branch
+# Sync current_remote/branch with parent_remote/branch
 function gsync() {
     branch="$(git symbolic-ref --short HEAD)"
     current_remote="${1:-origin}"
@@ -42,7 +42,7 @@ function glist() {
         | cut -d'/' -f 2,3
 }
 
-# Set current branch to pull from current remote
+# Set local branch to pull from current_remote/branch
 function gupstream() {
     branch="$(git symbolic-ref --short HEAD)"
     current_remote="${1:-origin}"
