@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 set -u -o pipefail
 
 # Install hidden files to home directory

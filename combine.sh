@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 set -e -u -o pipefail
 
 # Combine alias files into one file

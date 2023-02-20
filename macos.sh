@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 set -e -u -o pipefail
 
 # Install core developer software
