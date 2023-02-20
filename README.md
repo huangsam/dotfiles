@@ -8,7 +8,7 @@ Using them will reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.
 
 Run `macos.sh` to install core developer assets on a new MacOS machine.
 
-Run `combine.sh` to generate a `.bash_aliases` file at the home directory.
+Run `combine.sh` to generate a `.zsh_aliases` file at the home directory.
 
 Run `copy.sh` to copy all dotfiles to the home directory.
 
