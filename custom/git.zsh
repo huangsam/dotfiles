@@ -1,8 +1,8 @@
 # Run `git pull` and `git remote prune` for remote repos
 gpull () {
     repo="${1:-origin}"
-    find . -type d -name ".git" | while read dir; do
-        if grep -qs "remote .$repo." $dir/config; then
+    find . -type d -name ".git" | while read -r dir; do
+        if grep -qs "remote .$repo." "$dir/config"; then
             echo "$dir"
             git -C "$dir/../" pull "$repo"
             git -C "$dir/../" remote prune "$repo"
@@ -12,10 +12,9 @@ gpull () {
 
 # Run any `git` command for all repos
 gmap () {
-    command="$*"
-    find . -type d -name '.git' | while read dir; do
+    find . -type d -name '.git' | while read -r dir; do
         echo "$dir"
-        git -C "$dir/../" $command
+        git -C "$dir/../" "$@"
     done
 }
 
