@@ -2,7 +2,7 @@
 set -e -u -o pipefail
 
 # Combine alias files into one file
-for fl in custom/*.sh; do
+for fl in custom/*.zsh; do
     cat "$fl"
     echo
 done | perl -pe 'chomp if eof' > "$HOME/.zsh_aliases"
