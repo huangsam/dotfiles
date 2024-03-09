@@ -1,11 +1,11 @@
 # Normalize permissions of files and directories
-function normalperms {
+normalperms () {
     find . -type f -exec chmod 644 {} +
     find . -type d -exec chmod 755 {} +
 }
 
 # Change file suffix from X to Y
-function filesuffix {
+filesuffix () {
     cur_ext="$1"
     new_ext="$2"
     find . -type f -name "*.$cur_ext" | while read file; do

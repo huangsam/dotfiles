@@ -1,5 +1,5 @@
 # Run `git pull` and `git remote prune` for remote repos
-function gpull() {
+gpull () {
     repo="${1:-origin}"
     find . -type d -name ".git" | while read dir; do
         if grep -qs "remote .$repo." $dir/config; then
@@ -11,7 +11,7 @@ function gpull() {
 }
 
 # Run any `git` command for all repos
-function gmap() {
+gmap () {
     command="$*"
     find . -type d -name '.git' | while read dir; do
         echo "$dir"
@@ -20,7 +20,7 @@ function gmap() {
 }
 
 # Sync current_remote/branch with parent_remote/branch
-function gsync() {
+gsync () {
     branch="$(git symbolic-ref --short HEAD)"
     current_remote="${1:-origin}"
     parent_remote="${2:-upstream}"
@@ -30,7 +30,7 @@ function gsync() {
 }
 
 # List secondary branches for remote repos
-function glist() {
+glist () {
     exclude_pattern="${1:-(main|master)}"
     repo="${2:-origin}"
     git branch -r \

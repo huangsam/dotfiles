@@ -1,5 +1,5 @@
 # List top ten commands from history
-function hstats() {
+hstats () {
     history \
         | awk '{ CMD[$2]++; count++; } END { for (a in CMD) printf("%d %.2f%% %s\n", CMD[a], CMD[a]/count*100, a); }' \
         | column -c3 -s ' ' -t \
