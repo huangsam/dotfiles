@@ -1,24 +1,27 @@
-# Run `git pull` and `git remote prune` for remote repos
+# Pull latest changes and prune remote for multiple repos
 gpull () {
-    repo="${1:-origin}"
+    remote="${1:-origin}"
     find . -type d -name ".git" | while read -r dir; do
-        if grep -qs "remote .$repo." "$dir/config"; then
+        if grep -qs "remote .$remote." "$dir/config"; then
             echo "$dir"
-            git -C "$dir/../" pull "$repo"
-            git -C "$dir/../" remote prune "$repo"
+            git -C "$dir/../" pull --rebase "$remote"
+            git -C "$dir/../" remote prune "$remote"
         fi
     done
 }
 
-# Run any `git` command for all repos
+# Run `git` command with / without args for multiple repos
 gmap () {
     find . -type d -name '.git' | while read -r dir; do
         echo "$dir"
+
+        # Here is the difference between $@ and $*
+        # https://unix.stackexchange.com/q/129072
         git -C "$dir/../" "$@"
     done
 }
 
-# Sync branch on current_remote with parent_remote
+# Sync branch on current remote with parent remote for one repo
 gsync () {
     branch="$(git symbolic-ref --short HEAD)"
     current_remote="${1:-origin}"
@@ -28,7 +31,7 @@ gsync () {
     git push "$current_remote" "$branch"
 }
 
-# List secondary branches for remote repos
+# List secondary branches of current remote for one repo
 glist () {
     exclude_pattern="${1:-(main|master)}"
     repo="${2:-origin}"
