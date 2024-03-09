@@ -19,7 +19,7 @@ gmap () {
     done
 }
 
-# Sync current_remote/branch with parent_remote/branch
+# Sync branch on current_remote with parent_remote
 gsync () {
     branch="$(git symbolic-ref --short HEAD)"
     current_remote="${1:-origin}"
