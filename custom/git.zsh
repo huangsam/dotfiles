@@ -1,24 +1,22 @@
 # Run `git pull` and `git remote prune` for remote repos
 function gpull() {
-    find . -type d -name ".git" -exec sh -c '
-        dir="$1"
-        repo="$2"
+    repo="${1:-origin}"
+    find . -type d -name ".git" | while read dir; do
         if grep -qs "remote .$repo." $dir/config; then
             echo "$dir"
             git -C "$dir/../" pull "$repo"
             git -C "$dir/../" remote prune "$repo"
         fi
-    ' _ {} "${1:-origin}" \;
+    done
 }
 
 # Run any `git` command for all repos
 function gmap() {
-    find . -type d -name '.git' -exec sh -c '
-        dir="$1"
-        command="$2"
+    command="$*"
+    find . -type d -name '.git' | while read dir; do
         echo "$dir"
         git -C "$dir/../" $command
-    ' _ {} "$*" \;
+    done
 }
 
 # Sync current_remote/branch with parent_remote/branch

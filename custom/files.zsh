@@ -6,14 +6,13 @@ function normalperms {
 
 # Change file suffix from X to Y
 function filesuffix {
-    find . -type f -name "*.$1" -exec sh -c '
-        cur_file="$1"
-        cur_ext="$2"
-        new_ext="$3"
+    find . -type f -name "*.$1" | while read cur_file; do
+        cur_ext="$1"
+        new_ext="$2"
         new_file=${cur_file//$cur_ext}$new_ext
         echo "Change $cur_file to $new_file"
         mv "$cur_file" "$new_file"
-    ' _ {} $1 $2 \;
+    done
 }
 
 # File navigation and listing
