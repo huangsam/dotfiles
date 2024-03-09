@@ -51,11 +51,6 @@
 
 	# aliases to configure local branch to origin repository
 	push-origin = push -u origin
-	branch-origin = branch -u origin
-
-	# aliases to improve bisect UX
-	bisect-fixed = bisect bad
-	bisect-unfixed = bisect good
 
 	# aliases to improve submodule UX
 	submodule-sync = submodule sync --recursive
