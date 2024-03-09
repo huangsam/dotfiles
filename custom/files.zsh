@@ -9,7 +9,7 @@ filesuffix () {
     cur_ext="$1"
     new_ext="$2"
     find . -type f -name "*.$cur_ext" | while read file; do
-        new_file=${file//$cur_ext}$new_ext
+        new_file="${file//$cur_ext}$new_ext"
         echo "Change $file to $new_file"
         mv "$file" "$new_file"
     done
