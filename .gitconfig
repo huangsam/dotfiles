@@ -49,7 +49,7 @@
 	dc = diff --cached HEAD
 	dlc = diff --cached HEAD^
 
-	# aliases to configure local branch to origin repository
+	# alias to configure local branch to origin repository
 	push-origin = push -u origin
 
 	# aliases to improve submodule UX
