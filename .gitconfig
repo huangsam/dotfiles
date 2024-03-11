@@ -65,7 +65,6 @@
 	patternType = extended
 
 [pull]
-	default = current
 	rebase = true
 
 [push]
