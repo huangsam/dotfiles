@@ -52,6 +52,9 @@
 	# alias to configure local branch to origin repository
 	push-origin = push -u origin
 
+	# alias to prune local copies of remote branches that no longer exist
+	prune-origin = remote prune origin
+
 	# aliases to improve submodule UX
 	submodule-sync = submodule sync --recursive
 	submodule-update = submodule update --init --recursive
