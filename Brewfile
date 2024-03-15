@@ -30,7 +30,7 @@ brew "openjdk@17"
 brew "poetry"
 brew "postgresql@14", restart_service: true
 brew "protobuf"
-brew "python@3.10"
+brew "python@3.12"
 brew "r"
 brew "rust"
 brew "rustfmt"
