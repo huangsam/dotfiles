@@ -19,7 +19,6 @@ brew "git"
 brew "git-filter-repo"
 brew "go"
 brew "gradle"
-brew "hugo"
 brew "jq"
 brew "kotlin"
 brew "mysql", restart_service: true
