@@ -28,7 +28,7 @@ brew "node"
 brew "numpy"
 brew "openjdk@17"
 brew "poetry"
-brew "postgresql@14", restart_service: true
+brew "postgresql@16", restart_service: true
 brew "protobuf"
 brew "python@3.12"
 brew "r"
