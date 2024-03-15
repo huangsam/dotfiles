@@ -6,8 +6,8 @@ tap "homebrew/core"
 tap "homebrew/services"
 
 # Language frameworks, library packages, CLI tools
-# For postgresql, set latest stable version
 # For openjdk, set latest LTS version and add symbolic link
+# For postgresql, set latest stable version
 # For python, set latest stable version
 brew "boost"
 brew "cmake"
