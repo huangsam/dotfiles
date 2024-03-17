@@ -16,7 +16,7 @@ filesuffix () {
         done
 }
 
-# Look for file from target up to root
+# Look for file from target path up to root directory
 lookupfile () {
     target_file="$1"
     target_path="${2:-$(pwd)}"
