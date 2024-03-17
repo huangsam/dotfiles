@@ -1,7 +1,7 @@
 #!/bin/zsh
 set -e -u -o pipefail
 
-# Combine alias files into one file
+# Combine aliases and functions into one file
 for fl in custom/*.zsh; do
     cat "$fl"
     echo
