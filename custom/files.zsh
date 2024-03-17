@@ -4,7 +4,7 @@ normalperms () {
     find . -type d -exec chmod 755 {} +
 }
 
-# Change file suffix from X to Y
+# Change file suffix from .x to .y
 filesuffix () {
     current_suffix="$1"
     new_suffix="$2"
@@ -16,8 +16,7 @@ filesuffix () {
         done
 }
 
-# Look for file from target directory to the root directory
-# https://unix.stackexchange.com/a/293477
+# Look for file from target up to root
 lookupfile () {
     target_file="$1"
     target_path="${2:-$(pwd)}"
