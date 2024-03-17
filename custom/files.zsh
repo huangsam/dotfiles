@@ -16,6 +16,22 @@ filesuffix () {
         done
 }
 
+# Look for file from target directory to the root directory
+# https://unix.stackexchange.com/a/293477
+lookupfile () {
+    target_file="$1"
+    target_path="${2:-$(pwd)}"
+    target_match="$target_path/$target_file"
+    if [[ "$target_path" == "/" ]]; then
+        false
+    elif [[ -f "$target_match" ]]; then
+        echo "$target_match"
+        true
+    else
+        findfile "$target_file" "$(dirname $target_path)"
+    fi
+}
+
 # File navigation and listing
 alias ll='ls -l'
 alias la='ls -la'
