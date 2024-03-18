@@ -13,5 +13,5 @@ indent_style = tab
 indent_style = tab
 
 [*.{sh,md}]
-indent_space = 4
 indent_style = space
+indent_size = 4
