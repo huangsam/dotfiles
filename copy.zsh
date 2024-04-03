@@ -9,6 +9,6 @@ for fl in .*; do
 done
 
 # Indicate completion
-emoji_stars='\xE2\x9c\xa8'
-emoji_cake='\xF0\x9F\x8D\xB0'
+emoji_stars='\U00002728'
+emoji_cake='\U0001F370'
 echo -e "$0 complete! $emoji_stars $emoji_cake $emoji_stars"
