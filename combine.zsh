@@ -2,6 +2,7 @@
 set -e -u -o pipefail
 
 # Combine aliases and functions into one file
+# https://unix.stackexchange.com/a/541415/140057
 for fl in custom/*.zsh; do
     cat "$fl"
     echo
