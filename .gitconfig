@@ -44,9 +44,9 @@
 	one = show -1 HEAD
 	ten = log -10 HEAD --oneline
 	cached = diff --cached HEAD
-	lg = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]' --graph
-	ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]' --numstat
-	ls = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]'
+	ls = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]'
+	ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --numstat
+	lg = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --graph
 
 	# alias to show the root directory
 	root = rev-parse --show-toplevel
