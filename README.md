@@ -6,11 +6,11 @@ Using them will reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.
 
 ## Installation
 
-Run `macos.sh` to install core developer assets on a new MacOS machine.
+Run `macos.zsh` to install core developer assets on a new MacOS machine.
 
-Run `combine.sh` to generate a `.zsh_aliases` file at the home directory.
+Run `combine.zsh` to generate a `.zsh_aliases` file at the home directory.
 
-Run `copy.sh` to copy all dotfiles to the home directory.
+Run `copy.zsh` to copy all dotfiles to the home directory.
 
 Run `brew bundle` to install Homebrew assets from `Brewfile`.
 
