@@ -48,6 +48,9 @@
 	ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]' --numstat
 	ls = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(blue)[%cn]'
 
+	# alias to show the root directory
+	root = rev-parse --show-toplevel
+
 	# alias to configure local branch to origin repository
 	push-origin = push -u origin
 
