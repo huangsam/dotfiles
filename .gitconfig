@@ -42,7 +42,7 @@
 
 	# aliases to provide different views of the commit log
 	one = show -1 HEAD
-	ten = log -10 HEAD --oneline
+	ten = log -10 HEAD --oneline --shortstat
 	cached = diff --cached HEAD
 	ls = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]'
 	ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --numstat
