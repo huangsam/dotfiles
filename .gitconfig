@@ -73,7 +73,7 @@
 	rebase = true
 
 [push]
-	default = current
+	default = simple
 	followTags = true
 	autoSetupRemote = true
 
