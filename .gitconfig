@@ -51,6 +51,9 @@
 	# alias to show the root directory
 	root = rev-parse --show-toplevel
 
+	# alias to edit the global gitconfig
+	edit = config --global -e
+
 	# alias to configure local branch to origin repository
 	push-origin = push -u origin
 
