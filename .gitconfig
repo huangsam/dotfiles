@@ -2,9 +2,9 @@
 	ui = auto
 
 [color "branch"]
-	current = yellow reverse
+	current = green
 	local = yellow
-	remote = green
+	remote = cyan
 
 [color "diff"]
 	meta = yellow bold
@@ -13,8 +13,8 @@
 	new = green bold
 
 [color "status"]
-	added = yellow
-	changed = green
+	added = green
+	changed = yellow
 	untracked = cyan
 
 [alias]
