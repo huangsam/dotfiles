@@ -2,8 +2,8 @@
 	ui = auto
 
 [color "branch"]
-	current = green
-	local = yellow
+	current = yellow
+	local = green
 	remote = cyan
 
 [color "diff"]
@@ -13,8 +13,8 @@
 	new = green bold
 
 [color "status"]
-	added = green
-	changed = yellow
+	added = yellow
+	changed = green
 	untracked = cyan
 
 [alias]
@@ -82,7 +82,7 @@
 
 [core]
 	autocrlf = input
-	editor = vim
+	editor = nvim
 
 [init]
 	defaultBranch = main
