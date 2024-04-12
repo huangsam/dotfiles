@@ -41,9 +41,9 @@
 	contrib = shortlog --summary --numbered
 
 	# aliases to provide different views of the commit log
-	one = show -1 HEAD
-	ten = log -10 HEAD --oneline --stat
-	cached = diff --cached HEAD
+	one = show -1
+	ten = log -10 --oneline --stat
+	cached = diff --cached
 	ls = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]'
 	ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --numstat
 	lg = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --graph
