@@ -39,6 +39,7 @@ brew "shellcheck"
 brew "yt-dlp"
 
 # Casks applications
+cask "android-studio"
 cask "dbeaver-community"
 cask "discord"
 cask "intellij-idea-ce"
