@@ -6,7 +6,6 @@ tap "homebrew/core"
 tap "homebrew/services"
 
 # Language frameworks, library packages, CLI tools
-# For node, set latest stable version
 # For openjdk, set latest LTS version and add symbolic link
 # For postgresql, set latest stable version
 # For python, set latest stable version
@@ -24,7 +23,7 @@ brew "jq"
 brew "kotlin"
 brew "mysql", restart_service: true
 brew "neovim"
-brew "node@20"
+brew "node"
 brew "numpy"
 brew "openjdk@21"
 brew "poetry"
