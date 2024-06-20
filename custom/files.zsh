@@ -36,8 +36,6 @@ alias la='ls -la'
 alias l='ls -CF'
 alias sl='ls'
 alias lsl='ls -lhFA | less'
-alias cd..='cd ..'
-alias ..='cd ..'
 
 # File content searching
 alias grep='grep --color=auto'
