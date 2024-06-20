@@ -19,3 +19,4 @@ Run `brew bundle` to install Homebrew assets from `Brewfile`.
 - <https://github.com/robbyrussell/oh-my-zsh>
 - <https://github.com/mathiasbynens/dotfiles>
 - <https://github.com/unixorn/awesome-zsh-plugins>
+- <https://github.com/amix/vimrc>
