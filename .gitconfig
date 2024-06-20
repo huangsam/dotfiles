@@ -48,6 +48,9 @@
 	ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --numstat
 	lg = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --graph
 
+	# alias to show the current branch
+	current = branch --show-current
+
 	# alias to show the root directory
 	root = rev-parse --show-toplevel
 
