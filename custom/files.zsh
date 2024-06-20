@@ -8,12 +8,11 @@ normalperms () {
 filesuffix () {
     current_suffix="$1"
     new_suffix="$2"
-    find . -type f -name "*.$current_suffix" -print0 \
-        | while IFS= read -r -d '' file; do
-            new_file="${file//$current_suffix}$new_suffix"
-            echo "Change $file to $new_file"
-            mv "$file" "$new_file"
-        done
+    find . -type f -name "*.$current_suffix" -exec sh -c '
+        new_file="${1//$2}$3"
+        set -x
+        mv "$1" "$new_file"
+    ' _ {} "$current_suffix" "$new_suffix" \;
 }
 
 # Look for file from target path up to root directory
