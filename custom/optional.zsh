@@ -8,6 +8,9 @@ hstats () {
         | head -n10
 }
 
+# Reset Z shell configuration
+alias zset='source ~/.zshrc'
+
 # Shorten command for downloading videos from YouTube
 alias ytdl='yt-dlp'
 
