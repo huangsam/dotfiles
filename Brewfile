@@ -1,8 +1,5 @@
 # Repositories for brew and cask
 tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-versions"
-tap "homebrew/core"
 tap "homebrew/services"
 
 # Language frameworks, library packages, CLI tools
