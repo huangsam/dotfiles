@@ -1,11 +1,10 @@
-# Pull changes and prune stale branches for multiple Git repos
+# Pull changes for multiple Git repos
 gpull () {
     remote="${1:-origin}"
     find . -type d -name ".git" -exec sh -c '
         if grep -qs "remote .$2." "$1/config"; then
             set -x
             git -C "$1/../" pull "$2"
-            git -C "$1/../" remote prune "$2"
         fi
     ' _ {} "$remote" \;
 }
