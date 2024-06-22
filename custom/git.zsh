@@ -1,4 +1,4 @@
-# Pull latest changes and prune remote for multiple repos
+# Pull changes and prune stale branches for multiple Git repos
 gpull () {
     remote="${1:-origin}"
     find . -type d -name ".git" -exec sh -c '
@@ -10,18 +10,18 @@ gpull () {
     ' _ {} "$remote" \;
 }
 
-# Run Git command with arguments for multiple repos
+# Run command with arguments for multiple Git repos
 gmap () {
     # Here is the difference between $@ and $*
     # https://unix.stackexchange.com/q/129072
-    command="$*"
+    arguments="$*"
     find . -type d -name '.git' -exec sh -c '
         set -x
         git -C "$1/../" $2
-    ' _ {} "$command" \;
+    ' _ {} "$arguments" \;
 }
 
-# Sync branch on current remote with parent remote for one repo
+# Sync branch on current remote with parent remote for single Git repo
 gsync () {
     branch="$(git branch --show-current)"
     current_remote="${1:-origin}"
@@ -31,7 +31,7 @@ gsync () {
     git push "$current_remote" "$branch"
 }
 
-# List secondary branches of current remote for one repo
+# List secondary branches of current remote for single Git repo
 glist () {
     exclude_branches='(main|master)'
     remote="${1:-origin}"
