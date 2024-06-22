@@ -16,6 +16,3 @@ alias ytdl='yt-dlp'
 
 # Show Homebrew dependency tree
 alias brewtree='brew deps --tree --installed'
-
-# Show Mac system information
-alias macinfo='system_profiler SPHardwareDataType'
