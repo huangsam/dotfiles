@@ -23,7 +23,7 @@ gmap () {
 
 # Sync branch on current remote with parent remote for one repo
 gsync () {
-    branch="$(git symbolic-ref --short HEAD)"
+    branch="$(git branch --show-current)"
     current_remote="${1:-origin}"
     parent_remote="${2:-upstream}"
     git fetch "$parent_remote"
@@ -33,12 +33,12 @@ gsync () {
 
 # List secondary branches of current remote for one repo
 glist () {
-    exclude_pattern="${1:-(main|master)}"
-    repo="${2:-origin}"
+    exclude_branches='(main|master)'
+    remote="${1:-origin}"
     git branch -r \
-        | grep "$repo/" \
+        | grep "$remote/" \
         | grep -v 'HEAD' \
-        | grep -Ev "$exclude_pattern" \
+        | grep -Ev "$exclude_branches" \
         | cut -d'/' -f 2,3
 }
 
