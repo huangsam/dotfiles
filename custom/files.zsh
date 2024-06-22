@@ -17,7 +17,7 @@ filesuffix () {
 # Look for file from target path up to root directory
 filelookup () {
     target_file="$1"
-    target_path="${2:-$(pwd)}"
+    target_path="$(pwd)"
     target_match="$target_path/$target_file"
     if [[ "$target_path" == "/" ]]; then
         false
