@@ -26,7 +26,7 @@ filelookup () {
         echo "$target_match"
         true
     else
-        lookupfile "$target_file" "$(dirname "$target_path")"
+        filelookup "$target_file" "$(dirname "$target_path")"
     fi
 }
 
