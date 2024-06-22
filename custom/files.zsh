@@ -9,9 +9,8 @@ filesuffix () {
     current_suffix="$1"
     new_suffix="$2"
     find . -type f -name "*.$current_suffix" -exec sh -c '
-        new_file="${1//$2}$3"
         set -x
-        mv "$1" "$new_file"
+        mv "$1" "${1//$2}$3"
     ' _ {} "$current_suffix" "$new_suffix" \;
 }
 
