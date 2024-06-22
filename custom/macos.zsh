@@ -1,8 +1,10 @@
-# Show Mac OS system information
+# Mac OS system information
 alias macinfo='system_profiler SPHardwareDataType'
 
-# Check for system updates on Mac OS
-alias macupdates='softwareupdate -l'
+# Mac OS updates
+alias macsoft='softwareupdate'
+alias softcheck='macsoft -l'
+alias softrun='sudo macsoft -i -a -R'
 
-# Clear DNS cache on Mac OS
+# Mac OS network
 alias cleardns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
