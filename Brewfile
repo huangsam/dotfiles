@@ -3,9 +3,10 @@ tap "homebrew/bundle"
 tap "homebrew/services"
 
 # Language frameworks, library packages, CLI tools
-# For openjdk, set latest LTS version and add symbolic link
-# For postgresql, set latest stable version
-# For python, set latest stable version
+# For openjdk, set LTS version and add symbolic link
+#     sudo ln -sfn /usr/local/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.21.jdk
+# For postgresql, set stable version
+# For python, set stable version
 brew "boost"
 brew "cmake"
 brew "dos2unix"
