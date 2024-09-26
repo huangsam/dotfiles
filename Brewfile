@@ -23,6 +23,7 @@ brew "mysql", restart_service: true
 brew "neovim"
 brew "node"
 brew "numpy"
+brew "openjdk@17"
 brew "openjdk@21"
 brew "poetry"
 brew "postgresql@16", restart_service: true
