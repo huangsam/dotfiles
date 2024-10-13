@@ -13,22 +13,19 @@ jobs:
   dotfile-build:
     name: Dotfiles
     runs-on: macos-latest
-    defaults:
-      run:
-        shell: zsh
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Check default shell
-        run: |
-          echo $SHELL
-      - name: Run combine script
-        run: |
-          ./combine.zsh
-      - name: Run copy script
-        run: |
-          ./copy.sh
       - name: Check Brewfile contents
         run: |
           brew bundle list
+      - name: Install zsh shell
+        run: |
+          brew install zsh
+      - name: Run combine script
+        run: |
+          sh ./combine.zsh
+      - name: Run copy script
+        run: |
+          sh ./copy.sh
