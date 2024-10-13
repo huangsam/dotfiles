@@ -24,6 +24,8 @@ jobs:
         run: |
           brew install zsh
       - name: Run combine script
-        run: combine.zsh
+        run: |
+          ./combine.zsh
       - name: Run copy script
-        run: copy.zsh
+        run: |
+          ./copy.zsh
