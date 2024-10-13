@@ -17,7 +17,5 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
       - name: Install items from Brewfile
         uses: brew bundle install
