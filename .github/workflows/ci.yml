@@ -29,3 +29,6 @@ jobs:
       - name: Run copy script
         run: |
           ./copy.sh
+      - name: Check Brewfile contents
+        run: |
+          brew bundle list
