@@ -10,13 +10,22 @@ permissions:
   contents: read
 
 jobs:
-  brew-build:
-    name: Homebrew
+  dotfile-build:
+    name: Dotfiles
     runs-on: macos-latest
+    defaults:
+      run:
+        shell: zsh
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Install items from Brewfile
+      - name: Check default shell
         run: |
-          brew bundle install
+          echo $SHELL
+      - name: Run combine script
+        run: |
+          ./combine.zsh
+      - name: Run copy script
+        run: |
+          ./copy.sh
