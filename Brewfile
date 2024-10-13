@@ -29,7 +29,6 @@ brew "poetry"
 brew "postgresql@16", restart_service: true
 brew "protobuf"
 brew "python@3.12"
-brew "python@3.13"
 brew "r"
 brew "rust"
 brew "sbt"
