@@ -1,11 +1,18 @@
 # List top ten commands from history
 hstats () {
-    history \
-        | awk '{ CMD[$2]++; count++; } END { for (a in CMD) printf("%d %.2f%% %s\n", CMD[a], CMD[a]/count*100, a); }' \
-        | column -c3 -s ' ' -t \
-        | sort -nr \
-        | nl \
-        | head -n10
+    history |
+        awk '{
+            command_count[$2]++;
+            total_count++;
+        }
+        END {
+            for (cmd in command_count) {
+                printf("%d %.2f%% %s\n",
+                    command_count[cmd],
+                    command_count[cmd]/total_count*100,
+                    cmd);
+            }
+        }' | sort -nr | head -n10 | column -c3 -s ' ' -t | nl
 }
 
 # Reset Z shell configuration
