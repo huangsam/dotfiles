@@ -32,6 +32,7 @@ brew "rust"
 brew "sbt"
 brew "scala"
 brew "shellcheck"
+brew "virtualenv"
 brew "yt-dlp"
 
 # Casks applications
