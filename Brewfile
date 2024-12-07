@@ -18,14 +18,14 @@ brew "go"
 brew "gradle"
 brew "jq"
 brew "kotlin"
-brew "mysql", restart_service: true
+brew "mysql", restart_service: false
 brew "neovim"
 brew "node"
 brew "numpy"
 brew "openjdk@17"
 brew "openjdk@21"
 brew "poetry"
-brew "postgresql@16", restart_service: true
+brew "postgresql@16", restart_service: false
 brew "protobuf"
 brew "python@3.12"
 brew "rust"
