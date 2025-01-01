@@ -20,6 +20,7 @@ brew "jq"
 brew "kotlin"
 brew "mysql", restart_service: false
 brew "neovim"
+brew "nmap"
 brew "node"
 brew "numpy"
 brew "openjdk@17"
