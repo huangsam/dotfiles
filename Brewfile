@@ -4,6 +4,7 @@ tap "homebrew/services"
 
 # Language frameworks, library packages, CLI tools
 # For openjdk, set LTS version and add symbolic link
+#     sudo ln -sfn /usr/local/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.17.jdk
 #     sudo ln -sfn /usr/local/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.21.jdk
 # For postgresql, set stable version
 # For python, set stable version
