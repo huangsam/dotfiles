@@ -33,6 +33,7 @@ brew "poetry"
 brew "postgresql@16", restart_service: false
 brew "protobuf"
 brew "python@3.12"
+brew "python@3.13"
 brew "rust"
 brew "sbt"
 brew "scala"
