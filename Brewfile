@@ -9,6 +9,7 @@ tap "homebrew/services"
 # For postgresql, set stable version
 # For python, set stable version
 brew "boost"
+brew "clang-format"
 brew "cmake"
 brew "dos2unix"
 brew "exiftool"
@@ -20,6 +21,7 @@ brew "golangci-lint"
 brew "gradle"
 brew "jq"
 brew "kotlin"
+brew "mockery"
 brew "mysql", restart_service: false
 brew "neovim"
 brew "nmap"
