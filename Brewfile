@@ -12,6 +12,7 @@ brew "boost"
 brew "clang-format"
 brew "cmake"
 brew "dos2unix"
+brew "etcd", restart_service: false
 brew "exiftool"
 brew "ffmpeg"
 brew "gh"
