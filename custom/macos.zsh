@@ -8,6 +8,7 @@ alias softrun='sudo macsoft -i -a -R'
 
 # Mac OS network
 alias cleardns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+alias timesync='sudo sntp -sS time.apple.com'
 
 # Mac OS files
 alias showall='defaults write com.apple.finder AppleShowAllFiles -bool TRUE && killall finder'
