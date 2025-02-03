@@ -15,6 +15,7 @@ brew "dos2unix"
 brew "etcd", restart_service: false
 brew "exiftool"
 brew "ffmpeg"
+brew "fzf"
 brew "gh"
 brew "git"
 brew "go"
