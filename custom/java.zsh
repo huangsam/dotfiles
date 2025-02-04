@@ -11,5 +11,5 @@ alias mvskip='mvn -DskipTests'
 alias grnew='gradle init wrapper'
 
 # Show available Java JDKs
-alias jdkmac='ls /Library/Java/JavaVirtualMachines'
-alias jdklnx='ls /usr/lib/jvm'
+alias jdkmacos='ls /Library/Java/JavaVirtualMachines'
+alias jdklinux='ls /usr/lib/jvm'
