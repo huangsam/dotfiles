@@ -25,6 +25,8 @@ zsh copy.zsh
 brew bundle install
 ```
 
+[Click here](./custom/) to see what gets populated in `.zsh_aliases`.
+
 ## Credits
 
 Special thanks to the following repositories for inspiration and resources:
