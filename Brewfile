@@ -8,6 +8,7 @@ tap "homebrew/services"
 #     sudo ln -sfn /usr/local/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.21.jdk
 # For postgresql, set stable version
 # For python, set stable version
+# For fzf, source the completions in ~/.zshrc
 brew "boost"
 brew "clang-format"
 brew "cmake"
