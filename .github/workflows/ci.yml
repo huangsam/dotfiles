@@ -18,14 +18,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Check Brewfile contents
-        run: |
-          brew bundle list
-      - name: Install zsh shell
-        run: |
-          brew install zsh
+        run: brew bundle list
+      - name: Setup zsh
+        run: brew install zsh
       - name: Run combine script
-        run: |
-          ./combine.zsh
+        run: zsh combine.zsh
       - name: Run copy script
-        run: |
-          ./copy.zsh
+        run: zsh copy.zsh
