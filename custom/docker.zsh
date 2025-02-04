@@ -7,6 +7,7 @@ alias dcex='docker container exec'
 # Docker images
 alias dils='docker image ls'
 alias dirm='docker image rm'
+alias diprune='docker image prune'
 
 # Docker volumes
 alias dvls='docker volume ls'
