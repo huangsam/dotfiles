@@ -9,6 +9,8 @@ Using them will reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.
 
 ## Getting started
 
+Here are the commands to prepare your Mac for development:
+
 ```shell
 # Install core developer assets
 zsh install.zsh
@@ -24,6 +26,8 @@ brew bundle install
 ```
 
 ## Credits
+
+Special thanks to the following repositories for inspiration and resources:
 
 - [amix/vimrc](https://github.com/amix/vimrc) - Collection of vimrc configurations for a better Vim experience.
 - [Homebrew/homebrew-core](https://github.com/Homebrew/homebrew-core) - Main repository for Homebrew formulae.
