@@ -23,10 +23,10 @@ zsh copy.zsh
 brew bundle install
 ```
 
-## Thanks to
+## Credits
 
-- <https://github.com/robbyrussell/oh-my-zsh>
-- <https://github.com/mathiasbynens/dotfiles>
-- <https://github.com/unixorn/awesome-zsh-plugins>
-- <https://github.com/amix/vimrc>
-- <https://github.com/Homebrew/homebrew-core>
+- [amix/vimrc](https://github.com/amix/vimrc) - Collection of vimrc configurations for a better Vim experience.
+- [Homebrew/homebrew-core](https://github.com/Homebrew/homebrew-core) - Main repository for Homebrew formulae.
+- [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles) - Dotfiles to personalize macOS or Linux environment.
+- [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) - Community-driven framework for managing zsh configuration.
+- [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins) - List of frameworks, plugins, themes, and tutorials for Zsh.
