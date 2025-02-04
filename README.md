@@ -9,13 +9,19 @@ Using them will reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.
 
 ## Installation
 
-Run `install.zsh` to install core developer assets on a new MacOS machine.
+```shell
+# Install core developer assets
+zsh install.zsh
 
-Run `combine.zsh` to generate a `.zsh_aliases` file at the home directory.
+# Generate .zsh_aliases file at the home directory
+zsh combine.zsh
 
-Run `copy.zsh` to copy all dotfiles to the home directory.
+# Copy all dotfiles to the home directory
+zsh copy.zsh
 
-Run `brew bundle install` to install Homebrew artifacts.
+# Install Homebrew artifacts
+brew bundle install
+```
 
 ## Thanks to
 
