@@ -1,5 +1,5 @@
 # Normalize permissions of files and directories
-normalperms () {
+filenorm () {
     find . -type f -exec chmod 644 {} +
     find . -type d -exec chmod 755 {} +
 }
