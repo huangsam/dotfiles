@@ -15,6 +15,8 @@ Run `combine.zsh` to generate a `.zsh_aliases` file at the home directory.
 
 Run `copy.zsh` to copy all dotfiles to the home directory.
 
+Run `brew bundle install` to install Homebrew artifacts.
+
 ## Thanks to
 
 - <https://github.com/robbyrussell/oh-my-zsh>
