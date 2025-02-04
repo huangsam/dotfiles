@@ -1,5 +1,5 @@
 #!/bin/zsh
-set -e -u -o pipefail
+set -eu -o pipefail
 
 # Install core developer software
 xcode-select --install
