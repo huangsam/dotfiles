@@ -8,6 +8,7 @@ alias dcex='docker container exec'
 alias dils='docker image ls'
 alias dirm='docker image rm'
 alias diprune='docker image prune'
+alias difresh='dils --format "{{.Repository}}:{{.Tag}}" | xargs -L1 docker pull'
 
 # Docker volumes
 alias dvls='docker volume ls'
