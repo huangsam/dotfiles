@@ -10,6 +10,8 @@ tap "homebrew/services"
 # For postgresql, set stable version
 # For python, set stable version
 # For fzf, source the completions in ~/.zshrc
+brew "agg"
+brew "asciinema"
 brew "boost"
 brew "clang-format"
 brew "cmake"
