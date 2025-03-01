@@ -19,6 +19,7 @@ brew "dos2unix"
 brew "etcd", restart_service: false
 brew "exiftool"
 brew "ffmpeg"
+brew "font-hack-nerd-font"
 brew "fzf"
 brew "gh"
 brew "git"
