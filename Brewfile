@@ -1,5 +1,4 @@
 # Repositories for brew and cask
-tap "goreleaser/tap"
 tap "homebrew/bundle"
 tap "homebrew/services"
 
@@ -24,7 +23,7 @@ brew "gh"
 brew "git"
 brew "go"
 brew "golangci-lint"
-brew "goreleaser/tap/goreleaser"
+brew "goreleaser"
 brew "gotestsum"
 brew "gradle"
 brew "jq"
