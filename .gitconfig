@@ -89,6 +89,9 @@
 	followTags = true
 	autoSetupRemote = true
 
+[merge]
+	conflictStyle = diff3
+
 [core]
 	autocrlf = input
 	editor = nvim
