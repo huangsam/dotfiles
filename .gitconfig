@@ -34,6 +34,9 @@
 	# alias to undo the last commit and leave the files staged
 	undo = reset --soft HEAD^
 
+	# alias to undo a tag
+	untag = tag --delete
+
 	# alias to remove untracked and ignored files
 	cleanup = clean -fdx
 
@@ -62,6 +65,9 @@
 
 	# alias to prune local copies of remote branches that no longer exist
 	prune-origin = remote prune origin
+
+	# alias to delete something from the origin repository
+	delete-origin = push --delete origin
 
 	# aliases to improve submodule UX
 	submodule-sync = submodule sync --recursive
