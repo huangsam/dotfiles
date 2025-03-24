@@ -50,6 +50,7 @@ brew "virtualenv"
 brew "yt-dlp"
 
 # Casks applications
+# Run `brew upgrade --cask --greedy` for personal machines, NOT work machines
 cask "dbeaver-community"
 cask "discord"
 cask "font-hack-nerd-font"
