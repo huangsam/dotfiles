@@ -43,6 +43,7 @@ brew "openjdk@21"
 brew "poetry"
 brew "postgresql@16", restart_service: false
 brew "protobuf"
+brew "pstree"
 brew "python@3.12"
 brew "python@3.13"
 brew "redis", restart_service: false
