@@ -14,6 +14,7 @@ brew "asciinema"
 brew "boost"
 brew "clang-format"
 brew "cmake"
+brew "cppcheck"
 brew "dos2unix"
 brew "etcd", restart_service: false
 brew "exiftool"
