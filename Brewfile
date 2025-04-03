@@ -33,6 +33,7 @@ brew "kotlin"
 brew "mockery"
 brew "mysql", restart_service: false
 brew "neovim"
+brew "ninja"
 brew "nmap"
 brew "node"
 brew "numpy"
