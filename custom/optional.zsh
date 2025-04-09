@@ -22,10 +22,10 @@ locstats () {
     local pattern="*.${extension#.}"
 
     if [[ ! -d "$target_dir" ]]; then
-        echo "Error: Target directory '$target_dir' does not exist."
+        echo "Error: Target directory '$target_dir' does not exist" >&2
         return 1
     elif [[ -z "$extension" ]]; then
-        echo "Error: File extension is empty."
+        echo "Error: File extension is empty" >&2
         return 1
     fi
 
