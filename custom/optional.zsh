@@ -15,11 +15,20 @@ hstats () {
         }' | sort -nr | head -n10 | column -c3 -s ' ' -t | nl
 }
 
-# List line of code for a given extension by subfolders
+# List line-of-code metrics for given directory and extension
 locstats () {
     local target_dir="$1"
     local extension="$2"
     local pattern="*.${extension#.}"
+
+    if [[ ! -d "$target_dir" ]]; then
+        echo "Error: Target directory '$target_dir' does not exist."
+        return 1
+    elif [[ -z "$extension" ]]; then
+        echo "Error: File extension is empty."
+        return 1
+    fi
+
     find "$target_dir" -mindepth 1 -maxdepth 1 -type d -print0 \
             | while IFS= read -r -d '' dir; do
         local dir="${dir#target_dir/}"
