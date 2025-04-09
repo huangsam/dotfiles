@@ -6,8 +6,8 @@ filenorm () {
 
 # Change file suffix from .x to .y
 filesuffix () {
-    current_suffix="$1"
-    new_suffix="$2"
+    local current_suffix="$1"
+    local new_suffix="$2"
     find . -type f -name "*.$current_suffix" -exec sh -c '
         set -x
         mv "$1" "${1//$2}$3"
@@ -16,9 +16,9 @@ filesuffix () {
 
 # Look for file from target path up to root directory
 filelookup () {
-    target_file="$1"
-    target_path="$(pwd)"
-    target_match="$target_path/$target_file"
+    local target_file="$1"
+    local target_path="$(pwd)"
+    local target_match="$target_path/$target_file"
     if [[ "$target_path" == "/" ]]; then
         false
     elif [[ -f "$target_match" ]]; then

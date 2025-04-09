@@ -1,6 +1,6 @@
 # Pull changes for multiple Git repos
 gpull () {
-    remote="${1:-origin}"
+    local remote="${1:-origin}"
     find . -type d -name ".git" -exec sh -c '
         if grep -qs "remote .$2." "$1/config"; then
             set -x
@@ -13,7 +13,7 @@ gpull () {
 gmap () {
     # Here is the difference between $@ and $*
     # https://unix.stackexchange.com/q/129072
-    arguments="$*"
+    local arguments="$*"
     find . -type d -name '.git' -exec sh -c '
         set -x
         git -C "$1/../" $2
@@ -22,9 +22,9 @@ gmap () {
 
 # Sync branch on current remote with parent remote for single Git repo
 gsync () {
-    branch="$(git branch --show-current)"
-    current_remote="${1:-origin}"
-    parent_remote="${2:-upstream}"
+    local branch="$(git branch --show-current)"
+    local current_remote="${1:-origin}"
+    local parent_remote="${2:-upstream}"
     git fetch "$parent_remote"
     git reset --hard "$parent_remote/$branch"
     git push "$current_remote" "$branch"
@@ -32,8 +32,8 @@ gsync () {
 
 # List secondary branches of current remote for single Git repo
 glist () {
-    exclude_branches='(main|master)'
-    remote="${1:-origin}"
+    local exclude_branches='(main|master)'
+    local remote="${1:-origin}"
     git branch -r \
         | grep "$remote/" \
         | grep -v 'HEAD' \

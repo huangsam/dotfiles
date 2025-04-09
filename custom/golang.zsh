@@ -1,6 +1,6 @@
 # Manage Go module dependencies
 gomo () {
-    cmd="${1:-unknown}"
+    local cmd="${1:-unknown}"
     case "$cmd" in
         "clean") go clean -modcache ;;
         "down") go mod download ;;
