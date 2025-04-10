@@ -17,7 +17,7 @@ filesuffix () {
 # Look for file from target path up to root directory
 filelookup () {
     local target_file="$1"
-    local target_path="$(pwd)"
+    local target_path="$PWD"
     while [[ "$target_path" != "/" ]]; do
         if [[ -f "$target_path/$target_file" ]]; then
             echo "$target_path/$target_file"
