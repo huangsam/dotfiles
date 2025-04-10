@@ -33,7 +33,7 @@ locstats () {
             | while IFS= read -r -d '' dir; do
         local dir="${dir#target_dir/}"
         local count=$(find "$dir" -type f -name "$pattern" -exec cat {} + | wc -l | xargs)
-        echo "$(basename $dir) ${count:-0}"
+        echo "$(basename "$dir") ${count:-0}"
     done | column -t
 }
 
