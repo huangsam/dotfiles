@@ -22,7 +22,7 @@ gmap () {
 
 # Sync branch on current remote with parent remote for single Git repo
 gsync () {
-    local branch='main'
+    local branch=''
     branch="$(git branch --show-current)"
     local current_remote="${1:-origin}"
     local parent_remote="${2:-upstream}"
