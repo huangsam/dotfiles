@@ -32,9 +32,9 @@ locstats () {
     find "$target_dir" -mindepth 1 -maxdepth 1 -type d -print0 \
             | while IFS= read -r -d '' dir; do
         local dir="${dir#target_dir/}"
-        local count
-        count=$(find "$dir" -type f -name "$pattern" -exec cat {} + | wc -l | xargs)
-        echo "$(basename "$dir") ${count:-0}"
+        local count="0"
+        count="$(find "$dir" -type f -name "$pattern" -exec cat {} + | wc -l | xargs)"
+        echo "$(basename "$dir") $count"
     done | column -t
 }
 
