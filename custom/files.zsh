@@ -18,15 +18,14 @@ filesuffix () {
 filelookup () {
     local target_file="$1"
     local target_path="$(pwd)"
-    local target_match="$target_path/$target_file"
-    if [[ "$target_path" == "/" ]]; then
-        false
-    elif [[ -f "$target_match" ]]; then
-        echo "$target_match"
-        true
-    else
-        filelookup "$target_file" "$(dirname "$target_path")"
-    fi
+    while [[ "$target_path" != "/" ]]; do
+        if [[ -f "$target_path/$target_file" ]]; then
+            echo "$target_path/$target_file"
+            return 0
+        fi
+        target_path="$(dirname "$target_path")"
+    done
+    return 1
 }
 
 # File navigation and listing
