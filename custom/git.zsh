@@ -20,17 +20,6 @@ gmap () {
     ' _ {} "$arguments" \;
 }
 
-# Sync branch on current remote with parent remote for single Git repo
-gsync () {
-    local branch=''
-    branch="$(git branch --show-current)"
-    local current_remote="${1:-origin}"
-    local parent_remote="${2:-upstream}"
-    git fetch "$parent_remote"
-    git reset --hard "$parent_remote/$branch"
-    git push "$current_remote" "$branch"
-}
-
 # List secondary branches of current remote for single Git repo
 glist () {
     local exclude_branches='(main|master)'
