@@ -20,13 +20,16 @@ locstats () {
     local target_dir="$1"
     local extension="$2"
     local pattern="*.${extension#.}"
+    if [[ ! -d "$target_dir" || -z "$extension" ]]; then
+        return 1
+    fi
     {
-        local current=''
+        local current
         current=$(find "$target_dir" -maxdepth 1 -type f -name "$pattern" -exec cat {} + | wc -l)
         echo ". $current"
 
         find "$target_dir" -mindepth 1 -maxdepth 1 -type d -print0 | while IFS= read -r -d '' dir; do
-            local inner=''
+            local inner
             inner=$(find "$dir" -type f -name "$pattern" -exec cat {} + | wc -l)
             echo "$(basename "$dir") $inner"
         done
