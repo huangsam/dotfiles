@@ -20,22 +20,21 @@ locstats () {
     local target_dir="$1"
     local extension="$2"
     local pattern="*.${extension#.}"
-
-    if [[ ! -d "$target_dir" ]]; then
-        echo "Error: Target directory '$target_dir' does not exist" >&2
-        return 1
-    elif [[ -z "$extension" ]]; then
-        echo "Error: File extension is empty" >&2
+    if [[ ! -d "$target_dir" || -z "$extension" ]]; then
+        echo "Usage: locstats <directory> <extension>"
         return 1
     fi
+    {
+        local current
+        current=$(find "$target_dir" -maxdepth 1 -type f -name "$pattern" -exec cat {} + | wc -l)
+        echo ". $current"
 
-    find "$target_dir" -mindepth 1 -maxdepth 1 -type d -print0 \
-            | while IFS= read -r -d '' dir; do
-        local dir="${dir#target_dir/}"
-        local count='' # local assignment avoids extra output
-        count="$(find "$dir" -type f -name "$pattern" -exec cat {} + | wc -l | xargs)"
-        echo "$(basename "$dir") $count"
-    done | column -t
+        find "$target_dir" -mindepth 1 -maxdepth 1 -type d -print0 | while IFS= read -r -d '' dir; do
+            local inner
+            inner=$(find "$dir" -type f -name "$pattern" -exec cat {} + | wc -l)
+            echo "$(basename "$dir") $inner"
+        done
+    } | column -t
 }
 
 # Reset Z shell configuration
