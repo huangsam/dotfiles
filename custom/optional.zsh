@@ -20,10 +20,6 @@ locstats () {
     local target_dir="$1"
     local extension="$2"
     local pattern="*.${extension#.}"
-    if [[ ! -d "$target_dir" || -z "$extension" ]]; then
-        echo "Usage: locstats <directory> <extension>"
-        return 1
-    fi
     {
         local current=''
         current=$(find "$target_dir" -maxdepth 1 -type f -name "$pattern" -exec cat {} + | wc -l)
