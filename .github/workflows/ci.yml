@@ -22,10 +22,10 @@ jobs:
       - name: Setup zsh and shellcheck
         run: brew install zsh shellcheck
       - name: Run combine script
-        run: zsh combine.zsh
+        run: zsh combine.zsh override
       - name: Validate combine script
         run: shellcheck --shell=bash $HOME/.zsh_aliases
       - name: Run copy script
-        run: zsh copy.zsh
+        run: zsh copy.zsh override
       - name: Validate copy script
         run: git la
