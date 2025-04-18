@@ -6,7 +6,7 @@ mode="${1:-default}"
 
 # Generate combined aliases if in default mode (file doesn't exist)
 # or override mode (file exists)
-if [ "${mode}" = "default" -a ! -f "$HOME/.zsh_aliases" ] || [ "${mode}" = "override" -a -f "$HOME/.zsh_aliases" ]; then
+if [ "${mode}" = "default" ] && [ ! -f "$HOME/.zsh_aliases" ] || [ "${mode}" = "override" ] && [ -f "$HOME/.zsh_aliases" ]; then
     echo "Generate combined aliases"
     # Combine aliases and functions into one file
     # https://unix.stackexchange.com/a/541415/140057
