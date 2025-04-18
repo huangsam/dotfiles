@@ -21,9 +21,11 @@ jobs:
         run: brew bundle list
       - name: Setup zsh and shellcheck
         run: brew install zsh shellcheck
-      - name: Run shell linter
-        run: find . -name '*.zsh' -exec shellcheck --shell=bash {} +
       - name: Run combine script
         run: zsh combine.zsh
+      - name: Validate combine script
+        run: shellcheck --shell=bash $HOME/.zsh_aliases
       - name: Run copy script
         run: zsh copy.zsh
+      - name: Validate copy script
+        run: git la
