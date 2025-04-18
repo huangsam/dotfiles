@@ -24,7 +24,7 @@ jobs:
       - name: Run combine script
         run: zsh combine.zsh override
       - name: Validate combine script
-        run: shellcheck --shell=bash $HOME/.zsh_aliases
+        run: shellcheck --shell=bash /home/runner/.zsh_aliases
       - name: Run copy script
         run: zsh copy.zsh override
       - name: Validate copy script
