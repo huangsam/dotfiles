@@ -18,6 +18,7 @@ brew "cppcheck"
 brew "dos2unix"
 brew "etcd", restart_service: false
 brew "exiftool"
+brew "fd"
 brew "ffmpeg"
 brew "fzf"
 brew "gh"
