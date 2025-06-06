@@ -11,6 +11,7 @@ tap "homebrew/services"
 # For fzf, source the completions in ~/.zshrc
 brew "agg"
 brew "asciinema"
+brew "bat"
 brew "boost"
 brew "clang-format"
 brew "cmake"
