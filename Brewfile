@@ -51,10 +51,12 @@ brew "python@3.13"
 brew "redis", restart_service: false
 brew "ruff"
 brew "rust"
+brew "rustscan"
 brew "sbt"
 brew "scala"
 brew "shellcheck"
 brew "staticcheck"
+brew "tcpdump"
 brew "virtualenv"
 brew "yt-dlp"
 
