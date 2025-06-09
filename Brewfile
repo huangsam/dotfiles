@@ -17,6 +17,7 @@ brew "clang-format"
 brew "cmake"
 brew "cppcheck"
 brew "dos2unix"
+brew "dust"
 brew "etcd", restart_service: false
 brew "exiftool"
 brew "fd"
