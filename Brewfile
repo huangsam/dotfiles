@@ -9,8 +9,6 @@ tap "homebrew/services"
 # For postgresql, set stable version
 # For python, set stable version
 # For fzf, source the completions in ~/.zshrc
-brew "agg"
-brew "asciinema"
 brew "bat"
 brew "boost"
 brew "clang-format"
@@ -53,12 +51,12 @@ brew "redis", restart_service: false
 brew "ripgrep"
 brew "ruff"
 brew "rust"
-brew "rustscan"
 brew "sbt"
 brew "scala"
 brew "shellcheck"
 brew "staticcheck"
 brew "tcpdump"
+brew "vhs"
 brew "virtualenv"
 brew "yt-dlp"
 
