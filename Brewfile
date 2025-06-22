@@ -9,9 +9,10 @@ tap "homebrew/services"
 # For postgresql, set stable version
 # For python, set stable version
 # For fzf, source the completions in ~/.zshrc
+# For go, java, rust, llvm, set PATH references in ~/.zprofile
+# For c/c++ libraries, set CFLAGS and LDFLAGS appropriately
 brew "bat"
 brew "boost"
-brew "clang-format"
 brew "cmake"
 brew "cppcheck"
 brew "dos2unix"
@@ -32,6 +33,7 @@ brew "gotestsum"
 brew "gradle"
 brew "jq"
 brew "kotlin"
+brew "llvm"
 brew "mockery"
 brew "mysql", restart_service: false
 brew "neovim"
