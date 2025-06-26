@@ -14,6 +14,12 @@ filesuffix () {
     ' _ {} "$current_suffix" "$new_suffix" \;
 }
 
+# Touch files with a specific extension
+filetouch () {
+    local file_ext="$1"
+    find . -type f -name "*.$file_ext" -exec touch {} +
+}
+
 # Look for file from target path up to root directory
 filelookup () {
     local target_file="$1"
