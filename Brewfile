@@ -33,6 +33,7 @@ brew "gotestsum"
 brew "gradle"
 brew "jq"
 brew "kotlin"
+brew "lefthook"
 brew "llvm"
 brew "mockery"
 brew "mysql", restart_service: false
