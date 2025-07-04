@@ -64,6 +64,7 @@ brew "uv"
 brew "vhs"
 brew "virtualenv"
 brew "yt-dlp"
+brew "zig"
 
 # Casks applications
 # Run `brew upgrade --cask --greedy` for personal machines, NOT work machines
