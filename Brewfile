@@ -1,7 +1,3 @@
-# Repositories for brew and cask
-tap "homebrew/bundle"
-tap "homebrew/services"
-
 # Language frameworks, library packages, CLI tools
 # For openjdk, set LTS version and add symbolic link
 #     sudo ln -sfn "$HOMEBREW/opt/openjdk@17/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk.17.jdk
