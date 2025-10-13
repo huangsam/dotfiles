@@ -50,6 +50,7 @@ brew "protobuf"
 brew "pstree"
 brew "python@3.12"
 brew "python@3.13"
+brew "python@3.14"
 brew "redis", restart_service: false
 brew "ripgrep"
 brew "ruff"
