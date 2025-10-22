@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Check Brewfile contents
         run: brew bundle list
       - name: Setup zsh and shellcheck
