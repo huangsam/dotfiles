@@ -5,7 +5,8 @@ gomo () {
         "clean") go clean -modcache ;;
         "down") go mod download ;;
         "tidy") go mod tidy ;;
-        "up") go get -u ./... ;;
+        "list") go list -m -f '{{if not .Indirect}}{{.Path}}{{end}}' all ;;
+        "up") go get $(go list -m -f '{{if not .Indirect}}{{.Path}}{{end}}' all) ;;
         *) echo "Invalid command: $cmd" ;;
     esac
 }
