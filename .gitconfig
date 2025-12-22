@@ -31,6 +31,9 @@
 	# alias to fix the last commit without changing the commit message
 	caan = commit --all --amend --no-edit
 
+	# alias to change user.name and user.email of current commit
+	sign = commit --amend --reset-author
+
 	# alias to undo the last commit and leave the files staged
 	undo = reset --soft HEAD^
 
