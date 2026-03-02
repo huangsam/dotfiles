@@ -23,6 +23,9 @@ zsh copy.zsh
 
 # Install Homebrew artifacts
 brew bundle install
+
+# Configure OpenJDK symlinks for macOS
+zsh configure_openjdk.zsh
 ```
 
 [Click here](./custom/) to see what gets populated in `.zsh_aliases`.
