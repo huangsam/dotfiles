@@ -8,6 +8,7 @@
 # For c/c++ libraries, set CFLAGS and LDFLAGS appropriately
 brew "bat"
 brew "boost"
+brew "cfr-decompiler"
 brew "cmake"
 brew "cppcheck"
 brew "coreutils"
