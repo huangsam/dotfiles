@@ -53,5 +53,13 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+if command -v bat >/dev/null 2>&1; then
+    alias cat='bat --paging=never'
+fi
+
+if command -v fd >/dev/null 2>&1; then
+    alias f='fd'
+fi
+
 # File transfer
 alias rsyncp='rsync -azvhP'
