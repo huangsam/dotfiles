@@ -1,23 +1,36 @@
 # Normalize permissions of files and directories
 filenorm () {
-    find . -type f -exec chmod 644 {} +
-    find . -type d -exec chmod 755 {} +
+    if (( $+commands[fd] )); then
+        fd -t f -x chmod 644
+        fd -t d -x chmod 755
+    else
+        find . -type f -exec chmod 644 {} +
+        find . -type d -exec chmod 755 {} +
+    fi
 }
 
 # Change file suffix from .x to .y
 filesuffix () {
     local current_suffix="$1"
     local new_suffix="$2"
-    find . -type f -name "*.$current_suffix" -exec sh -c '
-        set -x
-        mv "$1" "${1//$2}$3"
-    ' _ {} "$current_suffix" "$new_suffix" \;
+    if (( $+commands[fd] )); then
+        fd -e "$current_suffix" -x sh -c 'mv "$1" "${1%.$2}.$3"' _ {} "$current_suffix" "$new_suffix"
+    else
+        find . -type f -name "*.$current_suffix" -exec sh -c '
+            set -x
+            mv "$1" "${1//$2}$3"
+        ' _ {} "$current_suffix" "$new_suffix" \;
+    fi
 }
 
 # Touch files with a specific extension
 filetouch () {
     local file_ext="$1"
-    find . -type f -name "*.$file_ext" -exec touch {} +
+    if (( $+commands[fd] )); then
+        fd -e "$file_ext" -x touch
+    else
+        find . -type f -name "*.$file_ext" -exec touch {} +
+    fi
 }
 
 # Look for file from target path up to root directory

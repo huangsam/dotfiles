@@ -26,11 +26,24 @@ gmap () {
 glist () {
     local exclude_branches='(main|master)'
     local remote="${1:-origin}"
-    git branch -r \
+    local branches
+    branches=$(git branch -r \
         | grep "$remote/" \
         | grep -v 'HEAD' \
         | grep -Ev "$exclude_branches" \
-        | cut -d'/' -f 2,3
+        | cut -d'/' -f 2,3)
+    
+    if [[ -z "$branches" ]]; then
+        return 0
+    fi
+
+    if (( $+commands[fzf] )); then
+        local selected
+        selected=$(echo "$branches" | fzf --height 40% --layout=reverse --border)
+        [[ -n "$selected" ]] && git checkout "$selected"
+    else
+        echo "$branches"
+    fi
 }
 
 # Run `git fetch` with tracing enabled
