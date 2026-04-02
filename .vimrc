@@ -2,6 +2,12 @@
 set history=500
 
 " => VIM user interface
+set number
+set relativenumber
+set mouse=a
+set hlsearch
+set lazyredraw
+set clipboard+=unnamedplus
 set so=7
 set wildmenu
 set ruler
