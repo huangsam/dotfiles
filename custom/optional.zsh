@@ -44,3 +44,8 @@ alias ytdl='yt-dlp'
 
 # Show Homebrew dependency tree
 alias brewtree='brew deps --tree --installed'
+
+# Initialize modern CLI tools
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+fi

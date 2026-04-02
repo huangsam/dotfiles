@@ -35,9 +35,16 @@ filelookup () {
 }
 
 # File navigation and listing
-alias ll='ls -l'
-alias la='ls -la'
-alias l='ls -CF'
+if command -v eza >/dev/null 2>&1; then
+    alias ls='eza --group-directories-first'
+    alias ll='eza -l --group-directories-first'
+    alias la='eza -la --group-directories-first'
+    alias lt='eza --tree'
+else
+    alias ll='ls -l'
+    alias la='ls -la'
+    alias l='ls -CF'
+fi
 alias sl='ls'
 alias lsl='ls -lhFA | less'
 
