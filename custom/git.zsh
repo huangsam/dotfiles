@@ -39,3 +39,9 @@ gdate() {
     local d="${1:-now}"
     GIT_COMMITTER_DATE="$d" git commit --amend --no-edit --date="$d"
 }
+
+# GitHub CLI helpers
+alias ghp='gh pr create --fill'
+alias ghs='gh pr status'
+alias ghv='gh repo view --web'
+alias ghc='gh pr checkout'
