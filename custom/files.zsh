@@ -42,7 +42,7 @@ filelookup () {
             echo "$target_path/$target_file"
             return 0
         fi
-        target_path="$(dirname "$target_path")"
+        target_path="${target_path:h}"
     done
     return 1
 }

@@ -49,5 +49,12 @@ alias brewtree='brew deps --tree --installed'
 (( $+commands[dust] )) && alias du='dust'
 (( $+commands[scc] )) && alias loc='scc'
 
+# Global aliases (use anywhere in command)
+alias -g G='| grep'
+alias -g L='| less'
+alias -g H='| head'
+alias -g T='| tail'
+alias -g J='| jq'
+
 # Initialize modern CLI tools
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
