@@ -3,9 +3,13 @@ set -eu
 
 # Copy hidden files to home directory
 for fl in .*; do
+    # Skip directories and internal repo files
+    if [[ "$fl" == ".git" || "$fl" == ".gitignore" || "$fl" == ".DS_Store" ]]; then
+        continue
+    fi
+
     if [[ -f "$fl" ]]; then
         # Ignore non-zero exit status when a file is skipped
-        # https://stackoverflow.com/a/38332629/2748860
         cp -i "$fl" "$HOME/$fl" || :
     fi
 done
