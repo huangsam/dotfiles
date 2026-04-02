@@ -33,3 +33,9 @@ glist () {
 
 # Run `git fetch` with tracing enabled
 alias gtrace='GIT_TRACE=1 git fetch'
+
+# Redate the current HEAD commit (author and committer)
+gdate() {
+    local d="${1:-now}"
+    GIT_COMMITTER_DATE="$d" git commit --amend --no-edit --date="$d"
+}
