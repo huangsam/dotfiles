@@ -10,6 +10,15 @@ xcode-select --install
 # Install oh-my-zsh
 /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
 
+# Install Homebrew artifacts
+brew bundle install
+
+# Generate .zsh_aliases file at the home directory
+zsh combine.zsh
+
+# Copy all dotfiles to the home directory
+zsh copy.zsh
+
 # Indicate completion
 emoji_stars='\U00002728'
 emoji_cake='\U0001F370'
