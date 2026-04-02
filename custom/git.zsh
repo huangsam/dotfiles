@@ -1,23 +1,25 @@
 # Pull changes for multiple Git repos
 gpull () {
     local remote="${1:-origin}"
-    find . -type d -name ".git" -exec sh -c '
-        if grep -qs "remote .$2." "$1/config"; then
-            set -x
-            git -C "$1/../" pull "$2"
+    local search_cmd="find . -type d -name '.git'"
+    (( $+commands[fd] )) && search_cmd="fd -H -t d -g '.git'"
+    eval "$search_cmd" | xargs -I {} sh -c "
+        if grep -qs 'remote \"$remote\"' '{}/config'; then
+            echo 'Updating {}...'
+            git -C '{}/..' pull '$remote'
         fi
-    ' _ {} "$remote" \;
+    "
 }
 
 # Run command with arguments for multiple Git repos
 gmap () {
-    # Here is the difference between $@ and $*
-    # https://unix.stackexchange.com/q/129072
     local arguments="$*"
-    find . -type d -name '.git' -exec sh -c '
-        set -x
-        git -C "$1/../" $2
-    ' _ {} "$arguments" \;
+    local search_cmd="find . -type d -name '.git'"
+    (( $+commands[fd] )) && search_cmd="fd -H -t d -g '.git'"
+    eval "$search_cmd" | xargs -I {} sh -c "
+        echo 'Running in {}...'
+        git -C '{}/..' $arguments
+    "
 }
 
 # List secondary branches of current remote for single Git repo

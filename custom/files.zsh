@@ -35,7 +35,7 @@ filelookup () {
 }
 
 # File navigation and listing
-if command -v eza >/dev/null 2>&1; then
+if (( $+commands[eza] )); then
     alias ls='eza --group-directories-first'
     alias ll='eza -l --group-directories-first'
     alias la='eza -la --group-directories-first'
@@ -48,18 +48,14 @@ fi
 alias sl='ls'
 alias lsl='ls -lhFA | less'
 
-# File content searching
+# File content searching and viewing
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-if command -v bat >/dev/null 2>&1; then
-    alias cat='bat --paging=never'
-fi
+(( $+commands[bat] )) && alias cat='bat --paging=never'
+(( $+commands[fd] )) && alias f='fd'
 
-if command -v fd >/dev/null 2>&1; then
-    alias f='fd'
-fi
 
 # File transfer
 alias rsyncp='rsync -azvhP'
