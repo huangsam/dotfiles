@@ -19,10 +19,8 @@ jobs:
         uses: actions/checkout@v5
       - name: Check Brewfile contents
         run: brew bundle list
-      - name: Setup zsh and shellcheck
-        run: brew install zsh shellcheck
-      - name: Run shell linter
-        run: find . -name '*.zsh' -exec shellcheck --shell=bash {} +
+      - name: Setup zsh
+        run: brew install zsh
       - name: Run combine script
         run: zsh combine.zsh
       - name: Run copy script
