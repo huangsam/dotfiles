@@ -35,4 +35,4 @@ Special thanks to the following repositories for inspiration and resources:
 - [Homebrew/homebrew-core](https://github.com/Homebrew/homebrew-core) - Main repository for Homebrew formulae.
 - [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles) - Dotfiles to personalize macOS or Linux environment.
 - [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) - Community-driven framework for managing zsh configuration.
-- [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins) - List of frameworks, plugins, themes, and tutorials for Zsh.
+- [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins) - Frameworks and other resources for Zsh.
