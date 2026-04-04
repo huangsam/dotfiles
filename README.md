@@ -13,13 +13,13 @@ Here are the commands to prepare your Mac for development:
 
 ```shell
 # Install core developer assets
-zsh install.zsh
+zsh setup_system.zsh
 
 # Generate .zsh_aliases file at the home directory
-zsh combine.zsh
+zsh generate_aliases.zsh
 
 # Copy all dotfiles to the home directory
-zsh copy.zsh
+zsh deploy_configs.zsh
 
 # Install Homebrew artifacts
 brew bundle install

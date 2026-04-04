@@ -14,10 +14,10 @@ xcode-select --install
 brew bundle install
 
 # Generate .zsh_aliases file at the home directory
-zsh combine.zsh
+zsh generate_aliases.zsh
 
 # Copy all dotfiles to the home directory
-zsh copy.zsh
+zsh deploy_configs.zsh
 
 # Indicate completion
 emoji_stars='\U00002728'
