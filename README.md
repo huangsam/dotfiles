@@ -21,9 +21,6 @@ zsh generate_aliases.zsh
 # Copy all dotfiles to the home directory
 zsh deploy_configs.zsh
 
-# Install Homebrew artifacts
-brew bundle install
-
 # Configure OpenJDK symlinks for macOS
 zsh configure_openjdk.zsh
 ```
