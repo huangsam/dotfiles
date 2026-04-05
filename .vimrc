@@ -3,7 +3,6 @@ set history=500
 
 " => VIM user interface
 set number
-set relativenumber
 set mouse=a
 set hlsearch
 set lazyredraw
@@ -24,7 +23,6 @@ set tm=500
 
 " => Colors and Fonts
 syntax enable
-set regexpengine=0
 set encoding=utf8
 set ffs=unix,dos,mac
 
@@ -38,16 +36,16 @@ set expandtab
 set smarttab
 set shiftwidth=4
 set tabstop=4
-set lbr
+set linebreak
 set tw=500
-set ai
-set si
+set autoindent
+set smartindent
 set wrap
 
 " => Moving around, tabs, windows and buffers
-map <space> /
-map <C-space> ?
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nnoremap <space> /
+nnoremap <C-space> ?
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
