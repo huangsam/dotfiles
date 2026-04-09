@@ -100,7 +100,7 @@
 
 [core]
 	autocrlf = input
-	editor = nvim
+	editor = vim
 
 [init]
 	defaultBranch = main
