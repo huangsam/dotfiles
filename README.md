@@ -21,8 +21,8 @@ zsh generate_aliases.zsh
 # Copy all dotfiles to the home directory
 zsh copy_configs.zsh
 
-# Configure OpenJDK symlinks for macOS
-zsh configure_openjdk.zsh
+# Setup OpenJDK symlinks for macOS
+zsh setup_openjdk.zsh
 ```
 
 [Click here](./custom/) to see what gets populated in `.zsh_aliases`.

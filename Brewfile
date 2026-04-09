@@ -1,7 +1,5 @@
 # Language frameworks, library packages, CLI tools
-# For openjdk, set LTS version and add symbolic link
-#     sudo ln -sfn "$HOMEBREW/opt/openjdk@17/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk.17.jdk
-#     sudo ln -sfn "$HOMEBREW/opt/openjdk@21/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk.21.jdk
+# For openjdk, run setup_openjdk.zsh
 # For python, set stable version
 # For fzf, source the completions in ~/.zshrc
 # For go, java, rust, llvm, set PATH references in ~/.zprofile
