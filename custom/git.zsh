@@ -32,7 +32,7 @@ glist () {
         | grep -v 'HEAD' \
         | grep -Ev "$exclude_branches" \
         | cut -d'/' -f 2,3)
-    
+
     if [[ -z "$branches" ]]; then
         return 0
     fi
@@ -46,14 +46,14 @@ glist () {
     fi
 }
 
-# Run `git fetch` with tracing enabled
-alias gtrace='GIT_TRACE=1 git fetch'
-
 # Redate the current HEAD commit (author and committer)
-gdate() {
-    local d="${1:-now}"
+gdate () {
+    local d="${1:-$(date -R)}"
     GIT_COMMITTER_DATE="$d" git commit --amend --no-edit --date="$d"
 }
+
+# Run `git fetch` with tracing enabled
+alias gtrace='GIT_TRACE=1 git fetch'
 
 # GitHub CLI helpers
 alias ghp='gh pr create --fill'
