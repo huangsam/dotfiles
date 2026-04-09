@@ -9,7 +9,7 @@ Using them will reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.
 
 ## Getting started
 
-Here are the commands to prepare your Mac for development:
+For first-time setup, run:
 
 ```shell
 # Setup system tools and configurations
@@ -17,7 +17,11 @@ zsh setup_system.zsh
 
 # Setup OpenJDK symlinks for macOS
 zsh setup_openjdk.zsh
+```
 
+For regular maintenance and upkeep:
+
+```shell
 # Generate .zsh_aliases file at the home directory
 zsh generate_aliases.zsh
 
