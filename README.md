@@ -3,9 +3,9 @@
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/huangsam/dotfiles/ci.yml)](https://github.com/huangsam/dotfiles/actions)
 [![License](https://img.shields.io/github/license/huangsam/dotfiles)](https://github.com/huangsam/dotfiles/blob/main/LICENSE)
 
-Collection of dotfiles to boost productivity. 🚀
+Collection of dotfiles to boost productivity on macOS. 🚀
 
-Using them will reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/).
+Using them will reduce your risk for [Carpal Tunnel](https://orthoinfo.aaos.org/en/diseases--conditions/carpal-tunnel-syndrome/).
 
 ## Getting started
 
