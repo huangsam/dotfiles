@@ -48,6 +48,10 @@ alias brewtree='brew deps --tree --installed'
 # Modern CLI tools aliases
 (( $+commands[dust] )) && alias du='dust'
 (( $+commands[scc] )) && alias loc='scc'
+(( $+commands[rg] )) && alias rgf='rg -n --hidden --glob "!.git"'
+(( $+commands[nvim] )) && alias v='nvim'
+(( $+commands[tldr] )) && alias t='tldr'
+(( $+commands[gh] )) && alias ghpr='gh pr status'
 
 # Global aliases (use anywhere in command)
 alias -g G='| grep'
