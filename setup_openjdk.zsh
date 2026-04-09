@@ -6,6 +6,11 @@ JVM_DIR="/Library/Java/JavaVirtualMachines"
 
 echo "Setup OpenJDK symlinks for macOS in $JVM_DIR..."
 
+# Warm up sudo credentials for future sudo commands
+if [[ -o interactive && -t 0 ]]; then
+    sudo -v
+fi
+
 # Enable nullglob to safely handle when no matching files are found
 setopt nullglob
 
