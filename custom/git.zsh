@@ -54,9 +54,3 @@ gdate () {
 
 # Run `git fetch` with tracing enabled
 alias gtrace='GIT_TRACE=1 git fetch'
-
-# GitHub CLI helpers
-alias ghp='gh pr create --fill'
-alias ghs='gh pr status'
-alias ghv='gh repo view --web'
-alias ghc='gh pr checkout'
