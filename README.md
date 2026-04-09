@@ -19,7 +19,7 @@ zsh setup_system.zsh
 zsh generate_aliases.zsh
 
 # Copy all dotfiles to the home directory
-zsh deploy_configs.zsh
+zsh copy_configs.zsh
 
 # Configure OpenJDK symlinks for macOS
 zsh configure_openjdk.zsh

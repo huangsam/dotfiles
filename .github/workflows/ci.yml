@@ -24,4 +24,4 @@ jobs:
       - name: Run generate script
         run: zsh generate_aliases.zsh
       - name: Run deploy script
-        run: zsh deploy_configs.zsh
+        run: zsh copy_configs.zsh

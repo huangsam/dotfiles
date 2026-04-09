@@ -17,7 +17,7 @@ brew bundle install
 zsh generate_aliases.zsh
 
 # Copy all dotfiles to the home directory
-zsh deploy_configs.zsh
+zsh copy_configs.zsh
 
 # Indicate completion
 emoji_stars='\U00002728'
