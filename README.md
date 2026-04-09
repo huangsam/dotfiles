@@ -12,17 +12,17 @@ Using them will reduce your risk for [Carpal Tunnel Syndrome](https://orthoinfo.
 Here are the commands to prepare your Mac for development:
 
 ```shell
-# Install core developer assets
+# Setup system tools and configurations
 zsh setup_system.zsh
+
+# Setup OpenJDK symlinks for macOS
+zsh setup_openjdk.zsh
 
 # Generate .zsh_aliases file at the home directory
 zsh generate_aliases.zsh
 
 # Copy all dotfiles to the home directory
 zsh copy_configs.zsh
-
-# Setup OpenJDK symlinks for macOS
-zsh setup_openjdk.zsh
 ```
 
 [Click here](./custom/) to see what gets populated in `.zsh_aliases`.
