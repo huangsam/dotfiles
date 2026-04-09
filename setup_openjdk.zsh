@@ -4,7 +4,7 @@ set -eu -o pipefail
 HOMEBREW_PREFIX=$(brew --prefix)
 JVM_DIR="/Library/Java/JavaVirtualMachines"
 
-echo "Configuring OpenJDK symlinks for macOS in $JVM_DIR..."
+echo "Setup OpenJDK symlinks for macOS in $JVM_DIR..."
 
 # Enable nullglob to safely handle when no matching files are found
 setopt nullglob
