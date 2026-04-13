@@ -10,3 +10,16 @@ gomo () {
         *) echo "Invalid command: $cmd" ;;
     esac
 }
+
+# Run fresh Maven install
+alias mvnci='mvn clean install'
+
+# Setup Gradle assets for new project
+alias gradnew='gradle init wrapper'
+
+# Show available Java JDKs
+alias jdkapple='ls /Library/Java/JavaVirtualMachines'
+alias jdklinux='ls /usr/lib/jvm'
+
+# Python HTTP server
+alias pyhttp='python3 -m http.server --directory'
