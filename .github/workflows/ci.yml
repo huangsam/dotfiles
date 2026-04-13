@@ -21,7 +21,7 @@ jobs:
         run: brew bundle list
       - name: Setup zsh
         run: brew install zsh
-      - name: Run generate script
-        run: zsh generate_aliases.zsh
+      - name: Run combine script
+        run: zsh combine_aliases.zsh
       - name: Run deploy script
         run: zsh copy_configs.zsh

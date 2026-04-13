@@ -14,7 +14,7 @@ xcode-select --install
 brew bundle install
 
 # Generate .zsh_aliases file at the home directory
-zsh generate_aliases.zsh
+zsh combine_aliases.zsh
 
 # Copy all dotfiles to the home directory
 zsh copy_configs.zsh
