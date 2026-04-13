@@ -3,12 +3,12 @@ gpull () {
     local remote="${1:-origin}"
     local search_cmd="find . -type d -name '.git'"
     (( $+commands[fd] )) && search_cmd="fd -H -t d -g '.git'"
-    eval "$search_cmd" | xargs -I {} sh -c "
-        if grep -qs 'remote \"$remote\"' '{}/config'; then
-            echo 'Updating {}...'
-            git -C '{}/..' pull '$remote'
+    eval "$search_cmd" | while read -r repo; do
+        if grep -qs "remote \"$remote\"" "$repo/config"; then
+            echo "Updating $repo..."
+            git -C "$repo/.." pull "$remote"
         fi
-    "
+    done
 }
 
 # Run command with arguments for multiple Git repos
@@ -16,10 +16,10 @@ gmap () {
     local arguments="$*"
     local search_cmd="find . -type d -name '.git'"
     (( $+commands[fd] )) && search_cmd="fd -H -t d -g '.git'"
-    eval "$search_cmd" | xargs -I {} sh -c "
-        echo 'Running in {}...'
-        git -C '{}/..' $arguments
-    "
+    eval "$search_cmd" | while read -r repo; do
+        echo "Running in $repo..."
+        git -C "$repo/.." $arguments
+    done
 }
 
 # List secondary branches of current remote for single Git repo

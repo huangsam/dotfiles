@@ -53,13 +53,14 @@ if (( $+commands[eza] )); then
     alias ll='eza -l --group-directories-first'
     alias la='eza -la --group-directories-first'
     alias lt='eza --tree'
+    alias lsl='eza -lha --group-directories-first --classify | less'
 else
     alias ll='ls -l'
     alias la='ls -la'
     alias l='ls -CF'
+    alias lsl='ls -lhFA | less'
 fi
 alias sl='ls'
-alias lsl='ls -lhFA | less'
 
 # File content searching and viewing
 alias grep='grep --color=auto'
@@ -68,7 +69,6 @@ alias egrep='egrep --color=auto'
 
 (( $+commands[bat] )) && alias cat='bat --paging=never'
 (( $+commands[fd] )) && alias f='fd'
-
 
 # File transfer
 alias rsyncp='rsync -azvhP'
