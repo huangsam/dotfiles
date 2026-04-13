@@ -4,7 +4,6 @@ alias macinfo='system_profiler SPHardwareDataType'
 # Mac OS updates
 alias macsoft='softwareupdate'
 alias macsoftlist='macsoft -l'
-alias macsoftrun='sudo macsoft -i -a -R'
 
 # Mac OS network
 alias macdnsflush='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
