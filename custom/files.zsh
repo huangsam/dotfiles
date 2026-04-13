@@ -1,14 +1,3 @@
-# Normalize permissions of files and directories
-filenorm () {
-    if (( $+commands[fd] )); then
-        fd -t f -x chmod 644
-        fd -t d -x chmod 755
-    else
-        find . -type f -exec chmod 644 {} +
-        find . -type d -exec chmod 755 {} +
-    fi
-}
-
 # Change file suffix from .x to .y
 filesuffix () {
     local current_suffix="$1"
@@ -20,16 +9,6 @@ filesuffix () {
             set -x
             mv "$1" "${1//$2}$3"
         ' _ {} "$current_suffix" "$new_suffix" \;
-    fi
-}
-
-# Touch files with a specific extension
-filetouch () {
-    local file_ext="$1"
-    if (( $+commands[fd] )); then
-        fd -e "$file_ext" -x touch
-    else
-        find . -type f -name "*.$file_ext" -exec touch {} +
     fi
 }
 
@@ -60,8 +39,6 @@ else
     alias l='ls -CF'
     alias lsl='ls -lhFA | less'
 fi
-alias sl='ls'
-
 # File content searching and viewing
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
