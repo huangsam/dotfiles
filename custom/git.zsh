@@ -13,12 +13,11 @@ gpull () {
 
 # Run command with arguments for multiple Git repos
 gmap () {
-    local arguments="$*"
     local search_cmd="find . -type d -name '.git'"
     (( $+commands[fd] )) && search_cmd="fd -H -t d -g '.git'"
     eval "$search_cmd" | while read -r repo; do
         echo "Running in $repo..."
-        git -C "$repo/.." $arguments
+        git -C "$repo/.." "$@"
     done
 }
 
