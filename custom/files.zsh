@@ -6,8 +6,7 @@ filesuffix () {
         fd -e "$current_suffix" -x sh -c 'mv "$1" "${1%.$2}.$3"' _ {} "$current_suffix" "$new_suffix"
     else
         find . -type f -name "*.$current_suffix" -exec sh -c '
-            set -x
-            mv "$1" "${1//$2}$3"
+            mv "$1" "${1%.$2}.$3"
         ' _ {} "$current_suffix" "$new_suffix" \;
     fi
 }
@@ -16,11 +15,12 @@ filesuffix () {
 filelookup () {
     local target_file="$1"
     local target_path="$PWD"
-    while [[ "$target_path" != "/" ]]; do
+    while true; do
         if [[ -f "$target_path/$target_file" ]]; then
             echo "$target_path/$target_file"
             return 0
         fi
+        [[ "$target_path" == "/" ]] && break
         target_path="${target_path:h}"
     done
     return 1
