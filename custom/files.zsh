@@ -39,11 +39,13 @@ else
     alias l='ls -CF'
     alias lsl='ls -lhFA | less'
 fi
+
 # File content searching and viewing
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+# Modern alternatives for cat and find
 (( $+commands[bat] )) && alias cat='bat --paging=never'
 (( $+commands[fd] )) && alias f='fd'
 
