@@ -1,0 +1,10 @@
+{
+  "mappings": [
+    {
+      "name": "option-to-enter",
+      "description": "Map Right Option (0x7000000e6) to Return/Enter (0x700000028)",
+      "src": "0x7000000e6",
+      "dst": "0x700000028"
+    }
+  ]
+}

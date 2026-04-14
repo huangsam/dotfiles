@@ -1,3 +1,22 @@
+# Enable Mac OS key remapping
+mackeyon() {
+    local keymap_file="$HOME/.keymap.json"
+    if [[ ! -f "$keymap_file" ]]; then
+        echo "Error: keymap.json not found at $keymap_file"
+        return 1
+    fi
+
+    local mapping=$(jq '.mappings[0]' "$keymap_file")
+    local src=$(echo "$mapping" | jq -r '.src')
+    local dst=$(echo "$mapping" | jq -r '.dst')
+    hidutil property --set "{\"UserKeyMapping\":[{\"HIDKeyboardModifierMappingSrc\":${src},\"HIDKeyboardModifierMappingDst\":${dst}}]}"
+}
+
+# Disable Mac OS key remapping
+mackeyoff() {
+    hidutil property --set '{"UserKeyMapping":[]}'
+}
+
 # Mac OS system information
 alias macinfo='system_profiler SPHardwareDataType'
 
