@@ -67,11 +67,13 @@ brew "zoxide"
 # Casks applications
 # Run `brew upgrade --cask --greedy` for personal machines, NOT work machines
 cask "antigravity"
+cask "claude-code"
 cask "dbeaver-community"
 cask "discord"
 cask "font-hack-nerd-font"
 cask "ghostty"
 cask "jetbrains-toolbox"
+cask "ollama"
 cask "postman"
 cask "redis-insight"
 cask "slack"
