@@ -115,6 +115,12 @@
 	autocrlf = input
 	editor = vim
 
+[commit]
+	verbose = true
+
+[diff]
+	colorMoved = default
+
 [init]
 	defaultBranch = main
 
