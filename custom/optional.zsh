@@ -28,7 +28,7 @@ alias brewtree='brew deps --tree --installed'
 (( $+commands[dust] )) && alias du='dust'
 (( $+commands[scc] )) && alias loc='scc'
 (( $+commands[rg] )) && alias rgf='rg -n --hidden --glob "!.git"'
-(( $+commands[nvim] )) && alias v='nvim'
+(( $+commands[vim] )) && alias v='vim'
 (( $+commands[tldr] )) && alias t='tldr'
 (( $+commands[gh] )) && alias ghpr='gh pr status'
 
