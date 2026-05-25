@@ -51,3 +51,16 @@ alias egrep='egrep --color=auto'
 
 # File transfer
 alias rsyncp='rsync -azvhP'
+
+# Fuzzy search files using fd and fzf, then open the selection in VS Code
+fo() {
+    if (( $+commands[fd] )) && (( $+commands[fzf] )) && (( $+commands[code] )); then
+        local file
+        file=$(fd --type f --hidden --exclude .git | fzf)
+        [[ -n "$file" ]] && code "$file"
+    else
+        echo "Error: fo requires fd, fzf, and code (VS Code CLI) to be installed."
+        return 1
+    fi
+}
+
