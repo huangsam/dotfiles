@@ -80,6 +80,19 @@
 	index-flag = update-index --assume-unchanged
 	index-unflag = update-index --no-assume-unchanged
 
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
+
+[fetch]
+	prune = true
+	pruneTags = true
+
+[column]
+	ui = auto
+
 [grep]
 	lineNumber = true
 	patternType = extended
