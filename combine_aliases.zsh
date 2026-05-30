@@ -9,6 +9,4 @@ for fl in custom/*.zsh; do
 done | perl -pe 'chomp if eof' > "$HOME/.zsh_aliases"
 
 # Indicate completion
-emoji_stars='\U00002728'
-emoji_cake='\U0001F370'
-echo -e "$0 complete! $emoji_stars $emoji_cake $emoji_stars"
+echo "$0 complete! ✨ 🍰 ✨"

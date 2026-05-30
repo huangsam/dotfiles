@@ -1,6 +1,11 @@
 #!/bin/zsh
 set -eu -o pipefail
 
+# Ensure Homebrew is in the PATH of the current script execution (ARM Silicon)
+if ! command -v brew &>/dev/null; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 HOMEBREW_PREFIX=$(brew --prefix)
 JVM_DIR="/Library/Java/JavaVirtualMachines"
 
