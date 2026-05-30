@@ -1,8 +1,8 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-# Install core developer software
-xcode-select --install
+# Install core developer software (if not already installed)
+xcode-select -p &>/dev/null || xcode-select --install
 
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -16,8 +16,8 @@ if ! grep -q "eval \"\$(/opt/homebrew/bin/brew shellenv)\"" "$HOME/.zprofile" 2>
     echo "Added Homebrew to ~/.zprofile"
 fi
 
-# Install oh-my-zsh (unattended to prevent it from launching a new shell and halting execution)
-/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" "" --unattended
+# Install oh-my-zsh (unattended if not already installed)
+[[ -d "$HOME/.oh-my-zsh" ]] || /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" "" --unattended
 
 # Ensure ~/.zsh_aliases is sourced in ~/.zshrc
 if ! grep -q "source ~/.zsh_aliases" "$HOME/.zshrc" 2>/dev/null; then
