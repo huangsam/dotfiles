@@ -47,12 +47,12 @@ for jdk_path in $HOMEBREW_PREFIX/opt/openjdk*; do
 
         # Determine the destination symlink name by being explicit with the major version
         # We look inside the release file to get the true version
-        local release_file="$jdk_path/libexec/openjdk.jdk/Contents/Home/release"
-        local major_version=""
+        release_file="$jdk_path/libexec/openjdk.jdk/Contents/Home/release"
+        major_version=""
 
         if [[ -f "$release_file" ]]; then
             # Extract JAVA_VERSION="25.0.2" -> 25
-            local FullVersion=$(grep "^JAVA_VERSION=" "$release_file" | cut -d'"' -f2)
+            FullVersion=$(grep "^JAVA_VERSION=" "$release_file" | cut -d'"' -f2)
             major_version=$(echo "$FullVersion" | cut -d'.' -f1)
         fi
 
@@ -82,7 +82,7 @@ done
 # Cleanup phase: remove any openjdk*.jdk symlinks that we didn't just create/update
 echo "Cleaning up stale symlinks in $JVM_DIR..."
 for link in $JVM_DIR/openjdk*.jdk; do
-    local link_name=$(basename "$link")
+    link_name=$(basename "$link")
     # Only remove it if it's a symlink AND we didn't just manage it
     if [[ -L "$link" ]] && (( ! ${+managed_links[$link_name]} )); then
         echo "Removing stale symlink: $link_name"
