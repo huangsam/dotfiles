@@ -1,20 +1,17 @@
-# Change file suffix from .x to .y
-filesuffix () {
-    local current_suffix="$1"
-    local new_suffix="$2"
-    if (( $+commands[fd] )); then
-        fd -e "$current_suffix" -0 | while IFS= read -r -d '' file; do
-            mv "$file" "${file%.$current_suffix}.$new_suffix"
-        done
+# Fuzzy search files, then open the selection in VS Code
+fso () {
+    if (( $+commands[fd] )) && (( $+commands[fzf] )) && (( $+commands[code] )); then
+        local file
+        file=$(fd --type f --hidden --exclude .git | fzf)
+        [[ -n "$file" ]] && code "$file"
     else
-        find . -type f -name "*.$current_suffix" -print0 | while IFS= read -r -d '' file; do
-            mv "$file" "${file%.$current_suffix}.$new_suffix"
-        done
+        echo "Error: fso requires fd, fzf, and code to be installed."
+        return 1
     fi
 }
 
 # Look for file from target path up to root directory
-filelookup () {
+flook () {
     local target_file="$1"
     local target_path="$PWD"
     while true; do
@@ -26,6 +23,21 @@ filelookup () {
         target_path="${target_path:h}"
     done
     return 1
+}
+
+# Change file suffix from .x to .y
+fext () {
+    local current_suffix="$1"
+    local new_suffix="$2"
+    if (( $+commands[fd] )); then
+        fd -e "$current_suffix" -0 | while IFS= read -r -d '' file; do
+            mv "$file" "${file%.$current_suffix}.$new_suffix"
+        done
+    else
+        find . -type f -name "*.$current_suffix" -print0 | while IFS= read -r -d '' file; do
+            mv "$file" "${file%.$current_suffix}.$new_suffix"
+        done
+    fi
 }
 
 # File navigation and listing
@@ -53,15 +65,3 @@ alias egrep='egrep --color=auto'
 
 # File transfer
 alias rsyncp='rsync -azvhP'
-
-# Fuzzy search files using fd and fzf, then open the selection in VS Code
-fo() {
-    if (( $+commands[fd] )) && (( $+commands[fzf] )) && (( $+commands[code] )); then
-        local file
-        file=$(fd --type f --hidden --exclude .git | fzf)
-        [[ -n "$file" ]] && code "$file"
-    else
-        echo "Error: fo requires fd, fzf, and code (VS Code CLI) to be installed."
-        return 1
-    fi
-}
