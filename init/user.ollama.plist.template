@@ -6,7 +6,7 @@
     <string>user.ollama</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/opt/homebrew/bin/ollama</string>
+        <string>{{OLLAMA_PATH}}</string>
         <string>serve</string>
     </array>
     <key>RunAtLoad</key>
@@ -16,15 +16,15 @@
     <key>EnvironmentVariables</key>
     <dict>
         <key>OLLAMA_MAX_LOADED_MODELS</key>
-        <string>2</string>
+        <string>{{OLLAMA_MAX_LOADED_MODELS}}</string>
         <key>OLLAMA_NUM_PARALLEL</key>
-        <string>4</string>
+        <string>{{OLLAMA_NUM_PARALLEL}}</string>
         <key>OLLAMA_KEEP_ALIVE</key>
-        <string>2h</string>
+        <string>{{OLLAMA_KEEP_ALIVE}}</string>
         <key>OLLAMA_CONTEXT_LENGTH</key>
-        <string>65536</string>
+        <string>{{OLLAMA_CONTEXT_LENGTH}}</string>
         <key>OLLAMA_KV_CACHE_TYPE</key>
-        <string>q8_0</string>
+        <string>{{OLLAMA_KV_CACHE_TYPE}}</string>
     </dict>
     <key>StandardOutPath</key>
     <string>/tmp/ollama.stdout.log</string>
