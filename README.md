@@ -17,6 +17,9 @@ zsh setup_system.zsh
 
 # Setup OpenJDK symlinks for macOS
 zsh setup_openjdk.zsh
+
+# Setup Ollama for LLM inference
+zsh setup_ollama.zsh
 ```
 
 For regular maintenance and upkeep:
