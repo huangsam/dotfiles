@@ -1,9 +1,13 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-# Ensure Homebrew is in the PATH of the current script execution (ARM Silicon)
+# Ensure Homebrew is in the PATH of the current script execution
 if ! command -v brew &>/dev/null; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    if [[ -x "/opt/homebrew/bin/brew" ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -x "/usr/local/bin/brew" ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
 fi
 
 HOMEBREW_PREFIX=$(brew --prefix)

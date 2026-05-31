@@ -7,12 +7,21 @@ xcode-select -p &>/dev/null || xcode-select --install
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Ensure Homebrew is in the PATH of the current script execution (ARM Silicon)
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Ensure Homebrew is in the PATH of the current script execution
+local brew_cmd=""
+if [[ -x "/opt/homebrew/bin/brew" ]]; then
+    brew_cmd="/opt/homebrew/bin/brew"
+elif [[ -x "/usr/local/bin/brew" ]]; then
+    brew_cmd="/usr/local/bin/brew"
+else
+    echo "Error: Homebrew executable not found." >&2
+    exit 1
+fi
+eval "$($brew_cmd shellenv)"
 
-# Add Homebrew to ~/.zprofile for future shell sessions (ARM Silicon)
-if ! grep -q "eval \"\$(/opt/homebrew/bin/brew shellenv)\"" "$HOME/.zprofile" 2>/dev/null; then
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.zprofile"
+# Add Homebrew to ~/.zprofile for future shell sessions
+if ! grep -q "eval \"\$($brew_cmd shellenv)\"" "$HOME/.zprofile" 2>/dev/null; then
+    echo "eval \"\$($brew_cmd shellenv)\"" >> "$HOME/.zprofile"
     echo "Added Homebrew to ~/.zprofile"
 fi
 
