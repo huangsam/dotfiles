@@ -1,3 +1,30 @@
+# List process running on a specific port
+portlist () {
+    local port="$1"
+    if [[ -z "$port" ]]; then
+        echo "Usage: portlist <port>"
+        return 1
+    fi
+    lsof -i :"$port"
+}
+
+# Kill process running on a specific port
+portkill () {
+    local port="$1"
+    if [[ -z "$port" ]]; then
+        echo "Usage: portkill <port>"
+        return 1
+    fi
+    local pid
+    pid=$(lsof -t -i:"$port")
+    if [[ -n "$pid" ]]; then
+        echo "Killing process $pid on port $port..."
+        kill -9 "$pid"
+    else
+        echo "No process running on port $port"
+    fi
+}
+
 # SSH connection
 alias sshv='ssh -vvv -o LogLevel=DEBUG3'
 
@@ -17,21 +44,3 @@ fi
 
 # Local Wi-Fi information
 alias localwifi='networksetup -getinfo Wi-Fi'
-
-# Kill process running on a specific port
-portkill() {
-    local port="$1"
-    if [[ -z "$port" ]]; then
-        echo "Usage: portkill <port>"
-        return 1
-    fi
-    local pid
-    pid=$(lsof -t -i:"$port")
-    if [[ -n "$pid" ]]; then
-        echo "Killing process $pid on port $port..."
-        kill -9 "$pid"
-    else
-        echo "No process running on port $port"
-    fi
-}
-

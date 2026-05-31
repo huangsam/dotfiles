@@ -5,9 +5,9 @@ filesuffix () {
     if (( $+commands[fd] )); then
         fd -e "$current_suffix" -x sh -c 'mv "$1" "${1%.$2}.$3"' _ {} "$current_suffix" "$new_suffix"
     else
-        find . -type f -name "*.$current_suffix" -exec sh -c '
-            mv "$1" "${1%.$2}.$3"
-        ' _ {} "$current_suffix" "$new_suffix" \;
+        find . -type f -name "*.$current_suffix" -print0 | while IFS= read -r -d '' file; do
+            mv "$file" "${file%.$current_suffix}.$new_suffix"
+        done
     fi
 }
 
