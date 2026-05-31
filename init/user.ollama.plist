@@ -16,11 +16,19 @@
     <key>EnvironmentVariables</key>
     <dict>
         <key>OLLAMA_MAX_LOADED_MODELS</key>
-        <string>3</string>
+        <string>2</string>
         <key>OLLAMA_NUM_PARALLEL</key>
         <string>4</string>
         <key>OLLAMA_KEEP_ALIVE</key>
         <string>2h</string>
+        <key>OLLAMA_CONTEXT_LENGTH</key>
+        <string>65536</string>
+        <key>OLLAMA_KV_CACHE_TYPE</key>
+        <string>q8_0</string>
     </dict>
+    <key>StandardOutPath</key>
+    <string>/tmp/ollama.stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/ollama.stderr.log</string>
 </dict>
 </plist>
