@@ -3,7 +3,9 @@ filesuffix () {
     local current_suffix="$1"
     local new_suffix="$2"
     if (( $+commands[fd] )); then
-        fd -e "$current_suffix" -x sh -c 'mv "$1" "${1%.$2}.$3"' _ {} "$current_suffix" "$new_suffix"
+        fd -e "$current_suffix" -0 | while IFS= read -r -d '' file; do
+            mv "$file" "${file%.$current_suffix}.$new_suffix"
+        done
     else
         find . -type f -name "*.$current_suffix" -print0 | while IFS= read -r -d '' file; do
             mv "$file" "${file%.$current_suffix}.$new_suffix"
@@ -63,4 +65,3 @@ fo() {
         return 1
     fi
 }
-
