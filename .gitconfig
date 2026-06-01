@@ -25,49 +25,62 @@
 	br = branch
 	co = checkout
 	ci = commit
-	s  = status -s -uno
+	s = status -s -uno
 	st = status
 
 	# aliases for housekeeping
 	cleanup = clean -fdx
-	tidy	= gc --prune=now
+	tidy = gc --prune=now
 
-	# aliases to modify existing commits and tags
-	caan  = commit --all --amend --no-edit
-	sign  = commit --amend --reset-author
-	undo  = reset --soft HEAD^
+	# aliases for modifying existing commits and tags
+	caan = commit --all --amend --no-edit
+	sign = commit --amend --reset-author
+	undo = reset --soft HEAD^
 	untag = tag --delete
 
-	# aliases to provide different views of the commit log
-	one	= show -1
-	ten	= log -10 --pretty=short --stat
+	# aliases for viewing the commit log
+	one = show -1
+	ten = log -10 --pretty=short --stat
 	cached = diff --cached
-	ls	 = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]'
-	ll	 = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --numstat
-	lg	 = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --graph
+	ls = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]'
+	ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --numstat
+	lg = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --graph
 
 	# aliases for repository inspection & meta
 	current = branch --show-current
-	root	= rev-parse --show-toplevel
+	root = rev-parse --show-toplevel
 	contrib = shortlog --summary --numbered
-	edit	= config --global -e
+	edit = config --global -e
 
 [branch]
 	sort = -committerdate
 
-[tag]
-	sort = version:refname
+[column]
+	ui = auto
+
+[commit]
+	verbose = true
+
+[core]
+	autocrlf = input
+	editor = vim
+
+[diff]
+	colorMoved = default
 
 [fetch]
 	prune = true
 	pruneTags = true
 
-[column]
-	ui = auto
-
 [grep]
 	lineNumber = true
 	patternType = extended
+
+[init]
+	defaultBranch = main
+
+[merge]
+	conflictStyle = diff3
 
 [pull]
 	rebase = true
@@ -77,24 +90,11 @@
 	followTags = true
 	autoSetupRemote = true
 
-[merge]
-	conflictStyle = diff3
-
 [rebase]
 	autostash = true
 
-[core]
-	autocrlf = input
-	editor = vim
-
-[commit]
-	verbose = true
-
-[diff]
-	colorMoved = default
-
-[init]
-	defaultBranch = main
+[tag]
+	sort = version:refname
 
 [include]
 	path = ~/.gitconfig.local
