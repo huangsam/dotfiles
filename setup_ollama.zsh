@@ -25,15 +25,15 @@ OLLAMA_PATH=$(command -v ollama)
 # Define profile configuration parameters
 typeset -A max_models parallel keep_alive context kv_cache
 
-max_models[high]="2"
+max_models[high]="3"
 parallel[high]="2"
-keep_alive[high]="2h"
+keep_alive[high]="30m"
 context[high]="131072"
 kv_cache[high]="q8_0"
 
 max_models[medium]="1"
 parallel[medium]="1"
-keep_alive[medium]="1h"
+keep_alive[medium]="30m"
 context[medium]="65536"
 kv_cache[medium]="q8_0"
 
@@ -44,7 +44,7 @@ context[low]="8192"
 kv_cache[low]="f16"
 
 # Auto-detects the hardware profile and returns 'high', 'medium', or 'low'
-detect_profile() {
+detect_profile () {
     local cpu_brand mem_bytes mem_gb profile
     cpu_brand=$(sysctl -n machdep.cpu.brand_string 2>/dev/null || echo "")
     mem_bytes=$(sysctl -n hw.memsize 2>/dev/null || echo "0")
@@ -56,14 +56,6 @@ detect_profile() {
 
     if [[ "$cpu_brand" == *Intel* ]]; then
         profile="low"
-    elif [[ "$cpu_brand" == *Apple* ]]; then
-        if (( mem_gb > 64 )); then
-            profile="high"
-        elif (( mem_gb >= 16 )); then
-            profile="medium"
-        else
-            profile="low"
-        fi
     else
         if (( mem_gb > 64 )); then
             profile="high"
