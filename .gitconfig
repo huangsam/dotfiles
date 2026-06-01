@@ -19,66 +19,38 @@
 
 [alias]
 	# shortcut to list all aliases for git
-	la = !git config -l | grep alias | cut -c 7-
+	la = !git config --get-regexp '^alias\.' | sed 's/^alias\.//'
 
 	# aliases for the most common commands
 	br = branch
 	co = checkout
 	ci = commit
-	s = status -s -uno
+	s  = status -s -uno
 	st = status
 
-	# alias to fix the last commit without changing the commit message
-	caan = commit --all --amend --no-edit
+	# aliases for housekeeping
+	cleanup = clean -fdx
+	tidy	= gc --prune=now
 
-	# alias to change user.name and user.email of current commit
-	sign = commit --amend --reset-author
-
-	# alias to undo the last commit and leave the files staged
-	undo = reset --soft HEAD^
-
-	# alias to undo a tag
+	# aliases to modify existing commits and tags
+	caan  = commit --all --amend --no-edit
+	sign  = commit --amend --reset-author
+	undo  = reset --soft HEAD^
 	untag = tag --delete
 
-	# alias to remove untracked and ignored files
-	cleanup = clean -fdx
-
-	# alias to list contributors sorted by commit count
-	contrib = shortlog --summary --numbered
-
 	# aliases to provide different views of the commit log
-	one = show -1
-	ten = log -10 --pretty=short --stat
+	one	= show -1
+	ten	= log -10 --pretty=short --stat
 	cached = diff --cached
-	ls = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]'
-	ll = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --numstat
-	lg = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --graph
+	ls	 = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]'
+	ll	 = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --numstat
+	lg	 = log --pretty=format:'%C(yellow)%h %C(red)%d %C(reset)%s %C(cyan)(%cr) %C(blue)[%cn]' --graph
 
-	# alias to show the current branch
+	# aliases for repository inspection & meta
 	current = branch --show-current
-
-	# alias to show the root directory
-	root = rev-parse --show-toplevel
-
-	# alias to edit the global gitconfig
-	edit = config --global -e
-
-	# alias to configure local branch to origin repository
-	push-origin = push -u origin
-
-	# alias to prune local copies of remote branches that no longer exist
-	prune-origin = remote prune origin
-
-	# alias to delete something from the origin repository
-	delete-origin = push --delete origin
-
-	# aliases to improve submodule UX
-	submodule-sync = submodule sync --recursive
-	submodule-update = submodule update --init --recursive
-
-	# aliases to flag files that are not in .gitignore
-	index-flag = update-index --assume-unchanged
-	index-unflag = update-index --no-assume-unchanged
+	root	= rev-parse --show-toplevel
+	contrib = shortlog --summary --numbered
+	edit	= config --global -e
 
 [branch]
 	sort = -committerdate
