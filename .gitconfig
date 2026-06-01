@@ -19,7 +19,7 @@
 
 [alias]
 	# shortcut to list all aliases for git
-	la = !git config --get-regexp '^alias\.' | sed 's/^alias\.//'
+	la = !git config -l | grep alias | cut -c 7-
 
 	# aliases for the most common commands
 	br = branch
