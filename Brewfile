@@ -7,7 +7,6 @@
 # For ollama, use the init/user.ollama.plist with launchctl
 brew "bat"
 brew "boost"
-brew "cfr-decompiler"
 brew "cmake"
 brew "cppcheck"
 brew "coreutils"
