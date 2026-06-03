@@ -21,6 +21,8 @@ jobs:
         run: brew bundle list
       - name: Setup zsh
         run: brew install zsh
+      - name: Check syntax of Zsh scripts
+        run: zsh -n *.zsh custom/*.zsh
       - name: Run combine script
         run: zsh combine_aliases.zsh
       - name: Run deploy script
