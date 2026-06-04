@@ -3,7 +3,7 @@ set -eu -o pipefail
 
 # Get the absolute directory path of this script
 SCRIPT_DIR=${0:A:h}
-TARGET_PLIST="$HOME/Library/LaunchAgents/user.ollama.plist"
+TARGET_PLIST="$HOME/Library/LaunchAgents/com.$USER.ollama.plist"
 SOURCE_TEMPLATE="$SCRIPT_DIR/init/user.ollama.plist.template"
 
 # Ensure Homebrew is in the PATH for both ARM Silicon and Intel Macs
