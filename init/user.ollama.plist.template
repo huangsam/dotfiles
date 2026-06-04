@@ -15,6 +15,8 @@
     <true/>
     <key>EnvironmentVariables</key>
     <dict>
+        <key>OLLAMA_FLASH_ATTENTION</key>
+        <string>1</string>
         <key>OLLAMA_MAX_LOADED_MODELS</key>
         <string>{{OLLAMA_MAX_LOADED_MODELS}}</string>
         <key>OLLAMA_NUM_PARALLEL</key>
