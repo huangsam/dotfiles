@@ -16,8 +16,8 @@ if ! command -v brew &>/dev/null; then
 fi
 
 if ! command -v ollama &>/dev/null; then
-    echo "Ollama is not installed. Please try again."
-    exit 0
+    echo "Ollama is not installed. Please install with: brew install ollama" >&2
+    exit 1
 fi
 
 OLLAMA_PATH=$(command -v ollama)
@@ -139,7 +139,7 @@ echo "  OLLAMA_CONTEXT_LENGTH:    ${context[$PROFILE]}"
 echo "  OLLAMA_KV_CACHE_TYPE:     ${kv_cache[$PROFILE]}"
 
 if [[ -f "$TARGET_PLIST" ]]; then
-    local proceed="n"
+    proceed="n"
     if [[ "$FORCE" == "y" || ! -t 0 ]]; then
         proceed="y"
     else
@@ -172,7 +172,6 @@ fi
 mkdir -p "$(dirname "$TARGET_PLIST")"
 
 # Perform template variable substitution
-local plist_content
 plist_content=$(<"$SOURCE_TEMPLATE")
 plist_content="${plist_content//\{\{OLLAMA_PATH\}\}/$OLLAMA_PATH}"
 plist_content="${plist_content//\{\{OLLAMA_MAX_LOADED_MODELS\}\}/${max_models[$PROFILE]}}"
