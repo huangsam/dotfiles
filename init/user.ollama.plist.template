@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>user.ollama</string>
+    <string>{{OLLAMA_LABEL}}</string>
     <key>ProgramArguments</key>
     <array>
         <string>{{OLLAMA_PATH}}</string>

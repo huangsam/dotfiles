@@ -21,6 +21,7 @@ if ! command -v ollama &>/dev/null; then
 fi
 
 OLLAMA_PATH=$(command -v ollama)
+OLLAMA_LABEL="com.$USER.ollama"
 
 # Define profile configuration parameters
 typeset -A max_models parallel keep_alive context kv_cache
@@ -174,6 +175,7 @@ mkdir -p "$(dirname "$TARGET_PLIST")"
 # Perform template variable substitution
 plist_content=$(<"$SOURCE_TEMPLATE")
 plist_content="${plist_content//\{\{OLLAMA_PATH\}\}/$OLLAMA_PATH}"
+plist_content="${plist_content//\{\{OLLAMA_LABEL\}\}/$OLLAMA_LABEL}"
 plist_content="${plist_content//\{\{OLLAMA_MAX_LOADED_MODELS\}\}/${max_models[$PROFILE]}}"
 plist_content="${plist_content//\{\{OLLAMA_NUM_PARALLEL\}\}/${parallel[$PROFILE]}}"
 plist_content="${plist_content//\{\{OLLAMA_KEEP_ALIVE\}\}/${keep_alive[$PROFILE]}}"
