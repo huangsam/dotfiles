@@ -36,13 +36,13 @@ max_models[medium]="1"
 parallel[medium]="1"
 keep_alive[medium]="30m"
 context[medium]="32768"
-kv_cache[medium]="f16"
+kv_cache[medium]="q8_0"
 
 max_models[low]="1"
 parallel[low]="1"
 keep_alive[low]="30m"
 context[low]="8192"
-kv_cache[low]="f16"
+kv_cache[low]="q8_0"
 
 # Auto-detects the hardware profile and returns 'high', 'medium', or 'low'
 detect_profile () {
