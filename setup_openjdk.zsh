@@ -1,14 +1,10 @@
 #!/bin/zsh
 set -eu -o pipefail
 
-# Ensure Homebrew is in the PATH of the current script execution
-if ! command -v brew &>/dev/null; then
-    if [[ -x "/opt/homebrew/bin/brew" ]]; then
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-    elif [[ -x "/usr/local/bin/brew" ]]; then
-        eval "$(/usr/local/bin/brew shellenv)"
-    fi
-fi
+# Source shared Homebrew utility
+SCRIPT_DIR=${0:A:h}
+source "$SCRIPT_DIR/utils/brew_setup.zsh"
+ensure_brew_in_path
 
 HOMEBREW_PREFIX=$(brew --prefix)
 JVM_DIR="/Library/Java/JavaVirtualMachines"

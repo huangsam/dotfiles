@@ -6,14 +6,9 @@ SCRIPT_DIR=${0:A:h}
 TARGET_PLIST="$HOME/Library/LaunchAgents/com.$USER.ollama.plist"
 SOURCE_TEMPLATE="$SCRIPT_DIR/init/user.ollama.plist.template"
 
-# Ensure Homebrew is in the PATH for both ARM Silicon and Intel Macs
-if ! command -v brew &>/dev/null; then
-    if [[ -x "/opt/homebrew/bin/brew" ]]; then
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-    elif [[ -x "/usr/local/bin/brew" ]]; then
-        eval "$(/usr/local/bin/brew shellenv)"
-    fi
-fi
+# Source shared Homebrew utility
+source "$SCRIPT_DIR/utils/brew_setup.zsh"
+ensure_brew_in_path
 
 if ! command -v ollama &>/dev/null; then
     echo "Ollama is not installed. Please install with: brew install ollama" >&2

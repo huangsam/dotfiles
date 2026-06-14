@@ -1,6 +1,10 @@
 #!/bin/zsh
 set -eu -o pipefail
 
+# Source shared Homebrew utility
+SCRIPT_DIR=${0:A:h}
+source "$SCRIPT_DIR/utils/brew_setup.zsh"
+
 # Install core developer software (if not already installed)
 xcode-select -p &>/dev/null || xcode-select --install
 
@@ -8,16 +12,7 @@ xcode-select -p &>/dev/null || xcode-select --install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Ensure Homebrew is in the PATH of the current script execution
-local brew_cmd=""
-if [[ -x "/opt/homebrew/bin/brew" ]]; then
-    brew_cmd="/opt/homebrew/bin/brew"
-elif [[ -x "/usr/local/bin/brew" ]]; then
-    brew_cmd="/usr/local/bin/brew"
-else
-    echo "Error: Homebrew executable not found." >&2
-    exit 1
-fi
-eval "$($brew_cmd shellenv)"
+ensure_brew_in_path || exit 1
 
 # Add Homebrew to ~/.zprofile for future shell sessions
 if ! grep -q "eval \"\$($brew_cmd shellenv)\"" "$HOME/.zprofile" 2>/dev/null; then
