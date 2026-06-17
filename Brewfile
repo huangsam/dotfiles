@@ -74,6 +74,7 @@ brew "zoxide"
 # Run `brew upgrade --cask --greedy` for personal machines, NOT work machines
 cask "antigravity"
 cask "claude-code"
+cask "cursor"
 cask "dbeaver-community"
 cask "discord"
 cask "font-hack-nerd-font"
