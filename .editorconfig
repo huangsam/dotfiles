@@ -12,6 +12,10 @@ indent_style = tab
 [.gitconfig]
 indent_style = tab
 
-[*.{sh,zsh,md}]
+[*.{sh,zsh,py}]
 indent_style = space
 indent_size = 4
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
