@@ -40,6 +40,11 @@ fext () {
     fi
 }
 
+# Create directory and cd into it
+mkcd () {
+    mkdir -p "$1" && cd "$1"
+}
+
 # File navigation and listing
 if (( $+commands[eza] )); then
     alias ls='eza --group-directories-first'
