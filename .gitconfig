@@ -53,6 +53,7 @@
 	edit = config --global -e
 
 [branch]
+	autoSetupMerge = simple
 	sort = -committerdate
 
 [column]
@@ -66,9 +67,11 @@
 	editor = vim
 
 [diff]
+	algorithm = histogram
 	colorMoved = default
 
 [fetch]
+	parallel = 0
 	prune = true
 	pruneTags = true
 
@@ -76,11 +79,15 @@
 	lineNumber = true
 	patternType = extended
 
+[help]
+	autocorrect = 1
+
 [init]
 	defaultBranch = main
 
 [merge]
-	conflictStyle = diff3
+	conflictStyle = zdiff3
+	conflict.algorithm = histogram
 
 [pull]
 	rebase = true
@@ -92,6 +99,9 @@
 
 [rebase]
 	autostash = true
+
+[safe]
+	directory = *
 
 [tag]
 	sort = version:refname
