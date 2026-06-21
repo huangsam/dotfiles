@@ -87,7 +87,6 @@
 
 [merge]
 	conflictStyle = zdiff3
-	conflict.algorithm = histogram
 
 [pull]
 	rebase = true
