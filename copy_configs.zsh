@@ -10,7 +10,7 @@ for fl in .*; do
 
     if [[ -f "$fl" ]]; then
         # Ignore non-zero exit status when a file is skipped
-        cp -n "$fl" "$HOME/$fl" || :
+        cp -i "$fl" "$HOME/$fl" || :
     fi
 done
 
