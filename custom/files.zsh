@@ -46,7 +46,7 @@ mkcd () {
 }
 
 # File navigation and listing
-if [[ -o interactive ]]; then
+if [[ -o interactive && -t 1 ]]; then
     if (( $+commands[eza] )); then
         alias ls='eza --group-directories-first'
         alias ll='eza -l --group-directories-first'
