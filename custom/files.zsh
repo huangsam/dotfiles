@@ -46,17 +46,19 @@ mkcd () {
 }
 
 # File navigation and listing
-if (( $+commands[eza] )); then
-    alias ls='eza --group-directories-first'
-    alias ll='eza -l --group-directories-first'
-    alias la='eza -la --group-directories-first'
-    alias lt='eza --tree'
-    alias lsl='eza -lha --group-directories-first --classify | less'
-else
-    alias ll='ls -l'
-    alias la='ls -la'
-    alias l='ls -CF'
-    alias lsl='ls -lhFA | less'
+if [[ -o interactive ]]; then
+    if (( $+commands[eza] )); then
+        alias ls='eza --group-directories-first'
+        alias ll='eza -l --group-directories-first'
+        alias la='eza -la --group-directories-first'
+        alias lt='eza --tree'
+        alias lsl='eza -lha --group-directories-first --classify | less'
+    else
+        alias ll='ls -l'
+        alias la='ls -la'
+        alias l='ls -CF'
+        alias lsl='ls -lhFA | less'
+    fi
 fi
 
 # File content searching and viewing
