@@ -72,8 +72,6 @@
 
 [fetch]
 	parallel = 0
-	prune = true
-	pruneTags = true
 
 [grep]
 	lineNumber = true
