@@ -24,6 +24,9 @@ alias ytdl='yt-dlp'
 # Show Homebrew dependency tree
 alias brewtree='brew deps --tree --installed'
 
+# Refresh Ollama models in alphabetical order
+alias ofresh='ollama list | tail -n +2 | awk '\''{print $1}'\'' | sort -f | xargs -I {} ollama pull {}'
+
 # Modern CLI tools aliases
 (( $+commands[dust] )) && alias du='dust'
 (( $+commands[scc] )) && alias loc='scc'
