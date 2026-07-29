@@ -35,7 +35,7 @@
 
 	# aliases for modifying existing commits and tags
 	caan = commit --all --amend --no-edit
-	sign = commit --amend --reset-author
+	sign = commit --amend --reset-author --no-edit
 	undo = reset --soft HEAD^
 	untag = tag --delete
 
