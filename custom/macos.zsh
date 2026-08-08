@@ -17,4 +17,7 @@ alias machide='defaults write com.apple.finder AppleShowAllFiles -bool FALSE && 
 alias macbattery='pmset -g batt'
 
 # Mac OS screenshot (save to desktop)
-alias macscreenshot='screencapture ~/Desktop/screenshot-$(date +%Y%m%d-%H%M%S).png'
+alias macshot='screencapture ~/Desktop/screenshot-$(date +%Y%m%d-%H%M%S).png'
+
+# Mac OS caffeine (prevent sleep)
+alias macspike='echo "☕️" && caffeinate -u -t 43200'
