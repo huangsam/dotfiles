@@ -4,7 +4,7 @@
 # For fzf, source the completions in ~/.zshrc
 # For go, java, rust, llvm, set PATH references in ~/.zprofile
 # For c/c++ libraries, set CFLAGS and LDFLAGS appropriately
-# For ollama, use the init/user.ollama.plist with launchctl
+# For ollama, run setup_ollama.zsh
 brew "bat"
 brew "boost"
 brew "cmake"
