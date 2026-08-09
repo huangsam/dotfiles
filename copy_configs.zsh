@@ -1,16 +1,18 @@
 #!/bin/zsh
-set -eu
 
 # Copy hidden files to home directory
 for fl in .*; do
     # Skip directories and internal repo files
     case "$fl" in
-        .git|.gitignore|.DS_Store) continue ;;
+        .git|.gitignore|.DS_Store|.|..) continue ;;
     esac
 
     if [[ -f "$fl" ]]; then
-        # Ignore non-zero exit status when a file is skipped
-        cp -i "$fl" "$HOME/$fl" || :
+        if [[ -n "${FORCE:-}" ]]; then
+            cp -f "$fl" "$HOME/$fl"
+        else
+            cp -n "$fl" "$HOME/$fl"
+        fi
     fi
 done
 
