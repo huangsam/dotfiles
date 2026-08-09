@@ -8,7 +8,7 @@ SOURCE_TEMPLATE="$SCRIPT_DIR/init/user.ollama.plist.template"
 
 # Source shared Homebrew utility
 source "$SCRIPT_DIR/utils/brew_setup.zsh"
-ensure_brew_in_path
+ensure_brew_in_path || exit 1
 
 if ! command -v ollama &>/dev/null; then
     echo "Ollama is not installed. Please install with: brew install ollama" >&2

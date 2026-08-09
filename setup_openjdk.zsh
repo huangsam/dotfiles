@@ -4,7 +4,7 @@ set -eu -o pipefail
 # Source shared Homebrew utility
 SCRIPT_DIR=${0:A:h}
 source "$SCRIPT_DIR/utils/brew_setup.zsh"
-ensure_brew_in_path
+ensure_brew_in_path || exit 1
 
 HOMEBREW_PREFIX=$(brew --prefix)
 JVM_DIR="/Library/Java/JavaVirtualMachines"
