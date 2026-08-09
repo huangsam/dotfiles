@@ -16,4 +16,4 @@ for fl in .*; do
 done
 
 # Indicate completion
-echo -e "$0 complete! ✨ 🍰 ✨"
+echo "$0 complete! ✨ 🍰 ✨"
