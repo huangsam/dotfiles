@@ -4,15 +4,14 @@
 for fl in .*; do
     # Skip directories and internal repo files
     case "$fl" in
-        .git|.gitignore|.DS_Store|.|..) continue ;;
+        .git|.gitignore|.DS_Store) continue ;;
+        *) [[ -d "$fl" ]] && continue ;;
     esac
 
-    if [[ -f "$fl" ]]; then
-        if [[ -n "${FORCE:-}" ]]; then
-            cp -f "$fl" "$HOME/$fl"
-        else
-            cp -n "$fl" "$HOME/$fl"
-        fi
+    if [[ -n "${FORCE:-}" ]]; then
+        cp -f "$fl" "$HOME/$fl"
+    else
+        cp -n "$fl" "$HOME/$fl"
     fi
 done
 
