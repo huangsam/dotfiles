@@ -1,13 +1,15 @@
 #!/bin/zsh
+set -u
 
-# Copy hidden files to home directory
-for fl in .*; do
-    # Skip directories and internal repo files
-    case "$fl" in
-        .git|.gitignore|.DS_Store) continue ;;
-        *) [[ -d "$fl" ]] && continue ;;
-    esac
+# Allowlist of configuration files to copy to home directory
+configs=(
+    .digrc
+    .editorconfig
+    .gitconfig
+    .vimrc
+)
 
+for fl in "${configs[@]}"; do
     if [[ -n "${FORCE:-}" ]]; then
         cp -f "$fl" "$HOME/$fl"
     else
