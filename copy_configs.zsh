@@ -18,4 +18,4 @@ for fl in "${configs[@]}"; do
 done
 
 # Indicate completion
-echo "$0 complete! ✨ 🍰 ✨"
+echo "Dotfiles copied to $HOME!"
