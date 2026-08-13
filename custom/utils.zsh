@@ -44,6 +44,14 @@ mov2gif() {
     echo "Done! Saved as '$output'"
 }
 
+# Refresh Ollama models in alphabetical order
+ofresh () {
+    ollama list | awk 'NR>1 {print $1}' | sort | while read -r model; do
+        echo "==> Pulling $model..."
+        ollama pull "$model"
+    done
+}
+
 # Reset Z shell configuration
 alias zset='source ~/.zshrc'
 
@@ -52,9 +60,6 @@ alias ytdl='yt-dlp'
 
 # Show Homebrew dependency tree
 alias brewtree='brew deps --tree --installed'
-
-# Refresh Ollama models in alphabetical order
-alias ofresh='ollama list | tail -n +2 | awk '\''{print $1}'\'' | sort -f | xargs -I {} ollama pull {}'
 
 # Modern CLI tools aliases
 (( $+commands[dust] )) && alias du='dust'
