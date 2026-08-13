@@ -48,8 +48,8 @@ for jdk_path in $HOMEBREW_PREFIX/opt/openjdk*; do
 
         if [[ -f "$release_file" ]]; then
             # Extract JAVA_VERSION="25.0.2" -> 25
-            FullVersion=$(grep "^JAVA_VERSION=" "$release_file" | cut -d'"' -f2)
-            major_version=$(print -r -- "$FullVersion" | cut -d'.' -f1)
+            full_version=$(grep "^JAVA_VERSION=" "$release_file" | cut -d'"' -f2)
+            major_version=$(print -r -- "$full_version" | cut -d'.' -f1)
         fi
 
         # Fallback to parsing name if release file fails (unlikely)
