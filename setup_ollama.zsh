@@ -24,7 +24,7 @@ typeset -A max_models parallel keep_alive context kv_cache
 max_models[high]="2"
 parallel[high]="2"
 keep_alive[high]="30m"
-context[high]="32768"
+context[high]="65536"
 kv_cache[high]="q8_0"
 
 max_models[medium]="1"
