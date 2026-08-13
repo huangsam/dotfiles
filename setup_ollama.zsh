@@ -24,13 +24,13 @@ typeset -A max_models parallel keep_alive context kv_cache
 max_models[high]="2"
 parallel[high]="2"
 keep_alive[high]="30m"
-context[high]="131072"
+context[high]="32768"
 kv_cache[high]="q8_0"
 
 max_models[medium]="1"
 parallel[medium]="1"
 keep_alive[medium]="30m"
-context[medium]="32768"
+context[medium]="16384"
 kv_cache[medium]="q8_0"
 
 max_models[low]="1"
