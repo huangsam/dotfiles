@@ -59,7 +59,6 @@ alias brewtree='brew deps --tree --installed'
 # Modern CLI tools aliases
 alias loc='scc'
 alias rgf='rg -n --hidden --glob "!.git"'
-(( $+commands[vim] )) && alias v='vim'
 alias ghpr='gh pr status'
 
 # Initialize modern CLI tools
