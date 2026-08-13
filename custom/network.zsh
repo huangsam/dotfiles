@@ -5,6 +5,7 @@ portlist() {
         print -u2 -r -- "Usage: portlist <port>"
         return 1
     fi
+    [[ "$port" =~ ^[0-9]+$ ]] || { print -u2 -r -- "Error: Port must be a number"; return 1; }
     lsof -i :"$port"
 }
 
@@ -15,6 +16,7 @@ portkill() {
         print -u2 -r -- "Usage: portkill <port>"
         return 1
     fi
+    [[ "$port" =~ ^[0-9]+$ ]] || { print -u2 -r -- "Error: Port must be a number"; return 1; }
     local -a pids
     pids=($(lsof -t -i:"$port" 2>/dev/null))
     if (( ${#pids} > 0 )); then
