@@ -12,8 +12,8 @@ Using them will reduce your risk for [Carpal Tunnel](https://orthoinfo.aaos.org/
 For first-time setup, run:
 
 ```shell
-# Setup system tools and configurations
-zsh setup_system.zsh
+# Setup core tools (Xcode CLT, Homebrew, Oh-My-Zsh, Brewfile)
+zsh setup_core.zsh
 
 # Setup OpenJDK symlinks for macOS
 zsh setup_openjdk.zsh
