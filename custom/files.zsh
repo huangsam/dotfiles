@@ -1,17 +1,20 @@
 # Fuzzy search files, then open the selection in VS Code
 fso() {
-    if (( $+commands[fd] )) && (( $+commands[fzf] )) && (( $+commands[code] )); then
-        local file
-        file=$(fd --type f --hidden --exclude .git | fzf)
-        [[ -n "$file" ]] && code "$file"
-    else
-        echo "Error: fso requires fd, fzf, and code to be installed"
+    if ! (( $+commands[code] )); then
+        echo "Error: 'code' CLI not found in PATH (Install VS Code)" >&2
         return 1
     fi
+    local file
+    file=$(fd --type f --hidden --exclude .git | fzf)
+    [[ -n "$file" ]] && code "$file"
 }
 
 # Look for file from target path up to root directory
 flook() {
+    if [[ -z "$1" ]]; then
+        echo "Usage: flook <target_file>" >&2
+        return 1
+    fi
     local target_file="$1"
     local target_path="$PWD"
     while true; do
@@ -33,15 +36,9 @@ fext() {
         echo "Usage: fext <current_extension> <new_extension>" >&2
         return 1
     fi
-    if (( $+commands[fd] )); then
-        fd -e "$current_suffix" -0 | while IFS= read -r -d '' file; do
-            mv "$file" "${file%.$current_suffix}.$new_suffix"
-        done
-    else
-        find . -type f -name "*.$current_suffix" -print0 | while IFS= read -r -d '' file; do
-            mv "$file" "${file%.$current_suffix}.$new_suffix"
-        done
-    fi
+    fd -e "$current_suffix" -0 | while IFS= read -r -d '' file; do
+        mv "$file" "${file%.$current_suffix}.$new_suffix"
+    done
 }
 
 # Create directory and cd into it
@@ -51,25 +48,14 @@ mkcd() {
 
 # File navigation and listing
 if [[ -o interactive && -t 1 ]]; then
-    if (( $+commands[eza] )); then
-        alias ls='eza --group-directories-first'
-        alias ll='eza -l --group-directories-first'
-        alias la='eza -la --group-directories-first'
-    else
-        alias ll='ls -l'
-        alias la='ls -la'
-        alias l='ls -CF'
-    fi
+    alias ll='eza -l --group-directories-first'
+    alias la='eza -la --group-directories-first'
 fi
 
 # File content searching and viewing
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-
-# Modern alternatives for cat and find
-(( $+commands[bat] )) && alias cat='bat --paging=never'
-(( $+commands[fd] )) && alias f='fd'
 
 # File transfer
 alias rsyncp='rsync -azvhP'

@@ -18,13 +18,13 @@ hstats() {
 # Convert video (MOV, MP4, etc.) to optimized GIF using ffmpeg
 mov2gif() {
     if [[ -z "$1" ]]; then
-        echo "Usage: mov2gif <input_file> [width] [fps]"
+        echo "Usage: mov2gif <input_file> [width] [fps]" >&2
         return 1
     fi
 
     local input="$1"
     if [[ ! -f "$input" ]]; then
-        echo "Error: File '$input' not found"
+        echo "Error: File '$input' not found" >&2
         return 1
     fi
 
@@ -57,12 +57,11 @@ alias ytdl='yt-dlp'
 alias brewtree='brew deps --tree --installed'
 
 # Modern CLI tools aliases
-(( $+commands[dust] )) && alias du='dust'
-(( $+commands[scc] )) && alias loc='scc'
-(( $+commands[rg] )) && alias rgf='rg -n --hidden --glob "!.git"'
+alias loc='scc'
+alias rgf='rg -n --hidden --glob "!.git"'
 (( $+commands[vim] )) && alias v='vim'
-(( $+commands[tldr] )) && alias t='tldr'
-(( $+commands[gh] )) && alias ghpr='gh pr status'
+alias t='tldr'
+alias ghpr='gh pr status'
 
 # Global aliases (use anywhere in command)
 alias -g G='| grep'

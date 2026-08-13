@@ -2,7 +2,7 @@
 portlist() {
     local port="$1"
     if [[ -z "$port" ]]; then
-        echo "Usage: portlist <port>"
+        echo "Usage: portlist <port>" >&2
         return 1
     fi
     lsof -i :"$port"
@@ -12,7 +12,7 @@ portlist() {
 portkill() {
     local port="$1"
     if [[ -z "$port" ]]; then
-        echo "Usage: portkill <port>"
+        echo "Usage: portkill <port>" >&2
         return 1
     fi
     local -a pids
@@ -37,10 +37,8 @@ alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 # List of devices on the local network
 alias netlist='arp -a'
-if (( $+commands[nmap] )); then
-    alias nscan='sudo nmap -sn' # Ping scan
-    alias nmapfast='nmap -F'    # Fast scan of most common ports
-fi
+alias nscan='sudo nmap -sn' # Ping scan
+alias nmapfast='nmap -F'    # Fast scan of most common ports
 
 # Local Wi-Fi information
 alias localwifi='networksetup -getinfo Wi-Fi'

@@ -1,9 +1,7 @@
 # Pull changes for multiple Git repos
 gpull() {
     local remote="${1:-origin}"
-    local search_cmd="find . -type d -name '.git'"
-    (( $+commands[fd] )) && search_cmd="fd -H -t d -g '.git'"
-    eval "$search_cmd" | while read -r repo; do
+    fd -H -t d -g '.git' | while read -r repo; do
         if grep -qs "remote \"$remote\"" "$repo/config"; then
             echo "Updating $repo..."
             git -C "$repo/.." pull "$remote"
@@ -13,9 +11,11 @@ gpull() {
 
 # Run command with arguments for multiple Git repos
 gmap() {
-    local search_cmd="find . -type d -name '.git'"
-    (( $+commands[fd] )) && search_cmd="fd -H -t d -g '.git'"
-    eval "$search_cmd" | while read -r repo; do
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: gmap <command> [args...]" >&2
+        return 1
+    fi
+    fd -H -t d -g '.git' | while read -r repo; do
         echo "Running in $repo..."
         git -C "$repo/.." "$@"
     done
@@ -36,13 +36,9 @@ glist() {
         return 0
     fi
 
-    if (( $+commands[fzf] )); then
-        local selected
-        selected=$(echo "$branches" | fzf --height 40% --layout=reverse --border)
-        [[ -n "$selected" ]] && git checkout "$selected"
-    else
-        echo "$branches"
-    fi
+    local selected
+    selected=$(echo "$branches" | fzf --height 40% --layout=reverse --border)
+    [[ -n "$selected" ]] && git checkout "$selected" # no-op if fzf selection dismissed
 }
 
 # Redate the current HEAD commit (author and committer)

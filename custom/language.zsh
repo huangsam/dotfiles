@@ -7,7 +7,11 @@ gomo() {
         tidy) go mod tidy ;;
         list) go list -m -f '{{if not .Indirect}}{{.Path}}{{end}}' all ;;
         outdated) go list -m -u -f '{{if and .Update (not .Indirect)}}{{.Path}} {{.Version}} -> {{.Update.Version}}{{end}}' all ;;
-        *) echo "Invalid command: $cmd" ;;
+        *)
+            echo "Error: Invalid command '$cmd'" >&2
+            echo "Usage: gomo <clean|down|tidy|list|outdated>" >&2
+            return 1
+            ;;
     esac
 }
 
