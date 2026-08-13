@@ -15,14 +15,14 @@ fso() {
 # Look for file from target path up to root directory
 flook() {
     if [[ -z "$1" ]]; then
-        echo "Usage: flook <target_file>" >&2
+        print -u2 -r -- "Usage: flook <target_file>"
         return 1
     fi
     local target_file="$1"
     local target_path="$PWD"
     while true; do
         if [[ -f "$target_path/$target_file" ]]; then
-            echo "$target_path/$target_file"
+            print -r -- "$target_path/$target_file"
             return 0
         fi
         [[ "$target_path" == "/" ]] && break
@@ -36,7 +36,7 @@ fext() {
     local current_suffix="$1"
     local new_suffix="$2"
     if [[ -z "$current_suffix" || -z "$new_suffix" ]]; then
-        echo "Usage: fext <current_extension> <new_extension>" >&2
+        print -u2 -r -- "Usage: fext <current_extension> <new_extension>"
         return 1
     fi
     fd -e "$current_suffix" -0 | while IFS= read -r -d '' file; do

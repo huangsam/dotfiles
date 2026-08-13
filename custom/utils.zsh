@@ -18,13 +18,13 @@ hstats() {
 # Convert video (MOV, MP4, etc.) to optimized GIF using ffmpeg
 mov2gif() {
     if [[ -z "$1" ]]; then
-        echo "Usage: mov2gif <input_file> [width] [fps]" >&2
+        print -u2 -r -- "Usage: mov2gif <input_file> [width] [fps]"
         return 1
     fi
 
     local input="$1"
     if [[ ! -f "$input" ]]; then
-        echo "Error: File '$input' not found" >&2
+        print -u2 -r -- "Error: File '$input' not found"
         return 1
     fi
 
@@ -32,17 +32,17 @@ mov2gif() {
     local fps="${3:-15}"
     local output="${input%.*}.gif"
 
-    echo "Converting '$input' to '$output' (width: ${width}px, fps: ${fps})..."
+    print -r -- "Converting '$input' to '$output' (width: ${width}px, fps: ${fps})..."
 
     ffmpeg -i "$input" -vf "fps=${fps},scale=${width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 "$output"
 
-    echo "Done! Saved as '$output'"
+    print -r -- "Done! Saved as '$output'"
 }
 
 # Refresh Ollama models in alphabetical order
 ofresh() {
     ollama list | awk 'NR>1 {print $1}' | sort | while read -r model; do
-        echo "==> Pulling $model..."
+        print -r -- "==> Pulling $model..."
         ollama pull "$model"
     done
 }

@@ -7,8 +7,8 @@ TARGET="$HOME/.zsh_aliases"
 # https://unix.stackexchange.com/a/541415/140057
 for fl in custom/*.zsh; do
     cat "$fl"
-    echo
+    print ""
 done | perl -pe 'chomp if eof' > "$TARGET"
 
 # Indicate completion
-echo "Aliases combined into $TARGET"
+print -r -- "Aliases combined into $TARGET"

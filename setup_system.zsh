@@ -16,8 +16,8 @@ ensure_brew_in_path || exit 1
 
 # Add Homebrew to ~/.zprofile for future shell sessions
 if ! grep -q "eval \"\$($brew_cmd shellenv)\"" "$HOME/.zprofile" 2>/dev/null; then
-    echo "eval \"\$($brew_cmd shellenv)\"" >> "$HOME/.zprofile"
-    echo "Added Homebrew to ~/.zprofile"
+    print -r -- "eval \"\$($brew_cmd shellenv)\"" >> "$HOME/.zprofile"
+    print -r -- "Added Homebrew to ~/.zprofile"
 fi
 
 # Install oh-my-zsh (unattended if not already installed)
@@ -25,8 +25,8 @@ fi
 
 # Ensure ~/.zsh_aliases is sourced in ~/.zshrc
 if ! grep -q "source ~/.zsh_aliases" "$HOME/.zshrc" 2>/dev/null; then
-    echo -e "\n# Load custom aliases\n[[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases" >> "$HOME/.zshrc"
-    echo "Added ~/.zsh_aliases sourcing to ~/.zshrc"
+    print -r -- $'\n# Load custom aliases\n[[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases' >> "$HOME/.zshrc"
+    print -r -- "Added ~/.zsh_aliases sourcing to ~/.zshrc"
 fi
 
 # Install Homebrew artifacts
@@ -39,4 +39,4 @@ zsh combine_aliases.zsh
 zsh copy_configs.zsh
 
 # Indicate completion
-echo "MacOS system is ready to go"
+print -r -- "MacOS system is ready to go"

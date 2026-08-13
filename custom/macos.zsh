@@ -20,4 +20,4 @@ alias macbattery='pmset -g batt'
 alias macshot='screencapture ~/Desktop/screenshot-$(date +%Y%m%d-%H%M%S).png'
 
 # Mac OS caffeine (prevent sleep)
-alias macspike='echo "☕️" && caffeinate -u -t 43200'
+alias macspike='print -r -- "☕️" && caffeinate -u -t 43200'

@@ -2,7 +2,7 @@
 portlist() {
     local port="$1"
     if [[ -z "$port" ]]; then
-        echo "Usage: portlist <port>" >&2
+        print -u2 -r -- "Usage: portlist <port>"
         return 1
     fi
     lsof -i :"$port"
@@ -12,16 +12,16 @@ portlist() {
 portkill() {
     local port="$1"
     if [[ -z "$port" ]]; then
-        echo "Usage: portkill <port>" >&2
+        print -u2 -r -- "Usage: portkill <port>"
         return 1
     fi
     local -a pids
     pids=($(lsof -t -i:"$port" 2>/dev/null))
     if (( ${#pids} > 0 )); then
-        echo "Killing process(es) ${pids[*]} on port $port..."
+        print -r -- "Killing process(es) ${pids[*]} on port $port..."
         kill -9 "${pids[@]}"
     else
-        echo "No process running on port $port"
+        print -r -- "No process running on port $port"
     fi
 }
 

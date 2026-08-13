@@ -3,7 +3,7 @@ gpull() {
     local remote="${1:-origin}"
     fd -H -t d -g '.git' | while read -r repo; do
         if grep -qs "remote \"$remote\"" "$repo/config"; then
-            echo "Updating $repo..."
+            print -r -- "Updating $repo..."
             git -C "$repo/.." pull "$remote"
         fi
     done
@@ -12,11 +12,11 @@ gpull() {
 # Run command with arguments for multiple Git repos
 gmap() {
     if [[ $# -eq 0 ]]; then
-        echo "Usage: gmap <command> [args...]" >&2
+        print -u2 -r -- "Usage: gmap <command> [args...]"
         return 1
     fi
     fd -H -t d -g '.git' | while read -r repo; do
-        echo "Running in $repo..."
+        print -r -- "Running in $repo..."
         git -C "$repo/.." "$@"
     done
 }
@@ -37,7 +37,7 @@ glist() {
     fi
 
     local selected
-    selected=$(echo "$branches" | fzf --height 40% --layout=reverse --border)
+    selected=$(print -r -- "$branches" | fzf --height 40% --layout=reverse --border)
     [[ -n "$selected" ]] && git checkout "$selected" # no-op if fzf selection dismissed
 }
 

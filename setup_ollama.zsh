@@ -11,7 +11,7 @@ source "$SCRIPT_DIR/utils/brew_setup.zsh"
 ensure_brew_in_path || exit 1
 
 if ! command -v ollama &>/dev/null; then
-    echo "Ollama is not installed, please install with: brew install ollama" >&2
+    print -u2 -r -- "Ollama is not installed, please install with: brew install ollama"
     exit 1
 fi
 
@@ -42,13 +42,13 @@ kv_cache[low]="q8_0"
 # Auto-detects the hardware profile and returns 'high', 'medium', or 'low'
 detect_profile() {
     local cpu_brand mem_bytes mem_gb profile
-    cpu_brand=$(sysctl -n machdep.cpu.brand_string 2>/dev/null || echo "")
-    mem_bytes=$(sysctl -n hw.memsize 2>/dev/null || echo "0")
+    cpu_brand=$(sysctl -n machdep.cpu.brand_string 2>/dev/null || print -r "")
+    mem_bytes=$(sysctl -n hw.memsize 2>/dev/null || print -r "0")
     mem_gb=$(( mem_bytes / 1024 / 1024 / 1024 ))
 
-    echo "System Specs Detected:" >&2
-    echo "  CPU: ${cpu_brand:-Unknown}" >&2
-    echo "  RAM: ${mem_gb} GB" >&2
+    print -u2 -r -- "System Specs Detected:"
+    print -u2 -r -- "  CPU: ${cpu_brand:-Unknown}"
+    print -u2 -r -- "  RAM: ${mem_gb} GB"
 
     if [[ "$cpu_brand" == *Intel* ]]; then
         profile="low"
@@ -61,7 +61,7 @@ detect_profile() {
             profile="low"
         fi
     fi
-    echo "$profile"
+    print -r -- "$profile"
 }
 
 PROFILE=""
@@ -72,7 +72,7 @@ while [[ $# -gt 0 ]]; do
     case "$1" in
         -p|--profile)
             if [[ -z "${2:-}" ]]; then
-                echo "Error: --profile requires an argument (high, medium, low)" >&2
+                print -u2 -r -- "Error: --profile requires an argument (high, medium, low)"
                 exit 1
             fi
             PROFILE="$2"
@@ -95,19 +95,19 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         -h|--help)
-            echo "Usage: $0 [options]"
-            echo ""
-            echo "Options:"
-            echo "  -p, --profile <name>   Set profile explicitly (high, medium, low)"
-            echo "  --high                 Alias for '--profile high'"
-            echo "  --medium               Alias for '--profile medium'"
-            echo "  --low                  Alias for '--profile low'"
-            echo "  -f, --force            Force run (skip interactive prompts)"
-            echo "  -h, --help             Show this help message"
+            print -r -- "Usage: $0 [options]"
+            print ""
+            print -r -- "Options:"
+            print -r -- "  -p, --profile <name>   Set profile explicitly (high, medium, low)"
+            print -r -- "  --high                 Alias for '--profile high'"
+            print -r -- "  --medium               Alias for '--profile medium'"
+            print -r -- "  --low                  Alias for '--profile low'"
+            print -r -- "  -f, --force            Force run (skip interactive prompts)"
+            print -r -- "  -h, --help             Show this help message"
             exit 0
             ;;
         *)
-            echo "Unknown option: $1" >&2
+            print -u2 -r -- "Unknown option: $1"
             exit 1
             ;;
     esac
@@ -116,23 +116,23 @@ done
 # Validate and determine profile
 if [[ -n "$PROFILE" ]]; then
     if [[ "$PROFILE" != "high" && "$PROFILE" != "medium" && "$PROFILE" != "low" ]]; then
-        echo "Error: Invalid profile '$PROFILE', valid options are: high, medium, low" >&2
+        print -u2 -r -- "Error: Invalid profile '$PROFILE', valid options are: high, medium, low"
         exit 1
     fi
-    echo "Profile selected manually: $PROFILE"
+    print -r -- "Profile selected manually: $PROFILE"
 else
-    echo "Detecting hardware specifications..."
+    print -r -- "Detecting hardware specifications..."
     PROFILE=$(detect_profile)
-    echo "Auto-detected recommended profile: $PROFILE"
+    print -r -- "Auto-detected recommended profile: $PROFILE"
 fi
 
 # Display the configuration values
-echo "Applying values for profile '$PROFILE':"
-echo "  OLLAMA_MAX_LOADED_MODELS: ${max_models[$PROFILE]}"
-echo "  OLLAMA_NUM_PARALLEL:      ${parallel[$PROFILE]}"
-echo "  OLLAMA_KEEP_ALIVE:       ${keep_alive[$PROFILE]}"
-echo "  OLLAMA_CONTEXT_LENGTH:    ${context[$PROFILE]}"
-echo "  OLLAMA_KV_CACHE_TYPE:     ${kv_cache[$PROFILE]}"
+print -r -- "Applying values for profile '$PROFILE':"
+print -r -- "  OLLAMA_MAX_LOADED_MODELS: ${max_models[$PROFILE]}"
+print -r -- "  OLLAMA_NUM_PARALLEL:      ${parallel[$PROFILE]}"
+print -r -- "  OLLAMA_KEEP_ALIVE:       ${keep_alive[$PROFILE]}"
+print -r -- "  OLLAMA_CONTEXT_LENGTH:    ${context[$PROFILE]}"
+print -r -- "  OLLAMA_KV_CACHE_TYPE:     ${kv_cache[$PROFILE]}"
 
 if [[ -f "$TARGET_PLIST" ]]; then
     proceed="n"
@@ -140,27 +140,27 @@ if [[ -f "$TARGET_PLIST" ]]; then
         proceed="y"
     else
         # Native Zsh single-character yes/no prompt (stores result in 'choice')
-        echo -n "Existing Ollama LaunchAgent found. Unload and update it? (y/n): "
+        print -n -r -- "Existing Ollama LaunchAgent found. Unload and update it? (y/n): "
         read -k 1 choice
-        echo "" # Print newline after character keystroke
+        print "" # Print newline after character keystroke
         if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
             proceed="y"
         fi
     fi
 
     if [[ "$proceed" != "y" ]]; then
-        echo "Aborting setup..."
+        print -r -- "Aborting setup..."
         exit 0
     fi
 
-    echo "Stopping existing service..."
+    print -r -- "Stopping existing service..."
     # '|| true' prevents the script from crashing if plist exists but isn't actively running
     launchctl bootout gui/$(id -u) "$TARGET_PLIST" 2>/dev/null || true
 fi
 
 # Ensure template file exists
 if [[ ! -f "$SOURCE_TEMPLATE" ]]; then
-    echo "Error: template file not found at $SOURCE_TEMPLATE" >&2
+    print -u2 -r -- "Error: template file not found at $SOURCE_TEMPLATE"
     exit 1
 fi
 
@@ -177,9 +177,9 @@ plist_content="${plist_content//\{\{OLLAMA_KEEP_ALIVE\}\}/${keep_alive[$PROFILE]
 plist_content="${plist_content//\{\{OLLAMA_CONTEXT_LENGTH\}\}/${context[$PROFILE]}}"
 plist_content="${plist_content//\{\{OLLAMA_KV_CACHE_TYPE\}\}/${kv_cache[$PROFILE]}}"
 
-echo "Writing configuration..."
-echo "$plist_content" > "$TARGET_PLIST"
+print -r -- "Writing configuration..."
+print -r -- "$plist_content" > "$TARGET_PLIST"
 
-echo "Bootstrap new Ollama service..."
+print -r -- "Bootstrap new Ollama service..."
 launchctl bootstrap gui/$(id -u) "$TARGET_PLIST"
-echo "Ollama successfully configured with profile '$PROFILE'"
+print -r -- "Ollama successfully configured with profile '$PROFILE'"
