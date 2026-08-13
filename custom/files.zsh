@@ -50,7 +50,10 @@ mkcd() {
 }
 
 # File navigation and listing
-if [[ -o interactive && -t 1 ]]; then
+# Overrides system and oh-my-zsh for interactive shells
+if [[ -o interactive && -t 1 ]] && (( $+commands[eza] )); then
+    alias ls='eza --group-directories-first'
+    alias l='eza --group-directories-first'
     alias ll='eza -l --group-directories-first'
     alias la='eza -la --group-directories-first'
 fi
