@@ -1,9 +1,12 @@
+# Fuzzy search files, then open the selection in terminal editor
+fo() {
+    local file
+    file=$(fd --type f --hidden --exclude .git | fzf)
+    [[ -n "$file" ]] && "${EDITOR:-vim}" "$file"
+}
+
 # Fuzzy search files, then open the selection in VS Code
 fso() {
-    if ! (( $+commands[code] )); then
-        echo "Error: 'code' CLI not found in PATH (Install VS Code)" >&2
-        return 1
-    fi
     local file
     file=$(fd --type f --hidden --exclude .git | fzf)
     [[ -n "$file" ]] && code "$file"

@@ -60,15 +60,7 @@ alias brewtree='brew deps --tree --installed'
 alias loc='scc'
 alias rgf='rg -n --hidden --glob "!.git"'
 (( $+commands[vim] )) && alias v='vim'
-alias t='tldr'
 alias ghpr='gh pr status'
-
-# Global aliases (use anywhere in command)
-alias -g G='| grep'
-alias -g L='| less'
-alias -g H='| head'
-alias -g T='| tail'
-alias -g J='| jq'
 
 # Initialize modern CLI tools
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
