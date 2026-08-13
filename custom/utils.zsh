@@ -1,5 +1,5 @@
 # List top ten commands from history
-hstats () {
+hstats() {
     history |
         awk '{
             command_count[$2]++;
@@ -45,7 +45,7 @@ mov2gif() {
 }
 
 # Refresh Ollama models in alphabetical order
-ofresh () {
+ofresh() {
     ollama list | awk 'NR>1 {print $1}' | sort | while read -r model; do
         echo "==> Pulling $model..."
         ollama pull "$model"

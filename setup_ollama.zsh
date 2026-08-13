@@ -40,7 +40,7 @@ context[low]="8192"
 kv_cache[low]="q8_0"
 
 # Auto-detects the hardware profile and returns 'high', 'medium', or 'low'
-detect_profile () {
+detect_profile() {
     local cpu_brand mem_bytes mem_gb profile
     cpu_brand=$(sysctl -n machdep.cpu.brand_string 2>/dev/null || echo "")
     mem_bytes=$(sysctl -n hw.memsize 2>/dev/null || echo "0")

@@ -1,5 +1,5 @@
 # Manage Go module dependencies
-gomo () {
+gomo() {
     local cmd="${1:-unknown}"
     case "$cmd" in
         clean) go clean -modcache ;;

@@ -1,5 +1,5 @@
 # Pull changes for multiple Git repos
-gpull () {
+gpull() {
     local remote="${1:-origin}"
     local search_cmd="find . -type d -name '.git'"
     (( $+commands[fd] )) && search_cmd="fd -H -t d -g '.git'"
@@ -12,7 +12,7 @@ gpull () {
 }
 
 # Run command with arguments for multiple Git repos
-gmap () {
+gmap() {
     local search_cmd="find . -type d -name '.git'"
     (( $+commands[fd] )) && search_cmd="fd -H -t d -g '.git'"
     eval "$search_cmd" | while read -r repo; do
@@ -22,7 +22,7 @@ gmap () {
 }
 
 # List secondary branches of current remote for single Git repo
-glist () {
+glist() {
     local exclude_branches='(main|master)'
     local remote="${1:-origin}"
     local branches
@@ -46,7 +46,7 @@ glist () {
 }
 
 # Redate the current HEAD commit (author and committer)
-gdate () {
+gdate() {
     local d="${1:-$(date -R)}"
     GIT_COMMITTER_DATE="$d" git commit --amend --no-edit --date="$d"
 }

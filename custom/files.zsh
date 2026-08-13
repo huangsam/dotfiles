@@ -1,5 +1,5 @@
 # Fuzzy search files, then open the selection in VS Code
-fso () {
+fso() {
     if (( $+commands[fd] )) && (( $+commands[fzf] )) && (( $+commands[code] )); then
         local file
         file=$(fd --type f --hidden --exclude .git | fzf)
@@ -11,7 +11,7 @@ fso () {
 }
 
 # Look for file from target path up to root directory
-flook () {
+flook() {
     local target_file="$1"
     local target_path="$PWD"
     while true; do
@@ -26,7 +26,7 @@ flook () {
 }
 
 # Change file suffix from .x to .y
-fext () {
+fext() {
     local current_suffix="$1"
     local new_suffix="$2"
     if (( $+commands[fd] )); then
@@ -41,7 +41,7 @@ fext () {
 }
 
 # Create directory and cd into it
-mkcd () {
+mkcd() {
     mkdir -p "$1" && cd "$1"
 }
 

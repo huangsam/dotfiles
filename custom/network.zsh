@@ -1,5 +1,5 @@
 # List process running on a specific port
-portlist () {
+portlist() {
     local port="$1"
     if [[ -z "$port" ]]; then
         echo "Usage: portlist <port>"
@@ -9,7 +9,7 @@ portlist () {
 }
 
 # Kill process running on a specific port
-portkill () {
+portkill() {
     local port="$1"
     if [[ -z "$port" ]]; then
         echo "Usage: portkill <port>"
