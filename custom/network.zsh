@@ -15,11 +15,11 @@ portkill() {
         echo "Usage: portkill <port>"
         return 1
     fi
-    local pid
-    pid=$(lsof -t -i:"$port")
-    if [[ -n "$pid" ]]; then
-        echo "Killing process $pid on port $port..."
-        kill -9 "$pid"
+    local -a pids
+    pids=($(lsof -t -i:"$port" 2>/dev/null))
+    if (( ${#pids} > 0 )); then
+        echo "Killing process(es) ${pids[*]} on port $port..."
+        kill -9 "${pids[@]}"
     else
         echo "No process running on port $port"
     fi

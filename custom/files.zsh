@@ -29,6 +29,10 @@ flook() {
 fext() {
     local current_suffix="$1"
     local new_suffix="$2"
+    if [[ -z "$current_suffix" || -z "$new_suffix" ]]; then
+        echo "Usage: fext <current_extension> <new_extension>" >&2
+        return 1
+    fi
     if (( $+commands[fd] )); then
         fd -e "$current_suffix" -0 | while IFS= read -r -d '' file; do
             mv "$file" "${file%.$current_suffix}.$new_suffix"
