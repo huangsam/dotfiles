@@ -26,11 +26,11 @@ glist() {
     local exclude_branches='(main|master)'
     local remote="${1:-origin}"
     local branches
-    branches=$(git branch -r \
-        | grep "$remote/" \
+    branches=$(git branch -r --format='%(refname:short)' \
         | grep -v 'HEAD' \
-        | grep -Ev "$exclude_branches" \
-        | cut -d'/' -f 2,3)
+        | grep "^$remote/" \
+        | grep -Ev "^$remote/$exclude_branches$" \
+        | sed "s|^$remote/||")
 
     if [[ -z "$branches" ]]; then
         return 0
