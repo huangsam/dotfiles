@@ -11,4 +11,4 @@ for fl in custom/*.zsh; do
 done | perl -pe 'chomp if eof' > "$TARGET"
 
 # Indicate completion
-echo "Aliases combined into $TARGET!"
+echo "Aliases combined into $TARGET"

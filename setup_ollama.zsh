@@ -11,7 +11,7 @@ source "$SCRIPT_DIR/utils/brew_setup.zsh"
 ensure_brew_in_path || exit 1
 
 if ! command -v ollama &>/dev/null; then
-    echo "Ollama is not installed. Please install with: brew install ollama" >&2
+    echo "Ollama is not installed, please install with: brew install ollama" >&2
     exit 1
 fi
 
@@ -72,7 +72,7 @@ while [[ $# -gt 0 ]]; do
     case "$1" in
         -p|--profile)
             if [[ -z "${2:-}" ]]; then
-                echo "Error: --profile requires an argument (high, medium, low)." >&2
+                echo "Error: --profile requires an argument (high, medium, low)" >&2
                 exit 1
             fi
             PROFILE="$2"
@@ -116,7 +116,7 @@ done
 # Validate and determine profile
 if [[ -n "$PROFILE" ]]; then
     if [[ "$PROFILE" != "high" && "$PROFILE" != "medium" && "$PROFILE" != "low" ]]; then
-        echo "Error: Invalid profile '$PROFILE'. Valid options are: high, medium, low." >&2
+        echo "Error: Invalid profile '$PROFILE', valid options are: high, medium, low" >&2
         exit 1
     fi
     echo "Profile selected manually: $PROFILE"
@@ -160,7 +160,7 @@ fi
 
 # Ensure template file exists
 if [[ ! -f "$SOURCE_TEMPLATE" ]]; then
-    echo "Error: Template file not found at $SOURCE_TEMPLATE" >&2
+    echo "Error: template file not found at $SOURCE_TEMPLATE" >&2
     exit 1
 fi
 
@@ -182,4 +182,4 @@ echo "$plist_content" > "$TARGET_PLIST"
 
 echo "Bootstrap new Ollama service..."
 launchctl bootstrap gui/$(id -u) "$TARGET_PLIST"
-echo "Ollama successfully configured with profile '$PROFILE'!"
+echo "Ollama successfully configured with profile '$PROFILE'"

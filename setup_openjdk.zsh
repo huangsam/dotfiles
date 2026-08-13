@@ -87,7 +87,7 @@ for link in $JVM_DIR/openjdk*.jdk; do
 done
 
 if [[ $found -eq 0 ]]; then
-    echo "No Homebrew OpenJDK installations found."
+    echo "No Homebrew OpenJDK installations found"
 else
-    echo "Done linking OpenJDKs!"
+    echo "Done linking OpenJDKs"
 fi

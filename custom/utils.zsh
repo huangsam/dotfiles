@@ -23,13 +23,13 @@ mov2gif() {
     fi
 
     if ! command -v ffmpeg &>/dev/null; then
-        echo "Error: ffmpeg is not installed. Install it via 'brew install ffmpeg'."
+        echo "Error: ffmpeg is not installed, install it via 'brew install ffmpeg'"
         return 1
     fi
 
     local input="$1"
     if [[ ! -f "$input" ]]; then
-        echo "Error: File '$input' not found."
+        echo "Error: File '$input' not found"
         return 1
     fi
 

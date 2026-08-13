@@ -5,7 +5,7 @@ fso() {
         file=$(fd --type f --hidden --exclude .git | fzf)
         [[ -n "$file" ]] && code "$file"
     else
-        echo "Error: fso requires fd, fzf, and code to be installed."
+        echo "Error: fso requires fd, fzf, and code to be installed"
         return 1
     fi
 }

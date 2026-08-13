@@ -9,7 +9,7 @@ ensure_brew_in_path() {
         elif [[ -x "/usr/local/bin/brew" ]]; then
             eval "$(/usr/local/bin/brew shellenv)"
         else
-            echo "Error: Homebrew executable not found." >&2
+            echo "Error: Homebrew executable not found" >&2
             return 1
         fi
     fi

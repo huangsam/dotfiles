@@ -39,4 +39,4 @@ zsh combine_aliases.zsh
 zsh copy_configs.zsh
 
 # Indicate completion
-echo "MacOS system is ready to go!"
+echo "MacOS system is ready to go"
