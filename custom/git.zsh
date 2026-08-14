@@ -1,7 +1,15 @@
 # Pull changes for multiple Git repos
 gpull() {
     local remote="${1:-origin}"
-    fd -H -t d -g '.git' | while read -r repo; do
+    local -a repos
+    repos=(${(f)"$(fd -H -t d -g '.git' 2>/dev/null)"})
+
+    if (( ${#repos} == 0 )); then
+        return 0
+    fi
+
+    local repo
+    for repo in "${repos[@]}"; do
         if grep -qs "remote \"$remote\"" "$repo/config"; then
             print -r -- "Updating $repo..."
             git -C "$repo/.." pull "$remote"
@@ -15,7 +23,16 @@ gmap() {
         print -u2 -r -- "Usage: gmap <command> [args...]"
         return 1
     fi
-    fd -H -t d -g '.git' | while read -r repo; do
+
+    local -a repos
+    repos=(${(f)"$(fd -H -t d -g '.git' 2>/dev/null)"})
+
+    if (( ${#repos} == 0 )); then
+        return 0
+    fi
+
+    local repo
+    for repo in "${repos[@]}"; do
         print -r -- "Running in $repo..."
         git -C "$repo/.." "$@"
     done
