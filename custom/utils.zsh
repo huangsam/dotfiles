@@ -50,16 +50,15 @@ ofresh() {
 # Reset Z shell configuration
 alias zset='source ~/.zshrc'
 
-# Shorten command for downloading videos from YouTube
-alias ytdl='yt-dlp'
-
 # Show Homebrew dependency tree
 alias brewtree='brew deps --tree --installed'
 
-# Modern CLI tools aliases
+# Shorten commands for modern tools
 alias loc='scc'
 alias rgf='rg -n --hidden --glob "!.git"'
 alias ghpr='gh pr status'
+alias ytdl='yt-dlp'
+alias ocode='ollama launch opencode'
 
-# Initialize modern CLI tools
+# Initialize zoxide for smart navigation
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
