@@ -20,7 +20,7 @@ fi
 ensure_brew_in_path || exit 1
 
 # Add Homebrew to ~/.zprofile for future shell sessions
-if ! grep -q "eval \"\$($brew_cmd shellenv)\"" "$HOME/.zprofile" 2>/dev/null; then
+if ! grep -q 'brew shellenv' "$HOME/.zprofile" 2>/dev/null; then
     print -r -- "eval \"\$($brew_cmd shellenv)\"" >> "$HOME/.zprofile"
     print -r -- "Added Homebrew to ~/.zprofile"
 fi
