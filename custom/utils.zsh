@@ -1,18 +1,15 @@
 # List top ten commands from history
 hstats() {
-    history |
-        awk '{
+    history 1 | awk '
+        {
             command_count[$2]++;
             total_count++;
         }
         END {
             for (cmd in command_count) {
-                printf("%d %.2f%% %s\n",
-                    command_count[cmd],
-                    command_count[cmd]/total_count*100,
-                    cmd);
+                printf("%6d  %6.2f%%  %s\n", command_count[cmd], (command_count[cmd] / total_count) * 100, cmd);
             }
-        }' | sort -nr | head -n10 | column -c3 -s ' ' -t | nl
+        }' | sort -nr | head -n 10
 }
 
 # Convert video (MOV, MP4, etc.) to optimized GIF using ffmpeg
