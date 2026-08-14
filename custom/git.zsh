@@ -23,21 +23,18 @@ gmap() {
 
 # List secondary branches of current remote for single Git repo
 glist() {
-    local exclude_branches='(main|master)'
     local remote="${1:-origin}"
-    local branches
-    branches=$(git branch -r --format='%(refname:short)' \
-        | grep -v 'HEAD' \
-        | grep "^$remote/" \
-        | grep -Ev "^$remote/$exclude_branches$" \
-        | sed "s|^$remote/||")
+    local -a raw_branches
+    raw_branches=(${(f)"$(git branch -r --list "$remote/*" --format='%(refname:short)' 2>/dev/null)"})
+    raw_branches=(${raw_branches:#$remote/HEAD*})
+    raw_branches=(${raw_branches:#$remote/(main|master)})
 
-    if [[ -z "$branches" ]]; then
+    if (( ${#raw_branches} == 0 )); then
         return 0
     fi
 
     local selected
-    selected=$(print -r -- "$branches" | fzf --height 40% --layout=reverse --border)
+    selected=$(printf "%s\n" "${raw_branches#$remote/}" | fzf --height 40% --layout=reverse --border)
     [[ -n "$selected" ]] && git checkout "$selected" # no-op if fzf selection dismissed
 }
 
