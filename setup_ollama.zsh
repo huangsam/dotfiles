@@ -51,7 +51,13 @@ detect_profile() {
     print -u2 -r -- "  RAM: ${mem_gb} GB"
 
     if [[ "$cpu_brand" == *Intel* ]]; then
-        profile="low"
+        # Intel Macs are CPU-first and usually do not benefit from the same GPU setup.
+        # Keep mid-range Intel machines at medium.
+        if (( mem_gb >= 12 )); then
+            profile="medium"
+        else
+            profile="low"
+        fi
     else
         if (( mem_gb > 64 )); then
             profile="high"
