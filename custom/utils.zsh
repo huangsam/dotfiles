@@ -51,9 +51,7 @@ alias zset='source ~/.zshrc'
 alias brewtree='brew deps --tree --installed'
 
 # Shorten commands for modern tools
-alias loc='scc'
-alias rgf='rg -n --hidden --glob "!.git"'
-alias ghpr='gh pr status'
+alias rgh='rg --hidden'
 alias ytdl='yt-dlp'
 alias ocode='ollama launch opencode'
 
