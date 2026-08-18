@@ -1,3 +1,5 @@
+set nocompatible
+
 " => General
 set history=500
 
@@ -5,7 +7,9 @@ set history=500
 set number
 set hlsearch
 set lazyredraw
-set clipboard=unnamed
+if has('clipboard')
+    set clipboard=unnamed,unnamedplus
+endif
 set so=7
 set wildmenu
 set ruler
@@ -22,6 +26,8 @@ set tm=500
 
 " => Colors and Fonts
 syntax enable
+set t_Co=256
+set background=dark
 set encoding=utf8
 set ffs=unix,dos,mac
 
@@ -32,7 +38,6 @@ set noswapfile
 
 " => Text, tab and indent related
 set expandtab
-set smarttab
 set shiftwidth=4
 set tabstop=4
 set linebreak
