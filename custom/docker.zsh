@@ -1,8 +1,6 @@
 # Docker containers
 alias dcls='docker container ls'
 alias dcrm='docker container rm'
-alias dclg='docker container logs'
-alias dcex='docker container exec'
 
 # Docker images
 alias dils='docker image ls'
