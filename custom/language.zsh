@@ -21,8 +21,5 @@ pyhttp() {
     python3 -m http.server --directory "${1:-.}" "${2:-8000}"
 }
 
-# Python virtual environment shortcut
-alias pyvenv='python3 -m venv'
-
 # List installed macOS JDKs
 alias jdkls='/usr/libexec/java_home -V'
