@@ -39,8 +39,6 @@ alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 # List of devices on the local network
 alias netlist='arp -a'
-alias nscan='sudo nmap -sn' # Ping scan
-alias nmapfast='nmap -F'    # Fast scan of most common ports
 
 # Local Wi-Fi information
 alias localwifi='networksetup -getinfo Wi-Fi'
