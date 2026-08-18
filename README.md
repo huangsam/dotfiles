@@ -30,6 +30,9 @@ zsh combine_aliases.zsh
 
 # Copy all dotfiles to the home directory
 zsh copy_configs.zsh
+
+# Audit alias and function usage in shell history
+python3 dotstats.py
 ```
 
 [Click here](./custom/) to see what gets populated in `.zsh_aliases`.
