@@ -37,6 +37,13 @@ python3 dotstats.py
 
 [Click here](./custom/) to see what gets populated in `.zsh_aliases`.
 
+## Agent skills
+
+Hierarchical markdown memory skills for AI agents in [`skills/`](./skills/):
+
+- [`summarize`](./skills/summarize/SKILL.md) - Distills and indexes durable facts into two-hop markdown memory.
+- [`recall`](./skills/recall/SKILL.md) - Discovers and validates memory notes with ripgrep fallback.
+
 ## Credits
 
 Special thanks to the following repositories for inspiration and resources:
