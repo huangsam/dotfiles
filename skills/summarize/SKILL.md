@@ -7,8 +7,6 @@ description: Extracts, stamps, and persists durable facts, decisions, and knowle
 
 **Role:** Distill durable technical facts, verified configurations, and architectural decisions from the current session into the two-hop memory hierarchy. Works in tandem with `recall`.
 
---------------------------------------------------------------------------------
-
 ## 1. Memory Roots & Hierarchy
 
 Resolve `<memory_root>` in order:
@@ -73,8 +71,6 @@ Problem description, environment background, or decision rationale.
 Exact commands, paths, flags, configuration snippets.
 ```
 
---------------------------------------------------------------------------------
-
 ## 2. Invariants & Rules
 
 ### 1. No-Op Guard
@@ -135,8 +131,6 @@ Whenever writing memory:
 * Confirm all relative markdown links point to existing files.
 * Confirm `<memory_root>/MEMORY.md` links to `<topic>/MEMORY.md`.
 * Prune broken links resulting from renamed or archived files.
-
---------------------------------------------------------------------------------
 
 ## 3. Execution Sequence
 

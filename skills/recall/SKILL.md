@@ -7,15 +7,11 @@ description: Discovers, retrieves, and validates context from the hierarchical m
 
 **Role:** Retrieve, validate, and cite facts from the hierarchical memory system. Works in tandem with `summarize`.
 
---------------------------------------------------------------------------------
-
 ## 1. Memory Roots
 
 Resolve `<memory_root>` in order:
 1. **Workspace Memory:** `.agent/memory/`, `.agents/memory/`, or `memory/` at repository root.
 2. **Global Memory:** `~/.memory/`.
-
---------------------------------------------------------------------------------
 
 ## 2. Retrieval Protocol: Two-Hop Discovery
 
@@ -45,8 +41,6 @@ Query ───> [Hop 1: Global MEMORY.md] ───> [Hop 2: Topic MEMORY.md] �
     * Check shelf-life: flag if expired (e.g., `#shelf:volatile` >14 days old).
 3. Read the selected detail file `<topic>/<slug>.md`.
 
---------------------------------------------------------------------------------
-
 ## 3. Whole-Corpus Fallback (`ripgrep`)
 
 **Do NOT declare "no memory found" without running fallback search.**
@@ -59,8 +53,6 @@ If Hop 1 or Hop 2 misses due to vocabulary mismatch or unindexed notes:
 2. Check matching hits in active details, topic indexes, and `archive/`.
 3. **Reconcile Flag:** If `rg` hits an active detail file not listed in `<topic>/MEMORY.md`, flag it for reconciliation by `summarize`.
 4. Report "no memory found" only after both Two-Hop Discovery and Ripgrep Fallback return zero hits.
-
---------------------------------------------------------------------------------
 
 ## 4. Invariants & Rules
 
@@ -84,8 +76,6 @@ If Hop 1 or Hop 2 misses due to vocabulary mismatch or unindexed notes:
     * `#shelf:volatile`: If >14 days old, treat as potentially invalid.
     * `#shelf:30d` / `#shelf:90d`: Check if version pins or branch references expired.
     * `#shelf:1y` / `#shelf:permanent`: Treat as durable system configuration.
-
---------------------------------------------------------------------------------
 
 ## 5. Output Protocol
 
