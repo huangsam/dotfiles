@@ -33,6 +33,9 @@ zsh copy_configs.zsh
 
 # Audit alias and function usage in shell history
 python3 dotstats.py
+
+# Verify integrity, security, and lifecycle budgets of agent memory
+python3 memcheck.py
 ```
 
 [Click here](./custom/) to see what gets populated in `.zsh_aliases`.
