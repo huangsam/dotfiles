@@ -30,7 +30,7 @@ kv_cache[high]="q8_0"
 max_models[medium]="1"
 parallel[medium]="1"
 keep_alive[medium]="30m"
-context[medium]="16384"
+context[medium]="32768"
 kv_cache[medium]="q8_0"
 
 max_models[low]="1"
