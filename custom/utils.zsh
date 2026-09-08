@@ -44,12 +44,18 @@ ofresh() {
     done
 }
 
-# Force-kill stuck Ollama model runners to immediately reclaim VRAM
+# Unload models and terminate stuck runners to immediately reclaim VRAM
 okill() {
-    if pkill -9 -f "ollama runner" 2>/dev/null; then
-        print -r -- "==> Terminated Ollama model runner(s). VRAM freed."
+    if [[ -n "${1:-}" ]]; then
+        print -r -- "==> Stopping model $1..."
+        ollama stop "$1" 2>/dev/null
     else
-        print -r -- "==> No active Ollama model runners found."
+        print -r -- "==> Stopping all active Ollama models..."
+        ollama ps 2>/dev/null | awk 'NR>1 {print $1}' | while read -r model; do
+            [[ -n "$model" ]] && ollama stop "$model" 2>/dev/null
+        done
+        # Force-kill any lingering runner subprocesses (GGUF llama-server or MLX runner)
+        pkill -9 -f "(llama-server|ollama runner)" 2>/dev/null || true
     fi
     ollama ps
 }
