@@ -44,6 +44,23 @@ ofresh() {
     done
 }
 
+# Force-kill stuck Ollama model runners to immediately reclaim VRAM
+okill() {
+    if pkill -9 -f "ollama runner" 2>/dev/null; then
+        print -r -- "==> Terminated Ollama model runner(s). VRAM freed."
+    else
+        print -r -- "==> No active Ollama model runners found."
+    fi
+    ollama ps
+}
+
+# Restart the Ollama launchd background service
+orestart() {
+    print -r -- "==> Restarting Ollama service..."
+    launchctl kickstart -k "gui/$(id -u)/com.$USER.ollama"
+    print -r -- "==> Ollama service restarted."
+}
+
 # Reset Z shell configuration
 alias zset='source ~/.zshrc'
 
