@@ -44,7 +44,7 @@ python3 memcheck.py
 
 Hierarchical markdown memory skills for AI agents in [`skills/`](./skills/):
 
-- [`summarize`](./skills/summarize/SKILL.md) - Distills and indexes durable facts into two-hop markdown memory.
+- [`persist`](./skills/persist/SKILL.md) - Distills and indexes durable facts into two-hop markdown memory.
 - [`recall`](./skills/recall/SKILL.md) - Discovers and validates memory notes with ripgrep fallback.
 
 ## Credits

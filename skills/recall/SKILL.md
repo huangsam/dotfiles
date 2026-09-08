@@ -5,7 +5,7 @@ description: Discovers, retrieves, and validates context from the hierarchical m
 
 # Recall: Hierarchical Memory Discovery & Retrieval
 
-**Role:** Retrieve, validate, and cite facts from the hierarchical memory system. Works in tandem with `summarize`.
+**Role:** Retrieve, validate, and cite facts from the hierarchical memory system. Works in tandem with `persist`.
 
 ## 1. Memory Roots
 
@@ -55,7 +55,7 @@ If Hop 1 or Hop 2 misses due to vocabulary mismatch or unindexed notes:
     rg -i "<search_terms>" "<memory_root>"
     ```
 2. Check matching hits in active details, topic indexes, and `archive/`.
-3. **Reconcile Flag:** If `rg` hits an active detail file not listed in `<topic>/MEMORY.md`, flag it for reconciliation by `summarize`.
+3. **Reconcile Flag:** If `rg` hits an active detail file not listed in `<topic>/MEMORY.md`, flag it for reconciliation by `persist`.
 4. Report "no memory found" only after both Two-Hop Discovery and Ripgrep Fallback return zero hits.
 
 ## 4. Invariants & Rules

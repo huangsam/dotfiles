@@ -1,9 +1,9 @@
 ---
-name: summarize
+name: persist
 description: Extracts, stamps, and persists durable facts, decisions, and knowledge into a two-hop hierarchical memory system (global MEMORY.md -> topic MEMORY.md -> detail.md). Enforces no-op guards, secrets redaction (type + location only), copy-don't-recall, downgrade-not-delete, and budget archiving.
 ---
 
-# Summarize: Memory Distillation & Curation
+# Persist: Memory Distillation & Curation
 
 **Role:** Distill durable technical facts, verified configurations, and architectural decisions from the current session into the two-hop memory hierarchy. Works in tandem with `recall`.
 
