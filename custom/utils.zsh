@@ -54,11 +54,15 @@ okill() {
     ollama ps
 }
 
-# Restart the Ollama launchd background service
+# Restart the Ollama launchd background service and verify version sync
 orestart() {
     print -r -- "==> Restarting Ollama service..."
     launchctl kickstart -k "gui/$(id -u)/com.$USER.ollama"
-    print -r -- "==> Ollama service restarted."
+    sleep 1
+    local client_ver server_ver
+    client_ver=$(ollama --version 2>/dev/null | awk '{print $NF}')
+    server_ver=$(curl -s http://localhost:11434/api/version 2>/dev/null | sed -E 's/.*"version":"([^"]+)".*/\1/')
+    print -r -- "==> Ollama restarted: client ($client_ver) | server (${server_ver:-unknown})"
 }
 
 # Reset Z shell configuration
