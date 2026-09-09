@@ -71,6 +71,20 @@ orestart() {
     print -r -- "==> Ollama restarted: client ($client_ver) | server (${server_ver:-unknown})"
 }
 
+# Print DrawThings prompt and generation settings
+dtprompt() {
+    exiftool -s3 -XMP-dc:Description ${1:-**/*.png(Nom[1])}
+}
+
+# Fuzzy search DrawThings generation prompts
+dtfind() {
+    local dir="${1:-.}"
+    exiftool -T -Directory -FileName -XMP-dc:Description "$dir" -r 2>/dev/null \
+        | awk -F'\t' '$3 != "" && $3 != "-" {print $1"/"$2 "\t" $3}' \
+        | fzf --delimiter='\t' --with-nth=2 --preview 'echo {2}' --preview-window=down:wrap \
+        | cut -f1
+}
+
 # Reset Z shell configuration
 alias zset='source ~/.zshrc'
 
