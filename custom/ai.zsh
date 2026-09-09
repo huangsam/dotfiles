@@ -6,7 +6,7 @@ ofresh() {
     done
 }
 
-# Unload models and terminate stuck runners to immediately reclaim VRAM
+# Unload Ollama models and terminate runners to reclaim VRAM
 okill() {
     if [[ -n "${1:-}" ]]; then
         print -r -- "==> Stopping model $1..."
@@ -33,5 +33,5 @@ orestart() {
     print -r -- "==> Ollama restarted: client ($client_ver) | server (${server_ver:-unknown})"
 }
 
-# OpenCode model launcher
+# Launch OpenCode with Ollama model selection
 alias ocode='ollama launch opencode'
