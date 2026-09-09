@@ -12,79 +12,6 @@ hstats() {
         }' | sort -nr | head -n 10
 }
 
-# Convert video (MOV, MP4, etc.) to optimized GIF using ffmpeg
-mov2gif() {
-    if [[ -z "$1" ]]; then
-        print -u2 -r -- "Usage: mov2gif <input_file> [width] [fps]"
-        return 1
-    fi
-
-    local input="$1"
-    if [[ ! -f "$input" ]]; then
-        print -u2 -r -- "Error: File '$input' not found"
-        return 1
-    fi
-
-    local width="${2:-800}"
-    local fps="${3:-15}"
-    local output="${input%.*}.gif"
-
-    print -r -- "Converting '$input' to '$output' (width: ${width}px, fps: ${fps})..."
-
-    ffmpeg -i "$input" -vf "fps=${fps},scale=${width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 "$output"
-
-    print -r -- "Done! Saved as '$output'"
-}
-
-# Refresh Ollama models in alphabetical order
-ofresh() {
-    ollama list | awk 'NR>1 {print $1}' | sort | while read -r model; do
-        print -r -- "==> Pulling $model..."
-        ollama pull "$model"
-    done
-}
-
-# Unload models and terminate stuck runners to immediately reclaim VRAM
-okill() {
-    if [[ -n "${1:-}" ]]; then
-        print -r -- "==> Stopping model $1..."
-        ollama stop "$1" 2>/dev/null
-    else
-        print -r -- "==> Stopping all active Ollama models..."
-        ollama ps 2>/dev/null | awk 'NR>1 {print $1}' | while read -r model; do
-            [[ -n "$model" ]] && ollama stop "$model" 2>/dev/null
-        done
-        # Force-kill any lingering runner subprocesses (GGUF llama-server or MLX runner)
-        pkill -9 -f "(llama-server|ollama runner)" 2>/dev/null || true
-    fi
-    ollama ps
-}
-
-# Restart the Ollama launchd background service and verify version sync
-orestart() {
-    print -r -- "==> Restarting Ollama service..."
-    launchctl kickstart -k "gui/$(id -u)/com.$USER.ollama"
-    sleep 1
-    local client_ver server_ver
-    client_ver=$(ollama --version 2>/dev/null | awk '{print $NF}')
-    server_ver=$(curl -s http://localhost:11434/api/version 2>/dev/null | sed -E 's/.*"version":"([^"]+)".*/\1/')
-    print -r -- "==> Ollama restarted: client ($client_ver) | server (${server_ver:-unknown})"
-}
-
-# Print DrawThings prompt and generation settings
-dtprompt() {
-    exiftool -s3 -XMP-dc:Description ${1:-**/*.png(Nom[1])}
-}
-
-# Fuzzy search DrawThings generation prompts
-dtfind() {
-    local dir="${1:-.}"
-    exiftool -T -Directory -FileName -XMP-dc:Description "$dir" -r 2>/dev/null \
-        | awk -F'\t' '$3 != "" && $3 != "-" {print $1"/"$2 "\t" $3}' \
-        | fzf --delimiter='\t' --with-nth=2 --preview 'echo {2}' --preview-window=down:wrap \
-        | cut -f1
-}
-
 # Reset Z shell configuration
 alias zset='source ~/.zshrc'
 
@@ -93,8 +20,6 @@ alias brewtree='brew deps --tree --installed'
 
 # Shorten commands for modern tools
 alias rgh='rg --hidden'
-alias ytdl='yt-dlp'
-alias ocode='ollama launch opencode'
 
 # Initialize zoxide for smart navigation
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
