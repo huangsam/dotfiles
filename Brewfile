@@ -71,6 +71,7 @@ brew "vineflower"
 brew "watch"
 brew "yt-dlp"
 brew "zig"
+brew "zls"
 brew "zoxide"
 
 # Casks applications
