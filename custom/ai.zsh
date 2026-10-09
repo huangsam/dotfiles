@@ -51,6 +51,7 @@ orestart() {
     client_ver=$(ollama --version 2>/dev/null | awk '{print $NF}')
     if [[ -z "$response" ]]; then
         print -r -- "==> Ollama did not respond after 30s: client ($client_ver) | server (unknown)" >&2
+        print -r -- "    Check: /tmp/ollama.stderr.log, /tmp/ollama.stdout.log, launchctl print gui/$(id -u)/$label" >&2
         return 1
     fi
     server_ver=$(print -r -- "$response" | sed -nE 's/.*"version":"([^"]+)".*/\1/p')
