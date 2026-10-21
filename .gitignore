@@ -3,3 +3,6 @@
 Brewfile.lock*
 __pycache__/
 *.pyc
+brainstorm/
+scratch/
+playground/
