@@ -1,8 +1,10 @@
+# Leftover assets
 .DS_Store
-.bash_aliases
 Brewfile.lock*
 __pycache__/
 *.pyc
+
+# Experimental directories
 brainstorm/
 scratch/
 playground/
