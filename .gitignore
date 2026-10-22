@@ -3,6 +3,8 @@
 Brewfile.lock*
 __pycache__/
 *.pyc
+.venv/
+uv.lock
 
 # Experimental directories
 brainstorm/
