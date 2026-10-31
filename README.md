@@ -20,6 +20,9 @@ zsh setup_openjdk.zsh
 
 # Setup Ollama for LLM inference
 zsh setup_ollama.zsh
+
+# Setup Colima runtime and Docker CLI plugins
+zsh setup_colima.zsh
 ```
 
 For regular maintenance and upkeep:

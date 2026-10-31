@@ -5,14 +5,19 @@
 # For go, java, rust, llvm, set PATH references in ~/.zprofile
 # For c/c++ libraries, set CFLAGS and LDFLAGS appropriately
 # For ollama, run setup_ollama.zsh
+# For colima, run setup_colima.zsh
 brew "bat"
 brew "boost"
 brew "cmake"
-brew "cppcheck"
+brew "colima"
 brew "corepack"
 brew "coreutils"
+brew "cppcheck"
 brew "curl"
 brew "dos2unix"
+brew "docker"
+brew "docker-buildx"
+brew "docker-compose"
 brew "dust"
 brew "eza"
 brew "exiftool"
@@ -32,6 +37,7 @@ brew "hugo"
 brew "jq"
 brew "kotlin"
 brew "ktfmt"
+brew "kubernetes-cli"
 brew "lefthook"
 brew "libpq"
 brew "llama.cpp"
