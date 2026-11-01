@@ -3,7 +3,8 @@ set -eu -o pipefail
 
 # Source shared Homebrew utility
 SCRIPT_DIR=${0:A:h}
-source "$SCRIPT_DIR/utils/brew_setup.zsh"
+DOTFILES_DIR=${SCRIPT_DIR:h}
+source "$SCRIPT_DIR/lib/brew_setup.zsh"
 
 print -r -- "Starting core system setup..."
 
@@ -33,6 +34,6 @@ fi
 
 # 4. Install Homebrew bundle artifacts (Brewfile)
 print -r -- "Installing Homebrew packages from Brewfile..."
-brew bundle install --no-upgrade --file="$SCRIPT_DIR/Brewfile"
+brew bundle install --no-upgrade --file="$DOTFILES_DIR/Brewfile"
 
 print -r -- "Core bootstrapping complete"

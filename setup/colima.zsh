@@ -5,7 +5,7 @@ set -eu -o pipefail
 SCRIPT_DIR=${0:A:h}
 
 # Source shared Homebrew utility
-source "$SCRIPT_DIR/utils/brew_setup.zsh"
+source "$SCRIPT_DIR/lib/brew_setup.zsh"
 ensure_brew_in_path || exit 1
 
 print -r -- "Setting up Docker CLI plugins and Colima..."

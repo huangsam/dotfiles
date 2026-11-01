@@ -93,9 +93,9 @@ def main() -> None:
         cmd_status()
         if len(sys.argv) == 1:
             print("\nUsage examples:")
-            print("  ./tune_colima.py --high    # 6 CPU, 8G RAM")
-            print("  ./tune_colima.py --medium  # 4 CPU, 6G RAM")
-            print("  ./tune_colima.py --low     # 2 CPU, 4G RAM")
+            print("  python3 bin/colimatune.py --high    # 6 CPU, 8G RAM")
+            print("  python3 bin/colimatune.py --medium  # 4 CPU, 6G RAM")
+            print("  python3 bin/colimatune.py --low     # 2 CPU, 4G RAM")
         return
 
     if args.action == "restart":

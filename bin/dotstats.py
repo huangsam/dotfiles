@@ -133,8 +133,8 @@ def count_history_usage(hist_file: Path, defined_names: set[str]) -> Counter[str
 
 
 def main() -> int:
-    script_dir = Path(__file__).resolve().parent
-    default_custom_dir = os.environ.get("DOTFILES_CUSTOM", str(script_dir / "custom"))
+    repo_root = Path(__file__).resolve().parent.parent
+    default_custom_dir = os.environ.get("DOTFILES_CUSTOM", str(repo_root / "custom"))
     default_hist_file = os.environ.get("HISTFILE", os.path.expanduser("~/.zsh_history"))
 
     parser = argparse.ArgumentParser(description="Rank custom dotfiles aliases and functions by usage count in shell history.")

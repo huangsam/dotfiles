@@ -13,32 +13,35 @@ For first-time setup, run:
 
 ```shell
 # Setup core tools (Xcode CLT, Homebrew, Oh-My-Zsh, Brewfile)
-zsh setup_core.zsh
+zsh setup/core.zsh
 
 # Setup OpenJDK symlinks for macOS
-zsh setup_openjdk.zsh
+zsh setup/openjdk.zsh
 
 # Setup Ollama for LLM inference
-zsh setup_ollama.zsh
+zsh setup/ollama.zsh
 
 # Setup Colima runtime and Docker CLI plugins
-zsh setup_colima.zsh
+zsh setup/colima.zsh
 ```
 
 For regular maintenance and upkeep:
 
 ```shell
 # Generate .zsh_aliases file at the home directory
-zsh combine_aliases.zsh
+zsh scripts/combine_aliases.zsh
 
 # Copy all dotfiles to the home directory
-zsh copy_configs.zsh
+zsh scripts/copy_configs.zsh
 
 # Audit alias and function usage in shell history
-python3 dotstats.py
+python3 bin/dotstats.py
 
 # Verify integrity, security, and lifecycle budgets of agent memory
-python3 memcheck.py
+python3 bin/memcheck.py
+
+# Tune Colima CPU, memory, and disk profiles
+python3 bin/colimatune.py --medium
 ```
 
 [Click here](./custom/) to see what gets populated in `.zsh_aliases`.

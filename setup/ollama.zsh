@@ -3,11 +3,12 @@ set -eu -o pipefail
 
 # Get the absolute directory path of this script
 SCRIPT_DIR=${0:A:h}
+DOTFILES_DIR=${SCRIPT_DIR:h}
 TARGET_PLIST="$HOME/Library/LaunchAgents/com.$USER.ollama.plist"
-SOURCE_TEMPLATE="$SCRIPT_DIR/init/user.ollama.plist.template"
+SOURCE_TEMPLATE="$DOTFILES_DIR/init/user.ollama.plist.template"
 
 # Source shared Homebrew utility
-source "$SCRIPT_DIR/utils/brew_setup.zsh"
+source "$SCRIPT_DIR/lib/brew_setup.zsh"
 ensure_brew_in_path || exit 1
 
 if ! command -v ollama &>/dev/null; then

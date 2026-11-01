@@ -1,11 +1,11 @@
 # Language frameworks, library packages, CLI tools
-# For openjdk, run setup_openjdk.zsh
+# For openjdk, run setup/openjdk.zsh
 # For python, set stable version
 # For fzf, source the completions in ~/.zshrc
 # For go, java, rust, llvm, set PATH references in ~/.zprofile
 # For c/c++ libraries, set CFLAGS and LDFLAGS appropriately
-# For ollama, run setup_ollama.zsh
-# For colima, run setup_colima.zsh
+# For ollama, run setup/ollama.zsh
+# For colima, run setup/colima.zsh
 brew "bat"
 brew "boost"
 brew "cmake"
