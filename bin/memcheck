@@ -26,6 +26,29 @@ SHELF_THRESHOLDS: dict[str, int] = {
     "1y": 365,
 }
 
+VALID_STATES = {"active", "evergreen", "reference", "done"}
+
+# Common synonyms mapped to canonical states
+STATE_ALIASES = {
+    "completed": "done",
+    "finished": "done",
+    "shipped": "done",
+    "closed": "done",
+    "cheatsheet": "reference",
+    "manual": "reference",
+    "docs": "reference",
+    "permanent": "evergreen",
+    "wip": "active",
+    "in-progress": "active",
+}
+
+# Regex to detect state declaration in topic header (handles bold, italic, backticks, colon inside or outside)
+STATE_HEADER_RE = re.compile(
+    r"^[_\*]*(?:State|Status)[_\*]*:[_\*]*\s*[_\*`]*([a-zA-Z\-]+)[_\*`]*",
+    re.MULTILINE | re.IGNORECASE,
+)
+STATE_TAG_RE = re.compile(r"#status:([a-zA-Z\-]+)\b", re.IGNORECASE)
+
 MAX_ACTIVE_FILES_PER_TOPIC = 15
 MAX_INDEX_LINES_PER_TOPIC = 250
 
@@ -36,19 +59,77 @@ def find_memory_root(explicit_path: str | None) -> Path | None:
         target = Path(explicit_path).expanduser().resolve()
         return target if target.is_dir() else None
 
-    # Check project workspace roots first
     cwd = Path.cwd()
     for candidate in [".agent/memory", ".agents/memory", "memory"]:
         candidate_path = cwd / candidate
         if candidate_path.is_dir() and (candidate_path / "MEMORY.md").is_file():
             return candidate_path
 
-    # Fall back to global user memory
     global_mem = Path.home() / ".memory"
     if global_mem.is_dir():
         return global_mem
 
     return None
+
+
+def normalize_state(raw_state: str) -> str | None:
+    """Normalize a raw state string to one of the 4 canonical states."""
+    cleaned = raw_state.strip().lower()
+    if cleaned in VALID_STATES:
+        return cleaned
+    if cleaned in STATE_ALIASES:
+        return STATE_ALIASES[cleaned]
+    return None
+
+
+def detect_topic_state(topic_dir: Path, global_index_content: str | None = None) -> str:
+    """
+    Detect the operational state of a topic: 'active', 'evergreen', 'reference', or 'done'.
+    Priority:
+      1. L2 Header in <topic>/MEMORY.md (_State: <state>_ or **State:** <state>)
+      2. L1 Table in global MEMORY.md (State column or #status:<state> tag)
+      3. Default fallback: 'active'
+    """
+    # 1. Inspect L2 topic index header
+    topic_index = topic_dir / "MEMORY.md"
+    if topic_index.is_file():
+        try:
+            content = topic_index.read_text(encoding="utf-8", errors="ignore")
+            # Check the header region (first 25 lines)
+            header_lines = "\n".join(content.splitlines()[:25])
+            match = STATE_HEADER_RE.search(header_lines)
+            if match:
+                state = normalize_state(match.group(1))
+                if state:
+                    return state
+
+            tag_match = STATE_TAG_RE.search(header_lines)
+            if tag_match:
+                state = normalize_state(tag_match.group(1))
+                if state:
+                    return state
+        except OSError:
+            pass
+
+    # 2. Inspect L1 global index row
+    if global_index_content:
+        for line in global_index_content.splitlines():
+            # Check lines linking to this topic directory
+            if f"({topic_dir.name}/" in line or f"({topic_dir.name})" in line or f"[{topic_dir.name}/]" in line:
+                tag_match = STATE_TAG_RE.search(line)
+                if tag_match:
+                    state = normalize_state(tag_match.group(1))
+                    if state:
+                        return state
+
+                # Check table columns: split by '|'
+                parts = [p.strip().strip("`*") for p in line.split("|")]
+                for part in parts:
+                    state = normalize_state(part)
+                    if state:
+                        return state
+
+    return "active"
 
 
 def scan_secrets(memory_root: Path) -> list[str]:
@@ -109,8 +190,14 @@ def check_integrity(memory_root: Path) -> list[str]:
         if not topic_index.is_file():
             continue
 
+        topic_state = detect_topic_state(topic_dir, global_content)
+
+        # Registration check: 'done' topics are validly excluded from L1!
         if topic_dir.resolve() not in {r.resolve() for r in registered_topics}:
-            errors.append(f"Topic not registered in global MEMORY.md: {topic_dir.name}/")
+            if topic_state != "done":
+                errors.append(
+                    f"Topic not registered in global MEMORY.md: {topic_dir.name}/ (state: {topic_state})"
+                )
 
         try:
             topic_content = topic_index.read_text(encoding="utf-8", errors="ignore")
@@ -140,15 +227,20 @@ def check_integrity(memory_root: Path) -> list[str]:
     return errors
 
 
-def check_lifecycle_and_budget(memory_root: Path, today: datetime.date | None = None) -> tuple[list[str], list[str]]:
-    """Audit topic budgets and shelf-life expiration dates."""
+def check_lifecycle_and_budget(memory_root: Path, today: datetime.date | None = None) -> tuple[list[str], list[str], dict[str, int]]:
+    """Audit topic budgets and shelf-life expiration dates per lifecycle state."""
     warnings: list[str] = []
     errors: list[str] = []
+    state_counts: dict[str, int] = {"active": 0, "evergreen": 0, "reference": 0, "done": 0}
+
     if today is None:
         today = datetime.date.today()
 
     date_re = re.compile(r"\b(20\d{2}-\d{2}-\d{2})\b")
     shelf_re = re.compile(r"#shelf:(volatile|30d|90d|1y|permanent)\b")
+
+    global_index = memory_root / "MEMORY.md"
+    global_content = global_index.read_text(encoding="utf-8", errors="ignore") if global_index.is_file() else None
 
     topic_dirs = [d for d in memory_root.iterdir() if d.is_dir() and not d.name.startswith((".", "_"))]
 
@@ -157,23 +249,30 @@ def check_lifecycle_and_budget(memory_root: Path, today: datetime.date | None = 
         if not topic_index.is_file():
             continue
 
-        # Budget check 1: Active detail files
+        topic_state = detect_topic_state(topic_dir, global_content)
+        state_counts[topic_state] = state_counts.get(topic_state, 0) + 1
+
         active_files = [f for f in topic_dir.glob("*.md") if f.name != "MEMORY.md"]
-        if len(active_files) > MAX_ACTIVE_FILES_PER_TOPIC:
+
+        # Budget check 1: Active detail files (Enforce for active only; reference/done exempt)
+        if topic_state == "active" and len(active_files) > MAX_ACTIVE_FILES_PER_TOPIC:
             warnings.append(
-                f"Topic '{topic_dir.name}' has {len(active_files)} active detail files "
+                f"Topic '{topic_dir.name}' ({topic_state}) has {len(active_files)} active detail files "
                 f"(budget <= {MAX_ACTIVE_FILES_PER_TOPIC}). Move older/stale notes to archive/."
             )
 
-        # Budget check 2: Topic MEMORY.md line count
-        try:
-            line_count = len(topic_index.read_text(encoding="utf-8", errors="ignore").splitlines())
-            if line_count > MAX_INDEX_LINES_PER_TOPIC:
-                warnings.append(f"{topic_dir.name}/MEMORY.md has {line_count} lines (budget <= {MAX_INDEX_LINES_PER_TOPIC}). Condense index.")
-        except OSError:
-            pass
+        # Budget check 2: Topic MEMORY.md line count (Enforce for active & evergreen)
+        if topic_state in ("active", "evergreen"):
+            try:
+                line_count = len(topic_index.read_text(encoding="utf-8", errors="ignore").splitlines())
+                if line_count > MAX_INDEX_LINES_PER_TOPIC:
+                    warnings.append(
+                        f"{topic_dir.name}/MEMORY.md has {line_count} lines (budget <= {MAX_INDEX_LINES_PER_TOPIC}). Condense index."
+                    )
+            except OSError:
+                pass
 
-        # Shelf-life audit for active detail files
+        # Detail file audits
         for md_file in active_files:
             try:
                 content = md_file.read_text(encoding="utf-8", errors="ignore")
@@ -186,32 +285,35 @@ def check_lifecycle_and_budget(memory_root: Path, today: datetime.date | None = 
             if "[SUPERSEDED" in content or "[DEPRECATED" in content:
                 continue
 
-            # Extract date
-            date_match = date_re.search(content)
-            if not date_match:
-                warnings.append(f"{rel_path}: Missing explicit YYYY-MM-DD date stamp.")
-                continue
+            # Date stamp verification (active, evergreen, reference benefit from date provenance; done exempt)
+            if topic_state != "done":
+                date_match = date_re.search(content)
+                if not date_match:
+                    warnings.append(f"{rel_path}: Missing explicit YYYY-MM-DD date stamp.")
+                    continue
 
-            try:
-                entry_date = datetime.date.fromisoformat(date_match.group(1))
-            except ValueError:
-                warnings.append(f"{rel_path}: Invalid date format '{date_match.group(1)}'.")
-                continue
+                try:
+                    entry_date = datetime.date.fromisoformat(date_match.group(1))
+                except ValueError:
+                    warnings.append(f"{rel_path}: Invalid date format '{date_match.group(1)}'.")
+                    continue
 
-            age_days = (today - entry_date).days
+                age_days = (today - entry_date).days
 
-            # Extract shelf life
-            shelf_match = shelf_re.search(content)
-            shelf_type = shelf_match.group(1) if shelf_match else None
+                # Shelf-life stale check: ONLY FOR ACTIVE TOPICS!
+                if topic_state == "active":
+                    shelf_match = shelf_re.search(content)
+                    shelf_type = shelf_match.group(1) if shelf_match else None
 
-            if shelf_type and shelf_type in SHELF_THRESHOLDS:
-                max_days = SHELF_THRESHOLDS[shelf_type]
-                if age_days > max_days:
-                    warnings.append(
-                        f"{rel_path}: #shelf:{shelf_type} is {age_days} days old (limit {max_days}d). Verify and refresh date, or mark [STALE] / archive."
-                    )
+                    if shelf_type and shelf_type in SHELF_THRESHOLDS:
+                        max_days = SHELF_THRESHOLDS[shelf_type]
+                        if age_days > max_days:
+                            warnings.append(
+                                f"{rel_path}: #shelf:{shelf_type} is {age_days} days old (limit {max_days}d). "
+                                f"Verify and refresh date, or mark [STALE] / archive."
+                            )
 
-    return errors, warnings
+    return errors, warnings, state_counts
 
 
 def main() -> int:
@@ -257,19 +359,20 @@ def main() -> int:
         print("[2/3] Hierarchy & Link Integrity: PASS (All links resolve, zero orphans)")
 
     # 3. Lifecycle & budget audit
-    lifecycle_errors, lifecycle_warnings = check_lifecycle_and_budget(memory_root)
+    lifecycle_errors, lifecycle_warnings, state_counts = check_lifecycle_and_budget(memory_root)
     total_errors = len(secret_errors) + len(integrity_errors) + len(lifecycle_errors)
     total_warnings = len(lifecycle_warnings)
 
+    counts_str = f"active: {state_counts['active']}, evergreen: {state_counts['evergreen']}, reference: {state_counts['reference']}, done: {state_counts['done']}"
     if lifecycle_errors or lifecycle_warnings:
         status_label = "FAIL" if lifecycle_errors else "WARN"
-        print(f"[3/3] Lifecycle & Budget Audit: {status_label}")
+        print(f"[3/3] Lifecycle & Budget Audit: {status_label} ({counts_str})")
         for err in lifecycle_errors:
             print(f"  ERROR: {err}")
         for warn in lifecycle_warnings:
             print(f"  WARNING: {warn}")
     else:
-        print("[3/3] Lifecycle & Budget Audit: PASS (All shelf-lives and budgets valid)")
+        print(f"[3/3] Lifecycle & Budget Audit: PASS ({counts_str})")
 
     # Final Summary
     print("\n" + "=" * 50)

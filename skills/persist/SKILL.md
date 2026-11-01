@@ -1,6 +1,6 @@
 ---
 name: persist
-description: Extracts, stamps, and persists durable facts, decisions, and knowledge into a two-hop hierarchical memory system (global MEMORY.md -> topic MEMORY.md -> detail.md). Enforces no-op guards, secrets redaction (type + location only), copy-don't-recall, downgrade-not-delete, and budget archiving.
+description: Extracts, stamps, and persists durable facts, decisions, and knowledge into a two-hop hierarchical memory system (global MEMORY.md -> topic MEMORY.md -> detail.md). Enforces topic lifecycles (active, evergreen, reference, done), no-op guards, secrets redaction (type + location only), copy-don't-recall, downgrade-not-delete, and budget archiving.
 ---
 
 # Persist: Memory Distillation & Curation
@@ -16,9 +16,9 @@ Resolve `<memory_root>` in order:
 
 ```text
 <memory_root>/
-├── MEMORY.md                     # Global Index (Hop 1)
+├── MEMORY.md                     # Global Index (Hop 1 - Living topics only)
 └── <topic>/
-    ├── MEMORY.md                 # Topic Index (Hop 2)
+    ├── MEMORY.md                 # Topic Index (Hop 2 - Declares _State: ..._)
     ├── <slug>.md                 # Detail records & runbooks
     └── archive/                  # Budget overflow & superseded notes
         └── <old_slug>.md
@@ -28,21 +28,37 @@ Resolve `<memory_root>` in order:
 
 #### Global Index (`<memory_root>/MEMORY.md`)
 
+The L1 Global Index functions as an **Operational Dispatch Table**, structured in priority sections. It lists **only** living topics (`active`, `evergreen`, `reference`). Completed (`done`) topics are excluded to prevent LLM state conflict and context pollution.
+
 ```markdown
 # Global Memory Index
 
 _Last Reconciled: YYYY-MM-DD_
 
-| Topic           | Directory                 | Description                          | Last Updated | Tags                  |
-| :-------------- | :------------------------ | :----------------------------------- | :----------- | :-------------------- |
-| **macOS Setup** | [macos/](macos/MEMORY.md) | OS configs, Homebrew, plist services | YYYY-MM-DD   | `#env:macos`, `#brew` |
+## 1. Active Focus Areas
+| Topic | State | Directory | Description | Last Updated | Tags |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **ClickHouse Sharding** | `active` | [clickhouse/](clickhouse/MEMORY.md) | Sharding migration & memory tuning | YYYY-MM-DD | `#tool:clickhouse` |
+
+## 2. Evergreen System Knowledge
+| Topic | State | Directory | Description | Last Updated | Tags |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **macOS Setup** | `evergreen` | [macos/](macos/MEMORY.md) | OS configs, Homebrew, plist services | YYYY-MM-DD | `#env:macos`, `#brew` |
+
+## 3. Reference Catalogs & Cheatsheets
+| Topic | State | Directory | Description | Last Updated | Tags |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Postgres Syntax** | `reference` | [postgres/](postgres/MEMORY.md) | Window functions, EXPLAIN cheat sheet | YYYY-MM-DD | `#tool:postgres` |
 ```
 
 #### Topic Index (`<memory_root>/<topic>/MEMORY.md`)
 
+Topic header prominently declares its operational state: `_State: active | evergreen | reference | done_`.
+
 ```markdown
 # Topic Memory: <Topic Name>
 
+_State: active_
 _Scope: Domain boundary for this topic._
 _Last Updated: YYYY-MM-DD_
 
@@ -55,6 +71,18 @@ _Last Updated: YYYY-MM-DD_
 ## Archived Records
 
 - [old-workaround.md](archive/old-workaround.md) - [SUPERSEDED: YYYY-MM-DD by ollama-service.md]
+```
+
+When a topic completes:
+```markdown
+# Topic Memory: <Topic Name>
+
+_State: done_
+_Scope: Historical record of completed migration/project._
+_Completed: YYYY-MM-DD_
+
+## Final Records
+...
 ```
 
 #### Detail Record (`<memory_root>/<topic>/<slug>.md`)
@@ -79,14 +107,35 @@ Exact commands, paths, flags, configuration snippets.
 
 ## 2. Invariants & Rules
 
-### 1. No-Op Guard
+### 1. Topic Lifecycles & States (Judgment-Based)
+
+Every topic belongs to one of four lifecycle states:
+
+- **`active`**: Current in-flight projects, WIP investigations, active migrations.
+  - *Audit:* Strict stale countdowns (`#shelf:*`), detail file caps (`<=15`), line limits (`<=250`).
+- **`evergreen`**: Durable system axioms, OS configurations, shell runbooks, core architecture principles.
+  - *Audit:* Index line budget (`<=250`), secrets, link integrity. **Exempt from stale expiration.**
+- **`reference`**: External specs, vendor documentation, API cheat sheets, syntax manuals.
+  - *Audit:* Secrets, link integrity. **Exempt from stale expiration and file caps.**
+- **`done`**: Shipped milestones, completed projects, retrospectives, historical ADRs.
+  - *Audit:* **Excluded from L1**. Secrets scan and relative link integrity only.
+
+### 2. The Three Exit Vectors (Promote, DM, Delete)
+
+Non-active topics are not decaying fruit to be polished on a timer; they are finished products on a loading dock:
+
+1. **Promote to Something Bigger:** When an `evergreen` runbook or `reference` spec stabilizes across multiple tasks, promote it out of private agent memory into the repository `docs/`, `README.md`, or company wiki.
+2. **DM Someone With Me:** When an active task completes (`done`), synthesize the final notes into a handoff artifact (PR description, Slack release summary, peer onboarding note).
+3. **Delete Me (Garbage Collection):** When temporary scaffolding notes have served their purpose and the resulting code is merged and verified in production, delete the directory (`rm -rf <topic>/`). No L1 edits or reconciliation needed.
+
+### 3. No-Op Guard
 
 If the session produced no durable facts, environment configurations, or finalized decisions: **ABORT. Write nothing.**
 
 - **Ignore:** Trivial Q&A, discarded debugging attempts, conversational chatter, standard library lookups.
 - **Persist:** Environment quirks, verified runbooks, architectural decisions, secret locations.
 
-### 2. Secrets Hard Rule
+### 4. Secrets Hard Rule
 
 **Record location + type ONLY. NEVER write secret values.**
 
@@ -94,35 +143,33 @@ If the session produced no durable facts, environment configurations, or finaliz
 - [OK] `Stripe API test key configured in environment variable STRIPE_API_KEY`
 - [FORBIDDEN] Never write `ghp_...`, `sk_live_...`, raw tokens, private keys, or passwords.
 
-### 3. Copy-Don't-Recall
+### 5. Copy-Don't-Recall
 
 - Copy exact strings, CLI invocations, flags, and error signatures directly from terminal output or inspected source files.
 - Do not paraphrase, retype from memory, or normalize paths without verifying.
 
-### 4. Explicit Date Stamping (`YYYY-MM-DD`)
+### 6. Explicit Date Stamping (`YYYY-MM-DD`)
 
 - All entries, updates, and status tags must include the ISO date (`YYYY-MM-DD`).
 - Never use relative dates ("today", "yesterday", "recently").
 
-### 5. Implied Shelf Life
+### 7. Implied Shelf Life
 
-Assign an explicit shelf-life tag to every detail file and topic row:
+Assign an explicit shelf-life tag based on topic state:
 
-- `#shelf:volatile`: Transient workarounds or bug mitigations (~7–14 days).
-- `#shelf:30d`: Active migration states, feature flags, sprint branches.
-- `#shelf:90d`: Third-party dependencies, quarterly API versions.
-- `#shelf:1y`: Toolchain setups, OS-level configurations, daemon scripts.
-- `#shelf:permanent`: Core domain architecture constraints, invariant business rules.
+- In **`active`** topics: Explicit decaying shelf-life tags are mandatory (`#shelf:volatile`, `#shelf:30d`, `#shelf:90d`).
+- In **`evergreen`** and **`reference`** topics: Notes default to `#shelf:permanent` or `#shelf:1y`.
+- In **`done`** topics: Notes are frozen historical records.
 
-### 6. Downgrade-Not-Delete
+### 8. Downgrade-Not-Delete (Within Living Topics)
 
-- When existing memory is invalidated or superseded: **DO NOT DELETE IT.**
+- When existing memory within a living topic is invalidated or superseded: **DO NOT DELETE IT.**
 - Update its status tag and append a concise reason:
     - `[SUPERSEDED: YYYY-MM-DD by <new_slug>.md]`
     - `[STALE: YYYY-MM-DD]` (requires re-verification)
     - `[DEPRECATED: YYYY-MM-DD]`
 
-### 7. Honest Tagging & Standard Prefixes
+### 9. Honest Tagging & Standard Prefixes
 
 Tag with exact provenance using standardized facet prefixes:
 
@@ -130,35 +177,34 @@ Tag with exact provenance using standardized facet prefixes:
 - `#tool:<name>`: Specific tool or utility (e.g., `#tool:ollama`, `#tool:docker`, `#tool:git`, `#tool:brew`).
 - `#topic:<area>`: Functional domain (e.g., `#topic:networking`, `#topic:auth`, `#topic:launchd`).
 - Status tags: `#verified` (tested in session), `#unverified` (discussion/docs only), `#workaround` (temporary patch).
-- **Multi-Topic Placement:** Store the physical detail file in the primary topic folder. Index all secondary domains via faceted tags rather than duplicating files.
 
-### 8. Budget & Archiving
+### 10. Budget & Archiving
 
 Keep topic indexes concise and fast to scan.
 
-- **Trigger:** If `<topic>/` exceeds **15 active detail files** or `MEMORY.md` exceeds **250 lines**:
+- **Trigger:** If an **`active`** `<topic>/` exceeds **15 active detail files** or `MEMORY.md` exceeds **250 lines**:
     1. Move older, superseded, or low-frequency detail files into `<topic>/archive/<slug>.md`.
     2. Move their entries in `<topic>/MEMORY.md` to `## Archived Records` with a 1-line summary.
+- **Reference Exemption:** `reference` topics are exempt from the 15-file cap (only the 250-line index limit applies).
 
-### 9. Zero Fabrication
+### 11. Zero Fabrication
 
 - Record only what was observed, executed, or explicitly decided.
 - Never invent hypothetical flags, unverified configs, or filler parameters.
-- Flag unknown parameters explicitly as `#unverified` or document them as open questions.
 
-### 10. Link & Path Reconciliation
+### 12. Link & Path Reconciliation
 
 Whenever writing memory:
 
 - Confirm all relative markdown links point to existing files.
-- Confirm `<memory_root>/MEMORY.md` links to `<topic>/MEMORY.md`.
-- Prune broken links resulting from renamed or archived files.
+- Living topics (`active`, `evergreen`, `reference`) must be registered in `<memory_root>/MEMORY.md`.
+- Completed (`done`) topics must be unlisted from `<memory_root>/MEMORY.md`.
 
 ## 3. Execution Sequence
 
 1. **Gate:** Apply No-Op Guard. Exit immediately if nothing durable occurred.
-2. **Locate:** Resolve topic directory or create `<topic>/`.
-3. **Draft Detail:** Write `<topic>/<slug>.md` with `YYYY-MM-DD`, shelf-life tag, exact copies, and redacted secrets.
-4. **Index Topic:** Add entry to `<topic>/MEMORY.md`. If over budget, move stale files to `archive/`.
-5. **Index Global:** Update `<memory_root>/MEMORY.md` row and timestamp.
+2. **Locate & Classify:** Resolve topic directory or create `<topic>/` with judgment-based state (`active`, `evergreen`, `reference`).
+3. **Draft Detail:** Write `<topic>/<slug>.md` with `YYYY-MM-DD`, appropriate shelf-life tag, exact copies, and redacted secrets.
+4. **Index Topic:** Add entry to `<topic>/MEMORY.md`. If active topic is over budget, move stale files to `archive/`.
+5. **Index Global:** If living topic, update `<memory_root>/MEMORY.md` under its respective section. If completed (`done`), remove from L1.
 6. **Reconcile:** Verify all relative markdown links resolve.
