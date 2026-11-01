@@ -305,12 +305,17 @@ def check_lifecycle_and_budget(memory_root: Path, today: datetime.date | None = 
                     shelf_match = shelf_re.search(content)
                     shelf_type = shelf_match.group(1) if shelf_match else None
 
-                    if shelf_type and shelf_type in SHELF_THRESHOLDS:
+                    if shelf_type == "permanent":
+                        warnings.append(
+                            f"{rel_path}: #shelf:permanent is not permitted in an active topic. "
+                            f"Assign a decaying shelf-life (#shelf:volatile/30d/90d/1y) or reclassify topic as evergreen."
+                        )
+                    elif shelf_type and shelf_type in SHELF_THRESHOLDS:
                         max_days = SHELF_THRESHOLDS[shelf_type]
                         if age_days > max_days:
                             warnings.append(
                                 f"{rel_path}: #shelf:{shelf_type} is {age_days} days old (limit {max_days}d). "
-                                f"Verify and refresh date, or mark [STALE] / archive."
+                                f"Action required: verify & refresh date (if active), mark '_State: done_', promote to evergreen, or delete."
                             )
 
     return errors, warnings, state_counts

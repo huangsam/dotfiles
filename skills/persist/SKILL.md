@@ -157,11 +157,16 @@ If the session produced no durable facts, environment configurations, or finaliz
 
 Assign an explicit shelf-life tag based on topic state:
 
-- In **`active`** topics: Explicit decaying shelf-life tags are mandatory (`#shelf:volatile`, `#shelf:30d`, `#shelf:90d`).
+- In **`active`** topics: Explicit decaying shelf-life tags are mandatory (`#shelf:volatile`, `#shelf:30d`, `#shelf:90d`, `#shelf:1y`). **`#shelf:permanent` is forbidden in active topics** (an active project cannot be permanent; either assign a decaying timer or reclassify the topic as `evergreen`).
 - In **`evergreen`** and **`reference`** topics: Notes default to `#shelf:permanent` or `#shelf:1y`.
 - In **`done`** topics: Notes are frozen historical records.
 
-### 8. Downgrade-Not-Delete (Within Living Topics)
+### 8. Opportunistic Maintenance
+
+During active engineering sessions, if an agent touches an `active` topic that contains expired or stale notes, it should opportunistically prompt the user with a concise one-liner:
+> *"Note: `<topic>/<slug>.md` is past its shelf-life. Should we refresh its date, mark the topic `_State: done_`, or prune it?"*
+
+### 9. Downgrade-Not-Delete (Within Living Topics)
 
 - When existing memory within a living topic is invalidated or superseded: **DO NOT DELETE IT.**
 - Update its status tag and append a concise reason:
@@ -169,7 +174,7 @@ Assign an explicit shelf-life tag based on topic state:
     - `[STALE: YYYY-MM-DD]` (requires re-verification)
     - `[DEPRECATED: YYYY-MM-DD]`
 
-### 9. Honest Tagging & Standard Prefixes
+### 10. Honest Tagging & Standard Prefixes
 
 Tag with exact provenance using standardized facet prefixes:
 
@@ -178,7 +183,7 @@ Tag with exact provenance using standardized facet prefixes:
 - `#topic:<area>`: Functional domain (e.g., `#topic:networking`, `#topic:auth`, `#topic:launchd`).
 - Status tags: `#verified` (tested in session), `#unverified` (discussion/docs only), `#workaround` (temporary patch).
 
-### 10. Budget & Archiving
+### 11. Budget & Archiving
 
 Keep topic indexes concise and fast to scan.
 
@@ -187,12 +192,12 @@ Keep topic indexes concise and fast to scan.
     2. Move their entries in `<topic>/MEMORY.md` to `## Archived Records` with a 1-line summary.
 - **Reference Exemption:** `reference` topics are exempt from the 15-file cap (only the 250-line index limit applies).
 
-### 11. Zero Fabrication
+### 12. Zero Fabrication
 
 - Record only what was observed, executed, or explicitly decided.
 - Never invent hypothetical flags, unverified configs, or filler parameters.
 
-### 12. Link & Path Reconciliation
+### 13. Link & Path Reconciliation
 
 Whenever writing memory:
 

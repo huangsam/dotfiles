@@ -94,6 +94,7 @@ If Hop 1 or Hop 2 misses due to vocabulary mismatch, unindexed notes, or retrosp
   - In **`active`** topics:
     - `#shelf:volatile`: If >14 days old, treat as potentially invalid.
     - `#shelf:30d` / `#shelf:90d`: Check if version pins or branch references expired.
+    - **Opportunistic Maintenance:** If recalling an active topic containing stale notes, prompt the user with a 1-line check: *"Note `<slug>.md` is expired. Should we refresh, mark the topic `_State: done_`, or prune it?"*
   - In **`evergreen`** and **`reference`** topics:
     - Treat `#shelf:1y` / `#shelf:permanent` as durable system configuration. Do not flag as expired due to elapsed time.
 
