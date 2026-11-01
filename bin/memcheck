@@ -233,7 +233,7 @@ def main() -> int:
     if memory_root is None:
         target_display = args.path or ".agent/memory, memory/, or ~/.memory"
         print(f"Error: No valid memory root found at '{target_display}'.", file=sys.stderr)
-        print("Usage: python3 bin/memcheck.py [path_to_memory_root]", file=sys.stderr)
+        print("Usage: memcheck [path_to_memory_root]", file=sys.stderr)
         return 1
 
     print(f"Checking agent memory at: {memory_root}\n")
