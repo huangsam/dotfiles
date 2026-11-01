@@ -22,7 +22,7 @@ jobs:
       - name: Setup zsh
         run: brew install zsh
       - name: Check syntax of zsh scripts
-        run: zsh -n scripts/*.zsh setup/*.zsh setup/lib/*.zsh custom/*.zsh
+        run: git ls-files -z '*.zsh' | xargs -0 zsh -n
       - name: Run combine script
         run: zsh scripts/combine_aliases.zsh
       - name: Run deploy script
