@@ -1,0 +1,124 @@
+#!/usr/bin/env python3
+"""Colima capacity and tuning manager for macOS."""
+
+from __future__ import annotations
+
+import argparse
+import os
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+CONFIG_FILE = Path.home() / ".colima" / "default" / "colima.yaml"
+TEMPLATE_FILE = Path.home() / ".colima" / "_templates" / "default.yaml"
+
+PROFILES = {
+    "high": (6, 8, 100),  # (cpu, memory_gb, disk_gb)
+    "medium": (4, 6, 80),
+    "low": (2, 4, 60),
+}
+
+
+def get_host_specs() -> tuple[str, int, int]:
+    brand = subprocess.getoutput("sysctl -n machdep.cpu.brand_string").strip() or "Apple Silicon"
+    ncpu = os.cpu_count() or 2
+    mem_bytes = subprocess.getoutput("sysctl -n hw.memsize").strip()
+    mem_gb = int(mem_bytes) // (1024**3) if mem_bytes.isdigit() else 16
+    return brand, ncpu, mem_gb
+
+
+def update_yaml_files(cpu: int, mem: int, disk: int) -> None:
+    keys = {
+        "cpu": cpu,
+        "memory": mem,
+        "disk": disk,
+    }
+    for path in (CONFIG_FILE, TEMPLATE_FILE):
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for k, v in keys.items():
+            if re.search(rf"^{k}:", text, re.M):
+                text = re.sub(rf"^{k}:.*$", f"{k}: {v}", text, flags=re.M)
+            else:
+                text += f"{k}: {v}\n"
+        path.write_text(text, encoding="utf-8")
+
+
+def get_live_vm_info() -> tuple[str, str, str]:
+    is_running = subprocess.run(["colima", "status"], capture_output=True).returncode == 0
+    if not is_running:
+        return "STOPPED", "-", "-"
+    info = subprocess.getoutput("docker info 2>/dev/null")
+    cpus = (re.search(r"CPUs:\s*(\d+)", info) or ["", "?"])[1]
+    mem = (re.search(r"Total Memory:\s*([\d\.]+\w+)", info) or ["", "?"])[1]
+    return "RUNNING", cpus, mem
+
+
+def cmd_status() -> None:
+    brand, ncpu, mem_gb = get_host_specs()
+    cfg = dict(re.findall(r"^(\w+):\s*(.*)$", CONFIG_FILE.read_text(encoding="utf-8") if CONFIG_FILE.is_file() else "", re.M))
+    status, live_cpus, live_mem = get_live_vm_info()
+
+    print("================ Colima Status ================")
+    print(f"Host:     {brand} ({ncpu} cores), {mem_gb} GB RAM")
+    print(f"Config:   cpu: {cfg.get('cpu', '2')}, memory: {cfg.get('memory', '2')}G, disk: {cfg.get('disk', '100')}G")
+    print(f"Live VM:  {status} (CPUs: {live_cpus}, Memory: {live_mem})")
+    print("===============================================")
+
+
+def restart_colima() -> None:
+    print("Restarting Colima daemon...")
+    subprocess.run(["colima", "restart"], check=False)
+    cmd_status()
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Colima capacity and tuning manager for macOS.")
+    parser.add_argument("action", nargs="?", choices=["status", "restart"], help="Direct action")
+    parser.add_argument("-s", "--status", action="store_true", help="Show diagnostic status")
+    parser.add_argument("-p", "--profile", choices=["high", "medium", "low"], help="Preset capacity profile")
+    parser.add_argument("--high", action="store_const", const="high", dest="profile", help="Apply high profile (6 CPU, 8G RAM)")
+    parser.add_argument("--medium", action="store_const", const="medium", dest="profile", help="Apply medium profile (4 CPU, 6G RAM)")
+    parser.add_argument("--low", action="store_const", const="low", dest="profile", help="Apply low profile (2 CPU, 4G RAM)")
+    parser.add_argument("-c", "--cpu", type=int, help="Override CPU count")
+    parser.add_argument("-m", "--memory", type=int, help="Override Memory in GiB")
+    parser.add_argument("-d", "--disk", type=int, help="Override Disk in GiB")
+    parser.add_argument("-f", "--force", action="store_true", help="Apply and restart without confirmation")
+
+    args = parser.parse_args()
+
+    if args.action == "status" or args.status or (len(sys.argv) == 1 and sys.stdin.isatty()):
+        cmd_status()
+        if len(sys.argv) == 1:
+            print("\nUsage examples:")
+            print("  ./tune_colima.py --high    # 6 CPU, 8G RAM")
+            print("  ./tune_colima.py --medium  # 4 CPU, 6G RAM")
+            print("  ./tune_colima.py --low     # 2 CPU, 4G RAM")
+        return
+
+    if args.action == "restart":
+        restart_colima()
+        return
+
+    _, _, mem_gb = get_host_specs()
+    prof_name = args.profile or ("high" if mem_gb >= 32 else "medium" if mem_gb >= 16 else "low")
+    base_cpu, base_mem, base_disk = PROFILES[prof_name]
+    cpu = args.cpu or base_cpu
+    mem = args.memory or base_mem
+    disk = args.disk or base_disk
+
+    print(f"Applying: {cpu} CPUs, {mem} GiB RAM, {disk} GiB Disk")
+    update_yaml_files(cpu, mem, disk)
+
+    if not args.force and sys.stdin.isatty():
+        if input("Restart Colima now to apply new limits? [y/N]: ").strip().lower() != "y":
+            print("Configuration saved. Restart Colima whenever you are ready.")
+            return
+
+    restart_colima()
+
+
+if __name__ == "__main__":
+    main()
