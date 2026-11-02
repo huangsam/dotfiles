@@ -7,14 +7,10 @@ source "$SCRIPT_DIR/lib/brew_setup.zsh"
 ensure_brew_in_path || exit 1
 
 HOMEBREW_PREFIX=$(brew --prefix)
-JVM_DIR="/Library/Java/JavaVirtualMachines"
+JVM_DIR="$HOME/Library/Java/JavaVirtualMachines"
+mkdir -p "$JVM_DIR"
 
 print -r -- "Setup OpenJDK symlinks for macOS in $JVM_DIR..."
-
-# Warm up sudo credentials for future sudo commands
-if [[ -o interactive && -t 0 ]]; then
-    sudo -v
-fi
 
 # Enable nullglob to safely handle when no matching files are found
 setopt nullglob
@@ -25,7 +21,9 @@ typeset -A seen_paths
 typeset -A managed_links
 
 found=0
-for jdk_path in $HOMEBREW_PREFIX/opt/openjdk*; do
+# Only link explicitly pinned major versions (e.g., openjdk@17, openjdk@21)
+# Avoids unpinned 'openjdk' silently upgrading and hijacking system $JAVA_HOME
+for jdk_path in $HOMEBREW_PREFIX/opt/openjdk@*; do
     # Verify the JDK libexec directory exists
     if [[ -d "$jdk_path/libexec/openjdk.jdk" ]]; then
         # Resolve the real path of the JDK to find unique installations
@@ -54,21 +52,14 @@ for jdk_path in $HOMEBREW_PREFIX/opt/openjdk*; do
 
         # Fallback to parsing name if release file fails (unlikely)
         if [[ -z "$major_version" ]]; then
-            if [[ "$jdk_name" == "openjdk" ]]; then
-                # Default to a generic name if we can't find version
-                dest_name="openjdk.jdk"
-            else
-                major_version=${jdk_name#openjdk@}
-                dest_name="openjdk.${major_version}.jdk"
-            fi
-        else
-            dest_name="openjdk.${major_version}.jdk"
+            major_version=${jdk_name#openjdk@}
         fi
+        dest_name="openjdk.${major_version}.jdk"
 
         dest_path="$JVM_DIR/$dest_name"
 
         print -r -- "Creating symlink for $jdk_name -> $dest_name"
-        sudo ln -sfn "$jdk_path/libexec/openjdk.jdk" "$dest_path"
+        ln -sfn "$jdk_path/libexec/openjdk.jdk" "$dest_path"
 
         # Track this as a managed link so it doesn't get cleaned up
         managed_links[$dest_name]=1
@@ -82,7 +73,7 @@ for link in $JVM_DIR/openjdk*.jdk; do
     # Only remove it if it's a symlink AND we didn't just manage it
     if [[ -L "$link" ]] && (( ! ${+managed_links[$link_name]} )); then
         print -r -- "Removing stale symlink: $link_name"
-        sudo rm "$link"
+        rm "$link"
     fi
 done
 
