@@ -324,7 +324,7 @@ def check_lifecycle_and_budget(memory_root: Path, today: datetime.date | None = 
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Verify integrity, security, and lifecycle budgets of hierarchical agent memory.")
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "path",
         nargs="?",

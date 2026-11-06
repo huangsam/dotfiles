@@ -139,7 +139,7 @@ def main() -> int:
     default_custom_dir = os.environ.get("DOTFILES_CUSTOM", str(repo_root / "custom"))
     default_hist_file = os.environ.get("HISTFILE", os.path.expanduser("~/.zsh_history"))
 
-    parser = argparse.ArgumentParser(description="Rank custom dotfiles aliases and functions by usage count in shell history.")
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--custom-dir",
         type=Path,

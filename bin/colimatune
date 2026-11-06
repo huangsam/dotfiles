@@ -75,7 +75,7 @@ def restart_colima() -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Colima capacity and tuning manager for macOS.")
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", nargs="?", choices=["status", "restart"], help="Direct action")
     parser.add_argument("-s", "--status", action="store_true", help="Show diagnostic status")
     parser.add_argument("-p", "--profile", choices=["high", "medium", "low"], help="Preset capacity profile")
