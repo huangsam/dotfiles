@@ -57,6 +57,3 @@ orestart() {
     server_ver=$(print -r -- "$response" | sed -nE 's/.*"version":"([^"]+)".*/\1/p')
     print -r -- "==> Ollama restarted: client ($client_ver) | server (${server_ver:-unknown})"
 }
-
-# Launch OpenCode with Ollama model selection
-alias ocode='ollama launch opencode'
