@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+"""Verify integrity, security, and lifecycle budgets of hierarchical agent memory."""
+
 from __future__ import annotations
 
 import argparse
