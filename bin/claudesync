@@ -1,0 +1,118 @@
+#!/usr/bin/env python3
+"""Sync local Ollama models into Claude Code modelPicker settings."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import re
+import sys
+import urllib.error
+import urllib.request
+from pathlib import Path
+
+
+def format_label(name: str) -> str:
+    """Format an Ollama model tag into a human-friendly label."""
+    parts = name.split(":", 1)
+    base = parts[0]
+    base = re.sub(r"^([a-z])", lambda m: m.group(1).upper(), base)
+    if len(parts) > 1:
+        tag = parts[1].replace("-", " ")
+        tag = re.sub(r"\b(mlx|gguf)\b", lambda m: m.group(1).upper(), tag, flags=re.I)
+        return f"{base} {tag}"
+    return base
+
+
+def fetch_ollama_models(api_base: str) -> list[dict]:
+    url = f"{api_base.rstrip('/')}/api/tags"
+    req = urllib.request.Request(url, headers={"User-Agent": "Claude-Code-Sync/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            return data.get("models", [])
+    except urllib.error.URLError as err:
+        print(f"==> Error connecting to Ollama at {url}: {err}", file=sys.stderr)
+        sys.exit(1)
+
+
+def build_options(models: list[dict]) -> list[dict]:
+    options = []
+    for m in models:
+        name = m.get("name", "")
+        if not name:
+            continue
+        size_bytes = m.get("size", 0)
+        size_gb = f"{size_bytes / (1024 ** 3):.1f} GB"
+        details = m.get("details") or {}
+        runner = (details.get("runner") or "").upper()
+        family = details.get("family") or "ollama"
+
+        desc_parts = [p for p in (runner, size_gb, family) if p]
+        desc = " · ".join(desc_parts)
+
+        is_large_or_reasoning = bool(re.search(r"(r1|122b|128b|70b)", name, re.IGNORECASE))
+        behaves_as = "claude-opus-4-6" if is_large_or_reasoning else "claude-sonnet-4-6"
+
+        options.append({
+            "model": name,
+            "label": format_label(name),
+            "description": desc,
+            "behavesAs": behaves_as,
+        })
+    return options
+
+
+def sync_claude_settings(options: list[dict], settings_path: Path, dry_run: bool = False) -> None:
+    settings = {}
+    if settings_path.exists():
+        try:
+            settings = json.loads(settings_path.read_text(encoding="utf-8"))
+        except Exception as e:
+            print(f"==> Warning: Could not parse existing {settings_path}: {e}", file=sys.stderr)
+
+    settings["modelPicker"] = {
+        "replaceBuiltInOptions": True,
+        "options": options,
+    }
+
+    if not settings.get("model") and options:
+        settings["model"] = options[0]["model"]
+
+    if dry_run:
+        print(json.dumps(settings.get("modelPicker"), indent=2))
+        return
+
+    settings_path.parent.mkdir(parents=True, exist_ok=True)
+    settings_path.write_text(json.dumps(settings, indent=2) + "\n", encoding="utf-8")
+    print(f"==> Successfully synced {len(options)} Ollama models to {settings_path}")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--api-base",
+        default=os.environ.get("OLLAMA_API_BASE") or os.environ.get("ANTHROPIC_BASE_URL") or "http://localhost:11434",
+        help="Ollama API base URL",
+    )
+    parser.add_argument(
+        "--settings",
+        type=Path,
+        default=Path.home() / ".claude" / "settings.json",
+        help="Path to Claude Code settings.json",
+    )
+    parser.add_argument("--dry-run", action="store_true", help="Print generated config without writing")
+    args = parser.parse_args()
+
+    models = fetch_ollama_models(args.api_base)
+    if not models:
+        print("==> No Ollama models found.", file=sys.stderr)
+        sys.exit(1)
+
+    options = build_options(models)
+    sync_claude_settings(options, args.settings, dry_run=args.dry_run)
+
+
+if __name__ == "__main__":
+    main()
