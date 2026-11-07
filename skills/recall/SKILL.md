@@ -45,7 +45,7 @@ Query ───> [Hop 1: Global MEMORY.md] ───> [Hop 2: Topic MEMORY.md] �
 3. Inspect `## Active Details` (or `## Final Records`):
    - Match query against titles, subjects, and faceted tags (`#env:*`, `#tool:*`, `#topic:*`).
    - For multi-topic questions, intersect tags across candidates.
-   - Check status: skip `[SUPERSEDED]` or `[DEPRECATED]` records unless historical context was requested.
+   - Check status: skip `[SUPERSEDED]`, `[DEPRECATED]`, or `[STALE]` records unless historical context was requested.
    - Check shelf-life:
      - In **`active`** topics: flag if expired (e.g., `#shelf:volatile` >14 days old).
      - In **`evergreen`** or **`reference`** topics: **do not** treat age as decay.
@@ -59,14 +59,49 @@ If Hop 1 or Hop 2 misses due to vocabulary mismatch, unindexed notes, or retrosp
 
 1. Search all markdown files across `<memory_root>` (use tag intersection for multi-topic queries):
    ```bash
-   rg -i "<search_terms>" "<memory_root>"
+   rg -i --glob '*.md' "<search_terms>" "<memory_root>"
    ```
-2. Check matching hits in active details, topic indexes, and `archive/`.
+2. Check matching hits in active details and topic indexes; check `archive/` only per the Archive Access Policy below.
 3. **Handling `done` topics found via fallback:**
    - If a search hits a topic marked `_State: done_`, treat its contents as **historical retrospective only**.
    - **Never** adopt a temporary workaround or migration shim from a `done` project as current operational practice.
 4. **Reconcile Flag:** If `rg` hits an active detail file not listed in `<topic>/MEMORY.md`, flag it for reconciliation by `persist`.
 5. Report "no memory found" only after both Two-Hop Discovery and Ripgrep Fallback return zero hits.
+
+### Historical Intent Detection
+
+- Use historical mode proactively when the query contains intent such as "why did we," "previous decision," "old migration," "completed project," "historical context," "what happened during," "retrospective," or "before we changed."
+- In historical mode, search living topics first for current framing, then search `done` topics and `archive/`.
+- Clearly label results as historical/completed.
+- Do not present old workarounds as current operational practice unless explicitly requested.
+
+### Fallback Search Discipline
+
+- Prefer markdown files only:
+  ```bash
+  rg -i --glob '*.md' "<search_terms>" "<memory_root>"
+  ```
+- First list matching files before reading full contents:
+  ```bash
+  rg -il --glob '*.md' "<search_terms>" "<memory_root>"
+  ```
+- Read only the most relevant files.
+- Do not dump entire archives into context unless explicitly requested.
+
+### Archive Access Policy
+
+Do not read `archive/` by default for current operational questions. Read `archive/` only when:
+
+- the topic index links to it as superseded context,
+- historical mode is active,
+- fallback search finds no living match,
+- or the user explicitly asks for archived/historical material.
+
+### Reconciliation Flag Format
+
+When recall finds orphaned or unindexed memory, append a concise maintenance note:
+
+> **Reconciliation needed:** `<topic>/<slug>.md` exists but is not listed in `<topic>/MEMORY.md`. Should `persist` index it?
 
 ## 4. Invariants & Rules
 
@@ -88,7 +123,31 @@ If Hop 1 or Hop 2 misses due to vocabulary mismatch, unindexed notes, or retrosp
 - If recalled memory does not fully answer the query, state the gap plainly.
 - Never hallucinate or extrapolate missing steps.
 
-### 4. Enforce Shelf Life (Active Topics Only)
+### 4. Secrets Hard Rule (Recall Side)
+
+- Never output secret values from memory, even if they were accidentally persisted.
+- If a detail file contains only location/type information (e.g., "API token lives in `~/.config/foo/token`"), return that safely.
+- If a recalled snippet appears to contain a raw token/password/private key, redact the value as `[REDACTED]` and state that secret values are not reproduced from memory.
+
+### 5. Conflict Resolution Precedence
+
+When multiple memories conflict, prefer in this order:
+
+1. Non-superseded over `[SUPERSEDED]`, `[STALE]`, or `[DEPRECATED]`.
+2. `#verified` over `#unverified` or `#workaround`.
+3. Newer `Last Updated` date over older date.
+4. Living topic (`active`, `evergreen`, `reference`) over `done`/archive for current operational questions.
+5. Exact detail file over index summary.
+
+If conflict remains material after applying precedence, disclose both sources and ask which should be treated as authoritative.
+
+### 6. Exact Snippet Reproduction
+
+- When returning commands, config snippets, paths, flags, SQL, or error signatures, quote the stored text exactly when possible.
+- Do not normalize casing, punctuation, or path separators unless explicitly asked to summarize.
+- If summarizing, clearly separate the summary from the exact quoted snippet.
+
+### 7. Enforce Shelf Life (Active Topics Only)
 
 - When reading detail records, evaluate expiration against current date:
   - In **`active`** topics:
